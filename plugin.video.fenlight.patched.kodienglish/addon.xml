@@ -1,0 +1,98 @@
+<addon id="plugin.video.fenlight.patched.kodienglish" name="Fen Light Patched" provider-name="Tikipeter" version="2.0.55.1001">
+    <requires>
+        <import addon="xbmc.python" version="3.0.0"/>
+        <import addon="script.module.requests" version="2.19.1"/>
+    </requires>
+    <extension point="xbmc.python.pluginsource" library="resources/lib/fenlight.py">
+        <provides>video</provides>
+    </extension>
+    <extension point="xbmc.service" library="resources/lib/service.py"/>
+    <extension point="xbmc.python.module" library="resources/lib/"/>
+    <extension point="xbmc.addon.metadata">
+        <reuselanguageinvoker>false</reuselanguageinvoker>
+        <summary lang="en">Access your content from Easynews and Debrid Clouds.</summary>
+        <description lang="en">This add-on is intended for advanced Kodi users only. You must own the content of any media you play through this addon. This is an English language only add-on.</description>
+        <platform>all</platform>
+		<disclaimer lang="en">The author of this addon does not host any of the content which is found and has no affiliation with any of the content providers.</disclaimer>
+        <license/>
+        <assets>
+            <icon>resources/media/fenlight_icon.png</icon>
+            <fanart>resources/media/fenlight_fanart2.jpg</fanart>
+        </assets>
+        <news>[v2.0.53]:
+  * Fix local resume bookmark cleanup after playback stop, including newer Kodi video-database detection and safer bookmark clearing around the patched playback flow.
+
+[v2.0.51]:
+  * Add a bundled default OMDb API key so patched Fenlight ships with extra-ratings support enabled without manual OMDb key entry.
+
+[v2.0.49]:
+  * Update the built-in default TMDb API key and keep the Restore Default TMDb API Key action aligned with the new bundled value.
+
+[v2.0.46]:
+  * Strip tracker suffix noise like .rartv. and .eztv before release-group matching so season-pack sources such as S01 BiRDHOUSE rank above weaker same-quality fallbacks when their episode subtitle release matches.
+  * Skip autoplay sources only when every detected audio stream is a blocked pirate-language track, so mixed-language sources with an acceptable track can still play.
+
+[v2.0.44]:
+  * Use the show's original or English title plus the actual episode name when building TV subtitle-search metadata and filenames, reducing mismatches on localized show labels.
+
+[v2.0.43]:
+  * Skip autoplay sources whose detected audio streams are Russian-only, Ukrainian-only, or Chinese-only unless the selected title metadata already expects that spoken language.
+
+[v2.0.42]:
+  * Add an explicit Trakt authorization status row to the settings window so expired or incomplete auth is visible even when a stale username is still stored.
+  * Only show Authorize when Trakt is not fully authorized and keep Revoke tied to a stored Trakt user instead of treating the username as the only auth signal.
+
+[v2.0.41]:
+  * Demote bare generic movie-title subtitles to low-confidence fallbacks so structured release-specific matches can win when available.
+  * Demote low-information source containment hits against structured DVDRip-style subtitles so malformed or ambiguous source names stop outranking stronger higher-quality matches.
+  * Return clearer Trakt expiry notifications instead of treating auth and rate-limit responses like generic request failures.
+
+[v2.0.39]:
+  * Add TMDb metadata language and fallback-language settings for movie, TV, collection, episode, and people details.
+  * Fill missing summaries from the configured fallback language instead of dropping back to English-only metadata requests.
+
+[v2.0.36]:
+  * Add support for up to three Gemini API keys with automatic fallback on rate-limit or quota-exhaustion responses.
+  * Expand the subtitle-backed retry pool to the best 10 selector-ranked candidates and let subtitle comments promote a stronger alias for the same subtitle item when they improve the release match.
+
+[v2.0.35]:
+  * Teach Gemini intent parsing to preserve named people separately from generic keywords so movie AI searches can feed TMDb cast-aware discovery and better title-like prompt handling.
+
+[v2.0.34]:
+  * Preserve meaningful technical bracket segments during bundled subtitle-selector normalization so release matching keeps cues like [1080p], codec tags, and year-style bracket tokens instead of discarding them as noise.
+
+[v2.0.33]:
+  * Add TMDb collection-search support for movie searches so matching collection results can open directly into the related movie-set listing.
+
+[v2.0.32]:
+  * Republish the same Gemini-backed AI Search test build under a higher test-only version so Kodi updates cleanly from the current production 2.0.31 release.
+
+[v2.0.31]:
+  * Add Gemini-backed AI Search inside Fen Light Patched so natural-language discovery can build TMDb-backed movie and TV result lists without leaving the patched addon.
+  * Store AI Search history locally and expose a Gemini API key field in the existing settings manager.
+
+[v2.0.30]:
+  * Clear local Kodi bookmark rows using the real plugin:// playback URLs so erase-bookmark actions target the active movie or episode instead of relying on the old broad filename match.
+
+[v2.0.28]:
+  * Keep the smoother autoplay handoff that waits for fullscreen before closing the resolver window, reducing the flash back to the skin start screen.
+  * Bridge selector playback metadata into Kodi properties so patched a4k can consume the exact selector-chosen subtitle for the active source at runtime.
+  * Trim the successful pre-player settle before player.run(...) to reduce startup latency without changing retry timing.
+
+[v2.0.26]:
+  * Ship Fen Light Patched with reuse language invoker disabled by default so repo installs stop re-enabling it for setups that expect it off.
+
+[v2.0.25]:
+  * Refresh packaged branding and artwork so repo installs no longer reuse the old selector-test presentation.
+
+[v2.0.24]:
+  * Prefer direct subtitle filename evidence over uploader comments when both are available.
+  * Strip OpenSubtitles track and language suffixes before source/subtitle matching.
+
+[v2.0.23]:
+  * Bundle the subtitle selector inside the add-on instead of depending on an external dev repo path.
+  * Build the autoplay retry pool from one title-level subtitle gather and local selector ranking.
+
+INFO: For latest changes see Changelog within Tools of add-on.</news>
+    </extension>
+</addon>

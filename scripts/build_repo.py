@@ -144,12 +144,12 @@ def ensure_repo_addon_source(root_dir: Path, repo_data_base_url: str) -> tuple[P
     fanart_path = repo_dir / "fanart.jpg"
     if not icon_path.exists():
         shutil.copy2(
-            root_dir / "plugin.video.fenlight" / "resources" / "media" / "fenlight_icon.png",
+            root_dir / "plugin.video.fenlight.kodienglish" / "resources" / "media" / "fenlight_icon.png",
             icon_path,
         )
     if not fanart_path.exists():
         shutil.copy2(
-            root_dir / "plugin.video.fenlight" / "resources" / "media" / "fenlight_fanart2.jpg",
+            root_dir / "plugin.video.fenlight.kodienglish" / "resources" / "media" / "fenlight_fanart2.jpg",
             fanart_path,
         )
     return repo_dir, repo_version

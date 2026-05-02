@@ -1,0 +1,259 @@
+[COLOR dodgerblue][B]Version 2.0.55[/B][/COLOR]
+- Keep the safer next-episode chapter timing fallback, make source shadow snapshots opt-in behind a profile marker file, and trim noisy playback and bookmark debug logging.
+
+[COLOR dodgerblue][B]Version 2.0.53[/B][/COLOR]
+- Fix local resume bookmark cleanup after playback stop, including newer Kodi video-database detection and safer bookmark clearing around the patched playback flow.
+
+[COLOR dodgerblue][B]Version 2.0.51[/B][/COLOR]
+- Add a bundled default OMDb API key so patched Fenlight ships with extra-ratings support enabled without manual OMDb key entry.
+
+[COLOR dodgerblue][B]Version 2.0.49[/B][/COLOR]
+- Update the built-in default TMDb API key and keep the Restore Default TMDb API Key action aligned with the new bundled value.
+
+[COLOR dodgerblue][B]Version 2.0.46[/B][/COLOR]
+- Strip tracker suffix noise like `.rartv.` and `.eztv` before release-group matching so season-pack sources can keep their stronger subtitle release matches.
+- Skip autoplay sources only when every detected audio stream is Russian-only, Ukrainian-only, or Chinese-only, while still allowing mixed-language sources with an acceptable track.
+
+[COLOR dodgerblue][B]Version 2.0.44[/B][/COLOR]
+- Use the show's original or English title plus the actual episode name when building TV subtitle-search metadata and filenames, reducing mismatches on localized show labels.
+
+[COLOR dodgerblue][B]Version 2.0.43[/B][/COLOR]
+- Skip autoplay sources whose detected audio streams are Russian-only, Ukrainian-only, or Chinese-only unless the selected title metadata already expects that spoken language.
+
+[COLOR darkgoldenrod]GOD BLESS HIM AND KEEP HIM SAFE.[/COLOR]
+
+[COLOR dodgerblue][B]Version 2.0.42[/B][/COLOR]
+- Added an explicit Trakt authorization status row to the settings window so expired or incomplete auth is visible even when a stale username is still stored.
+- Only show Authorize when Trakt is not fully authorized and keep Revoke tied to a stored Trakt user instead of treating the username as the only auth signal.
+
+[COLOR dodgerblue][B]Version 2.0.41[/B][/COLOR]
+- Demote bare generic movie-title subtitles to low-confidence fallbacks so structured release-specific matches can win when available.
+- Demote low-information source containment hits against structured DVDRip-style subtitles so malformed or ambiguous source names stop outranking stronger higher-quality matches.
+- Return clearer Trakt expiry notifications instead of treating auth and rate-limit responses like generic request failures.
+
+[COLOR dodgerblue][B]Version 2.0.39[/B][/COLOR]
+- Added TMDb metadata language and fallback-language settings so Fen Light Patched can request movie, TV show, collection, season, episode, and people details in the user-selected language.
+- Fill missing summaries and labels from the configured TMDb fallback language instead of relying on English-only detail requests.
+
+[COLOR dodgerblue][B]Version 2.0.36[/B][/COLOR]
+- Added support for up to three Gemini API keys and automatic fallback on rate-limit or quota-exhaustion responses so AI Search can keep working when one project hits its cap.
+- Raised the subtitle-backed autoplay retry pool candidate limit from `5` to `10`.
+- Let subtitle comments promote a stronger alias for the same subtitle item when they improve the release match, instead of treating comment parsing as fallback-only in all cases.
+
+[COLOR dodgerblue][B]Version 2.0.35[/B][/COLOR]
+- Taught Gemini intent parsing to preserve named people separately from generic keywords so movie AI searches can feed TMDb cast-aware discovery.
+- Tightened short-prompt interpretation so likely title or franchise searches stay closer to the literal request instead of drifting into overly broad themes.
+
+[COLOR dodgerblue][B]Version 2.0.34[/B][/COLOR]
+- Preserve meaningful technical bracket segments during bundled subtitle-selector normalization so release matching keeps cues like `[1080p]`, codec tags, and year-style bracket tokens instead of discarding them as noise.
+
+[COLOR dodgerblue][B]Version 2.0.33[/B][/COLOR]
+- Added TMDb collection-search support for movie searches so matching collection results can open directly into the related movie-set listing.
+
+[COLOR dodgerblue][B]Version 2.0.32[/B][/COLOR]
+- Republished the same Gemini-backed AI Search test build under a higher test-only version so Kodi updates cleanly from the currently shipped production `2.0.31` release.
+
+[COLOR dodgerblue][B]Version 2.0.31[/B][/COLOR]
+- Added Gemini-backed AI Search inside Fen Light Patched so natural-language prompts can build TMDb-backed movie and TV result lists without leaving the patched addon.
+- Added a Gemini API key field to the existing settings manager Accounts section.
+- Added local AI Search history alongside the existing movie, TV, anime, people, keyword, Easynews, and Trakt search histories.
+
+[COLOR dodgerblue][B]Version 2.0.30[/B][/COLOR]
+- Clear local Kodi bookmark rows using the real `plugin://plugin.video.fenlight.patched.kodienglish/...` playback URLs so erase-bookmark actions target the active movie or episode instead of relying on the old broad filename match.
+
+[COLOR dodgerblue][B]Session Note (2026-04-11, startup smoothing + selector runtime fix)[/B][/COLOR]
+- Keep the smoother autoplay handoff that waits for fullscreen before closing the resolver window, avoiding the flash back to the skin start screen while still shortening the settle around fullscreen.
+- Trim the successful pre-player settle before `player.run(...)` from `200 ms` to `50 ms` to shave a little startup latency without touching retry timing.
+- Bridge selector playback metadata into Kodi properties at playback start so patched a4k can consume the exact selector-chosen subtitle for the active source instead of falling back to a generic runtime search.
+- Live validation on `Glengarry Glen Ross` confirmed the previous generic-subtitle failure is fixed: the runtime path now logs `Using selector-matched runtime subtitle` and attaches `Glengarry Glen Ross (1992) BluRay 4K-Remastered 1080p DTS-HD AC3 x264 NL-RetailSub REMUX.nld.srt`.
+- Follow-up autoplay checks on `Hoppers`, `Good Luck, Have Fun, Don't Die`, `Interstellar`, `Predator: Badlands`, `Cold Storage`, `Nobody 2`, and `Top Gun: Maverick` also used selector-matched runtime subtitles, so the remaining edge cases are ranking-policy questions rather than a missing playback handoff.
+
+[COLOR dodgerblue][B]Version 2.0.28[/B][/COLOR]
+- Keep the smoother autoplay handoff that waits for fullscreen before closing the resolver window, reducing the flash back to the skin start screen while still shortening the settle around fullscreen.
+- Trim the successful pre-player settle before `player.run(...)` from `200 ms` to `50 ms` to shave a little startup latency without touching retry timing.
+- Bridge selector playback metadata into Kodi properties at playback start so patched a4k can consume the exact selector-chosen subtitle for the active source instead of falling back to a generic runtime search.
+
+[COLOR dodgerblue][B]Session Note (2026-04-11)[/B][/COLOR]
+- Guard external scraper worker threads so a crashing provider is logged and skipped instead of interrupting autoplay and dumping playback back to the manual sources list.
+- Session validation with `The Super Mario Bros. Movie` confirmed the practical goal: a broken cocoscrapers provider can still misbehave, but Fen Light Patched should keep going with the remaining providers.
+- No other Fen Light runtime policy was changed in this session beyond the scraper-failure guard.
+
+[COLOR dodgerblue][B]Version 2.0.27[/B][/COLOR]
+- Keep the known-good direct `player.run(...)` foreground playback path on macOS Kodi installs. Session validation showed skipped sources are normal resolve retries and should not be "fixed" by routing playback back through a resolver handoff.
+- Clarify maintainer expectations around subtitle-aware retries: future fallback work should preserve the current direct playback path and prefer the next best subtitle-backed source candidates before dropping to unrelated source order.
+- Keep the selector shadow-validation workflow focused on subtitle-backed ranking versus the actually played source so runs like Hoppers can be compared without moving playback policy into the standalone selector.
+
+[COLOR dodgerblue][B]Version 2.0.26[/B][/COLOR]
+- Ship Fen Light Patched with reuse language invoker disabled by default so updates stop re-enabling it for installs that expect it off.
+- Restore live source shadow snapshots so fresh selector trace inputs are written again during pre-play runs.
+- Keep paired latest source/subtitle shadow aliases rebuildable again by working with the new history-only runtime/manual subtitle snapshot flow in patched a4k.
+
+[COLOR dodgerblue][B]Version 2.0.25[/B][/COLOR]
+- Refresh packaged branding and artwork so repo installs stop reusing the old selector-test presentation from stale Kodi package caches.
+
+[COLOR dodgerblue][B]Version 2.0.24[/B][/COLOR]
+- Prefer direct subtitle filename evidence over uploader comments when both are available so real exact release matches beat comment-derived fallback guesses.
+- Strip OpenSubtitles track and language suffixes before source/subtitle matching so clean 1080p/720p release names keep the right match strength.
+
+[COLOR dodgerblue][B]Version 2.0.23[/B][/COLOR]
+- Bundle the subtitle selector inside the add-on instead of depending on an external dev repo path.
+- Gather subtitles once per title and build the autoplay retry pool from centralized selector ranking instead of probing subtitles source-by-source.
+
+[COLOR dodgerblue][B]Version 2.0.21[/B][/COLOR]
+- Restored direct player playback for resolved sources to avoid playback failures on some Kodi/macOS installs.
+
+[COLOR dodgerblue][B]Version 2.0.07[/B][/COLOR]
+- Added support for Season and Episode items included in Trakt list contents (My Lists, Liked Lists).
+- Updated Trakt icon.
+- Many smaller tweaks to various functions.
+- Other changes/fixes.
+
+[COLOR dodgerblue][B]Version 2.0.06[/B][/COLOR]
+- Fixed Results Highlight Color bug.
+- Added TorBox highlight color choice.
+- Fixed AI Upscaled/Enhanced filter not working. You will need to re-set this if you want to Exclude these results.
+- Fixed Offcloud login accepting incorrect credentials.
+- Fixed "Browse" in single episode list to honor flatten seasons setting.
+- Other changes/fixes.
+
+[COLOR dodgerblue][B]Version 2.0.05[/B][/COLOR]
+- Added OffCloud suppport. Big thanks to kodifitzwell who allowed me to steal a large portion of his code.
+- Added Easydebrid suppport. Big thanks to kodifitzwell who allowed me to steal a large portion of his code.
+- Added TorBox suppport. Big thanks to kodifitzwell who allowed me to steal a large portion of his code. Big thanks also to [B]DaleAlanC[/B] for lending me their account.
+- Other changes/fixes.
+
+[COLOR dodgerblue][B]Version 2.0.04[/B][/COLOR]
+- AD fix.
+- Reinstate Upload Manager, but I have disabled the Rollback Feature.
+- Added settings General->Manage Addon Updates... "Github Username" & "Github Repo Address". In these, you can enter the username and repo address of another dev who may wish to push a Fen Light Patched release. Devs will need to check the code within updater.py and make sure their repo is structured correctly. Basically repo_name/packages/CONTENT.
+
+[COLOR dodgerblue][B]Version 2.0.03[/B][/COLOR]
+- Let's try this again.
+- Fixed Reviews in Extras Menu. Clear IMDb cache and restart Kodi to refresh new data.
+- Added some to the Years menu.
+- Final release of this addon. Hopefully. So long all.
+
+[COLOR dodgerblue][B]Version 2.0.02[/B][/COLOR]
+- Oop. Spoke too soon.
+- Fix for browsing/downloading pack results through RD.
+- Quick fix for some media causing error when saving to favorites.
+- Quick fix to correct sequential playback.
+- Final release of this addon. Hopefully. So long all.
+
+[COLOR dodgerblue][B]Version 2.0.01[/B][/COLOR]
+- Fixed RD compatibility.
+- Removed update service.
+- Final release of this addon. So long all.
+
+[COLOR dodgerblue][B]Version 1.0.94[/B][/COLOR]
+NOTE: THERE ARE NO FIXES IN THIS RELEASE FOR REAL DEBRID INTEGRATION.
+- Added info for the unwatched count for single episode lists. This only shows for skins that support this.
+- Added Settings->Single Episode Lists->Trakt Calendar->"Flatten TV Shows Airing on Same Day". Use this to limit single episode lists to only display the first episode when multiple episodes are released on the same day.
+- Added ability to manually enter view type ids if needed. Enable "Control Viewtypes Within Addon" in Settings->Content->General, then you can enable "Manually Enter Viewtype Values" and enter the viewtype ids.
+- Fixed progress status on episodes when opening all instead of seasons.
+- Better detection of best instance of video for Official, first released trailer.
+- Other changes/fixes.
+
+[COLOR dodgerblue][B]Version 1.0.93[/B][/COLOR]
+- Couple of quick fixes.
+
+[COLOR dodgerblue][B]Version 1.0.92[/B][/COLOR]
+- [CONTEXT MENU->OPTIONS->ASSIGN AN EPISODE GROUP TO...] Added option for TV Shows to assign an episode group from TMDb. These episode groups cover alternate season and episode orders based on other parameters. For example, it might be possible to set the episode order for a TV Show based on it's streaming aired order, or it's order from another service such as TVDb. These Custom Episode Groups will not change how the episodes are arranged within Fen Light Patched, rather the information from them will be used when scraping for results for playback. This feature may be particularly useful when dealing with Anime content, but can be set for any TV Show.
+- Added Settings->Results->General->"Retry With Custom Episode Group When No Results". Enable this and Fen Light Patched will rescrape using a custom episode group if no results are found. If a custom episode group is already assigned to the TV Show (above for details), then a rescrape will occur using instead the default season/episode values instead.
+- Added Settings->General->General->"Limit Concurrent Threads". Use this if your device is erroring by not allowing python to start new threads once a certain threshold is reached. There is a hard limit of 60 if this is not enabled and set to a user preference. Min/max settings are 10/300.
+- Temporary workaround for the RD "no cached results" error currently randomly affecting calls to check RD's cache. Will be removed once their API is fixed for this endpoint.
+- Fixed "Parental Guide" in Extras window. To get fresh results (empty results are cached), clear IMDb Database and restart Kodi.
+- Improved trailer choice for metadata. Clear metadata cache for benefits.
+- Other changes/fixes.
+
+[COLOR dodgerblue][B]Version 1.0.90/91[/B][/COLOR]
+- Added Settings->Results->Sorting & Filtering->"Custom Autoplay Sort To Top". This will allow you to set 5 different video/audio characteristics that you wish to see brought to the top of the sources list for autoplay. Things like "HEVC" or "DOLBY VISION" etc. These will be weighted on importance, with the higher the position in the list of 5 the higher the importance when sorting to the top.
+- As a result, the other filtering options which previously featured an "INCLUDE, EXCLUDE, PREFER (AUTOPLAY)" setting have been reset, and the "PREFER (AUTOPLAY)" option has been removed.
+- Other changes/fixes.
+
+[COLOR dodgerblue][B]Version 1.0.89[/B][/COLOR]
+- Couple of quick fixes.
+
+[COLOR dodgerblue][B]Version 1.0.88[/B][/COLOR]
+- Quick fix for PM browsing.
+
+[COLOR dodgerblue][B]Version 1.0.87[/B][/COLOR]
+- Fixed incorrect aired episode totals in seasons container.
+- Optimizations to service procedures to help Fen Light Patched start quicker on Kodi opening.
+- Other changes/fixes.
+
+[COLOR dodgerblue][B]Version 1.0.86[/B][/COLOR]
+- FIXED UPDATER BUG. IT IS SAFE TO UPDATE TO THIS VERSION. IF YOU ARE ON VERSION 1.0.85, THEN DOWNGRADE FIRST BEFORE UPDATING.
+- Fixed searching Trakt user lists.
+- Fixed little filter error in fetching MPAA ratings.
+- Other changes/fixes.
+
+[COLOR dodgerblue][B]Version 1.0.85[/B][/COLOR]
+- Added Settings->Content->General->"Service used for Because You Watched". Choose which service provides recommendations for the Because You Watched menus. Options are Recommended (TMDb) or More Like This (IMDb). TMDb by default.
+- Added "Because You Watched" section to the Random menu. This will take random media from up to the last 5 movies/episodes you have watched, select one of those at random, and display recommended media from that watched item.
+- Added Settings->Content->General->"Seeds used for Because You Watched Random". Choose how much previously watched media is used for recommendations for the Because You Watched Random menu. You can choose from the previous 1 to 5 watched items as the list from which the seed will be added.
+- Partial fix for Parental Guidance in Extras window. IMDb look to be in the process of changing this on their website, so if the new layout loads, it will still not work. Clear Main Cache to clear any null values for this.
+- Other changes/fixes.
+
+[COLOR dodgerblue][B]Version 1.0.83/84[/B][/COLOR]
+- Added a favorites entry for Anime. All shows favorited from within the Anime section will be saved as an Anime favorite, rather than a TV Show favorite.
+- Added "Anime" to the Search menu. Will exclusively search for Anime TV Shows. Can be added to the Anime section if preferred using the menu edit system.
+- Added Settings->Content->General->Include Unaired Media in Trakt Watchlists. On by default. Disable this to hide Movies/TV Shows in your Trakt Watchlists that have yet to air.
+- Lowered caching times of some lists. Raised caching times of some others.
+- Reduced to 12 hours the cached contents of Trakt "Liked" lists.
+- Other changes/fixes.
+
+[COLOR dodgerblue][B]Version 1.0.81/82[/B][/COLOR]
+- Added 'Anime' section to Root Menu (Main Menu). To add this, context menu on any current Root Menu item->Check for New Menu Items. Add the Anime menu item where you please. If this doesn't work, then select Context Menu->Restore Menu.
+- Anime is also included in the "Random Lists" menu, where the Anime lists can be randomized just like the Movie and TV Show lists.
+- Added Settings->Content->General->"Watched (Still Airing) TV Shows Location". Select from "Watched", "In Progress" or "Both". This decides which menu fully watched, but still airing, TV Shows will be included in. Default is "Watched" (which is the current behavior).
+- Excluded some genres from the "Popular" TV Shows list. Atleast until TMDb get that list sorted out. Clear the Lists cache to get slightly better results there.
+- Other changes/fixes.
+
+[COLOR dodgerblue][B]Version 1.0.78/79/80[/B][/COLOR]
+- Added "AI Enhanced/Upscaled Files Filter" to Settings->Results->Sorting and Filtering. Set to Include, Exclude, Prefer (Autoplay).
+- Fix for Trakt liked lists not updating with new content. New content will be checked for every 24 hours.
+- Other changes/fixes.
+
+[COLOR dodgerblue][B]Version 1.0.77[/B][/COLOR]
+- Small adjustments to Extras and People windows.
+- Other changes/fixes.
+
+[COLOR dodgerblue][B]Version 1.0.76[/B][/COLOR]
+- More fine tuning of random widgets, mainly concerning the shortcuts folder. This is quickly becoming messy code though, which I'm not a fan of.
+- Other changes/fixes.
+- God Bless him and keep him safe.
+
+[COLOR dodgerblue][B]Version 1.0.75[/B][/COLOR]
+- Couple more adjustments to random widgets functions.
+
+[COLOR dodgerblue][B]Version 1.0.74[/B][/COLOR]
+- Added Settings->Results->Sorting and Filtering->Results Size Sort Direction. Default to Descending.
+- Quick fix for auto widget refreshing.
+
+[COLOR dodgerblue][B]Version 1.0.72/73[/B][/COLOR]
+- Added "Single Episode Lists" settings category. Some re-organizing of settings.
+- Added Settings->Content->Widgets->"Refresh Widgets on Timer". Enable this, set a timer value, and FenLight will refresh your widgets when the timer is due. Off by default. Also added boolean to enable/disable Notifications when this occurs. If you use "random" widgets (made using the various methods in Fen Light Patched) then you will need to set a value here or else the random widgets will only show fresh random content on each Kodi start.
+- Bifurcated (thanks for the new word) Minimum Size setting into movies/episodes for filtering results.
+- Other changes/fixes.
+
+[COLOR dodgerblue][B]Version 1.0.71[/B][/COLOR]
+- Quick fix for choosing Easynews language filters.
+
+[COLOR dodgerblue][B]Version 1.0.70[/B][/COLOR]
+- Quick fix for Extras Videos.
+
+............
+............
+............
+
+[COLOR dodgerblue][B]Version 1.0.0[/B][/COLOR]
+- Initial Release
+- This is an English language only addon.
+
+
+
+
+
+
+++
