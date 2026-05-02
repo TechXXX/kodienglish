@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="repository.kodienglish" name="Kodi English Repository" provider-name="Kodi English" version="1.0.5">
+<addon id="repository.kodienglish" name="Kodi English Repository" provider-name="Kodi English" version="1.0.6">
     <extension point="xbmc.addon.repository" name="Kodi English Repository">
         <dir>
             <info compressed="false">https://techxxx.github.io/kodienglish/addons.xml</info>

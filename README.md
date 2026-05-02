@@ -11,13 +11,13 @@ other repositories.
 
 Current source-tree versions:
 
-- `plugin.video.fenlight.kodienglish` `2.0.15.1001`
+- `plugin.video.fenlight.kodienglish` `2.0.15.1002`
   Vanilla Fen Light package.
-- `plugin.video.fenlight.patched.kodienglish` `2.0.55.1001`
+- `plugin.video.fenlight.patched.kodienglish` `2.0.55.1002`
   Patched Fen Light package copied from the main repo.
-- `plugin.video.themoviedb.helper.patched.kodienglish` `6.15.2.8.1001`
+- `plugin.video.themoviedb.helper.patched.kodienglish` `6.15.2.8.1002`
   Patched TMDb Helper package used by the patched skin flow.
-- `skin.arctic.horizon.2.patched.kodienglish` `0.8.30.7.1001`
+- `skin.arctic.horizon.2.patched.kodienglish` `0.8.30.7.1002`
   Patched Arctic Horizon 2 package targeting the patched TMDb Helper addon id.
 - `repository.kodienglish`
   The repository addon Kodi installs first.
