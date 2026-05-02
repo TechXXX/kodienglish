@@ -48,13 +48,11 @@ Current source-tree versions:
 
 The repository addon and metadata are published from:
 
-- [https://github.com/TechXXX/KodiEnglish](https://github.com/TechXXX/KodiEnglish)
+- [https://github.com/TechXXX/kodienglish](https://github.com/TechXXX/kodienglish)
 
-Kodi should consume:
+Kodi should consume the GitHub Pages path:
 
-- `https://raw.githubusercontent.com/TechXXX/KodiEnglish/main/addons.xml`
-- `https://raw.githubusercontent.com/TechXXX/KodiEnglish/main/addons.xml.md5`
-- `https://raw.githubusercontent.com/TechXXX/KodiEnglish/main/zips/`
+- `https://techxxx.github.io/kodienglish/`
 
 ## Generated Output Rules
 

@@ -15,8 +15,8 @@ import xml.etree.ElementTree as ET
 import zipfile
 
 
-DEFAULT_BASE_URL = "https://TechXXX.github.io/KodiEnglish/"
-DEFAULT_REPO_DATA_BASE_URL = "https://raw.githubusercontent.com/TechXXX/KodiEnglish/main/"
+DEFAULT_BASE_URL = "https://techxxx.github.io/kodienglish/"
+DEFAULT_REPO_DATA_BASE_URL = "https://techxxx.github.io/kodienglish/"
 REPO_ADDON_ID = "repository.kodienglish"
 REPO_ADDON_NAME = "Kodi English Repository"
 REPO_PROVIDER = "Kodi English"
