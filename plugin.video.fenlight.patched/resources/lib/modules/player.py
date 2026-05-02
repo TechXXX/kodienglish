@@ -1,0 +1,473 @@
+# -*- coding: utf-8 -*-
+import json
+import re
+import traceback
+from threading import Thread
+from apis.trakt_api import make_trakt_slug
+from caches.settings_cache import get_setting
+from modules import kodi_utils as ku, settings as st, watched_status as ws
+logger = ku.logger
+
+set_property, clear_property, get_visibility, hide_busy_dialog, xbmc_actor = ku.set_property, ku.clear_property, ku.get_visibility, ku.hide_busy_dialog, ku.xbmc_actor
+xbmc_player, execute_builtin, sleep = ku.xbmc_player, ku.execute_builtin, ku.sleep
+make_listitem, volume_checker, get_infolabel, xbmc_monitor = ku.make_listitem, ku.volume_checker, ku.get_infolabel, ku.xbmc_monitor
+close_all_dialog, notification, poster_empty, fanart_empty = ku.close_all_dialog, ku.notification, ku.empty_poster, ku.get_addon_fanart()
+set_resolved_url = ku.set_resolved_url
+get_jsonrpc = ku.get_jsonrpc
+auto_resume, auto_nextep_settings, store_resolved_to_cloud = st.auto_resume, st.auto_nextep_settings, st.store_resolved_to_cloud
+set_bookmark, mark_movie, mark_episode = ws.set_bookmark, ws.mark_movie, ws.mark_episode
+clear_local_bookmark = ws.clear_local_bookmark
+total_time_errors = ('0.0', '', 0.0, None)
+set_resume, set_watched = 5, 90
+video_fullscreen_check = 'Window.IsActive(fullscreenvideo)'
+dialog_close_settle_ms = 75
+post_fullscreen_settle_ms = 250
+post_stop_bookmark_clear_delay_ms = 750
+post_stop_bookmark_clear_retry_ms = 500
+post_stop_bookmark_clear_attempts = 3
+audio_language_check_attempts_max = 8
+audio_language_check_settle_ms = 150
+unwanted_audio_language_map = {
+	'ru': 'Russian',
+	'rus': 'Russian',
+	'russian': 'Russian',
+	'uk': 'Ukrainian',
+	'ukr': 'Ukrainian',
+	'ukrainian': 'Ukrainian',
+	'zh': 'Chinese',
+	'zho': 'Chinese',
+	'chi': 'Chinese',
+	'chinese': 'Chinese',
+	'mandarin': 'Chinese',
+	'cantonese': 'Chinese',
+	'cmn': 'Chinese',
+	'yue': 'Chinese',
+}
+
+class FenLightPlayer(xbmc_player):
+	def __init__ (self):
+		xbmc_player.__init__(self)
+
+	def run(self, url=None, obj=None):
+		hide_busy_dialog()
+		self.clear_playback_properties()
+		if not url: return self.run_error()
+		try:
+			return self.play_video(url, obj)
+		except:
+			logger('Fen Light Patched', 'Player.run exception')
+			return self.run_error()
+
+	def run_resolved(self, url=None, obj=None):
+		hide_busy_dialog()
+		self.clear_playback_properties()
+		if not url: return self.run_error()
+		try:
+			self.set_constants(url, obj)
+			volume_checker()
+			set_resolved_url(self.make_listing())
+			if not self.is_generic:
+				self.check_playback_start()
+				if self.playback_successful: self.monitor()
+				else:
+					self.sources_object.playback_successful = self.playback_successful
+					self.sources_object.cancel_all_playback = self.cancel_all_playback
+					if self.cancel_all_playback: self.kill_dialog()
+					self.stop()
+				try: del self.kodi_monitor
+				except: pass
+		except:
+			return self.run_error()
+
+	def play_video(self, url, obj):
+		self.set_constants(url, obj)
+		volume_checker()
+		listing = self.make_listing()
+		self._hybrid_resolve_handoff(listing)
+		if not self.isPlayingVideo():
+			self.play(self.url, listing)
+		if not self.is_generic:
+			self.check_playback_start()
+			if self.playback_successful or self.playback_started:
+				self.playback_successful = True
+				self.monitor()
+			else:
+				self.sources_object.playback_successful = self.playback_successful
+				self.sources_object.cancel_all_playback = self.cancel_all_playback
+				if self.cancel_all_playback: self.kill_dialog()
+				self.stop()
+			try: del self.kodi_monitor
+			except: pass
+
+	def check_playback_start(self):
+		resolve_percent = 0
+		while self.playback_successful is None:
+			hide_busy_dialog()
+			if not self.sources_object.progress_dialog: self.playback_successful = True
+			elif self.sources_object.progress_dialog.skip_resolved(): self.playback_successful = False
+			elif self.sources_object.progress_dialog.iscanceled() or self.kodi_monitor.abortRequested(): self.cancel_all_playback, self.playback_successful = True, False
+			elif resolve_percent >= 100: self.playback_successful = False
+			elif get_visibility('Window.IsTopMost(okdialog)'):
+				execute_builtin('SendClick(okdialog, 11)')
+				self.playback_successful = False
+			elif self.isPlayingVideo():
+				self.playback_started = True
+				try:
+					total_time = self.getTotalTime()
+					fullscreen = get_visibility(video_fullscreen_check)
+					if total_time not in total_time_errors and fullscreen: self.playback_successful = True
+				except: pass
+			resolve_percent = round(resolve_percent + 26.0/100, 1)
+			if self.sources_object.progress_dialog:
+				self.sources_object.progress_dialog.update_resolver(percent=resolve_percent)
+			sleep(50)
+
+	def playback_close_dialogs(self):
+		self.sources_object.playback_successful = True
+		self.kill_dialog()
+		sleep(dialog_close_settle_ms)
+		close_all_dialog()
+
+	def monitor(self):
+		try:
+			ensure_dialog_dead, total_check_time = False, 0
+			if self.media_type == 'episode':
+				play_random_continual = self.sources_object.random_continual
+				play_random = self.sources_object.random
+				disable_autoplay_next_episode = self.sources_object.disable_autoplay_next_episode
+				if disable_autoplay_next_episode: notification('Scrape with Custom Values - Autoplay Next Episode Cancelled', 4500)
+				if any((play_random_continual, play_random, disable_autoplay_next_episode)): self.autoplay_nextep, self.autoscrape_nextep = False, False
+				else: self.autoplay_nextep, self.autoscrape_nextep = self.sources_object.autoplay_nextep, self.sources_object.autoscrape_nextep
+			else: play_random_continual, self.autoplay_nextep, self.autoscrape_nextep = False, False, False
+			while total_check_time <= 30 and not get_visibility(video_fullscreen_check):
+				sleep(100)
+				total_check_time += 0.10
+			hide_busy_dialog()
+			sleep(post_fullscreen_settle_ms)
+			while self.isPlayingVideo():
+				try:
+					try: self.total_time, self.curr_time = self.getTotalTime(), self.getTime()
+					except: sleep(250); continue
+					if not ensure_dialog_dead:
+						audio_language_decision = self.check_unwanted_audio_language()
+						if audio_language_decision == 'retry': continue
+						if audio_language_decision == 'skip': return
+						ensure_dialog_dead = True
+						self.playback_close_dialogs()
+					sleep(1000)
+					self.current_point = round(float(self.curr_time/self.total_time * 100), 1)
+					if self.current_point >= set_watched:
+						if play_random_continual: self.run_random_continual(); break
+						if not self.media_marked: self.media_watched_marker()
+					if self.autoplay_nextep or self.autoscrape_nextep:
+						if not self.nextep_info_gathered: self.info_next_ep()
+						if round(self.total_time - self.curr_time) <= self.start_prep: self.run_next_ep(); break
+				except: pass
+			hide_busy_dialog()
+			if not self.media_marked: self.media_watched_marker()
+			self.schedule_local_bookmark_clear()
+			self.clear_playback_properties()
+			self.clear_playing_item()
+		except:
+			hide_busy_dialog()
+			logger('Fen Light Patched', 'Player.monitor exception | url=%s | error=%s' % (
+				getattr(self, 'url', ''), traceback.format_exc().strip()))
+			self.sources_object.playback_successful = False
+			self.sources_object.cancel_all_playback = True
+			return self.kill_dialog()
+
+	def check_unwanted_audio_language(self):
+		if self.audio_language_checked: return 'pass'
+		should_skip, blocked_languages, stream_details = self._should_skip_unwanted_audio_language()
+		if should_skip is None:
+			self.audio_language_check_attempts += 1
+			if self.audio_language_check_attempts < audio_language_check_attempts_max:
+				sleep(audio_language_check_settle_ms)
+				return 'retry'
+			self.audio_language_checked = True
+			return 'pass'
+		self.audio_language_checked = True
+		if not should_skip: return 'pass'
+		self.audio_language_rejected = True
+		spoken_language = self.meta_get('spoken_language', '')
+		logger('Fen Light Patched', 'Player.unwanted_audio_language_reject | blocked=%s | spoken_language=%s | streams=%s | url=%s' % (
+			', '.join(blocked_languages), spoken_language, ' || '.join(stream_details), self.url))
+		notification('Skipping source with %s-only audio' % '/'.join(blocked_languages), 2500)
+		self.playback_successful, self.cancel_all_playback = False, False
+		self.sources_object.playback_successful, self.sources_object.cancel_all_playback = False, False
+		self.clear_playback_properties()
+		self.stop()
+		return 'skip'
+
+	def _should_skip_unwanted_audio_language(self):
+		streams = self._get_audio_streams()
+		if not streams: return None, (), ()
+		blocked_languages, stream_details, has_meaningful_stream_data, allowed_stream_found = [], [], False, False
+		for stream in streams:
+			description = self._describe_audio_stream(stream)
+			if description:
+				has_meaningful_stream_data = True
+				stream_details.append(description)
+			blocked_language = self._detect_unwanted_audio_language(stream)
+			if blocked_language is None:
+				if description: allowed_stream_found = True
+				continue
+			blocked_languages.append(blocked_language)
+		if not has_meaningful_stream_data: return None, (), ()
+		if allowed_stream_found or not blocked_languages: return False, (), tuple(stream_details)
+		return True, tuple(sorted(set(blocked_languages))), tuple(stream_details)
+
+	def _get_audio_streams(self):
+		streams = []
+		try:
+			command = {
+				'jsonrpc': '2.0',
+				'id': 1,
+				'method': 'Player.GetProperties',
+				'params': {
+					'playerid': 1,
+					'properties': ['currentaudiostream', 'audiostreams'],
+				},
+			}
+			result = get_jsonrpc(command) or {}
+			current_audio_stream = result.get('currentaudiostream')
+			if current_audio_stream: streams.append(current_audio_stream)
+			streams.extend(result.get('audiostreams') or [])
+		except: pass
+		if streams: return streams
+		try: return [{'language': i} for i in self.getAvailableAudioStreams() if i]
+		except: return []
+
+	def _describe_audio_stream(self, stream):
+		language = (stream.get('language') or '').strip()
+		name = (stream.get('name') or '').strip()
+		parts = []
+		if language: parts.append(language)
+		if name and name != language: parts.append(name)
+		return ' | '.join(parts)
+
+	def _detect_unwanted_audio_language(self, stream):
+		for value, allow_name in ((stream.get('language'), False), (stream.get('name'), True)):
+			result = self._normalize_unwanted_audio_language(value, allow_name=allow_name)
+			if result: return result
+		return None
+
+	def _normalize_unwanted_audio_language(self, value, allow_name=False):
+		text = (value or '').strip().lower()
+		if not text: return None
+		if allow_name and any(i in text for i in ('/', '\\', '&', '+', ',', '|', '(', ')', '[', ']')): return None
+		text = re.sub(r'[^a-z]+', ' ', text).strip()
+		if not text or text in ('unknown', 'und', 'undetermined', 'default', 'original'): return None
+		if text in unwanted_audio_language_map: return unwanted_audio_language_map[text]
+		tokens = text.split()
+		matches = {unwanted_audio_language_map[i] for i in tokens if i in unwanted_audio_language_map}
+		if len(matches) == 1 and (not allow_name or len(tokens) <= 2):
+			return next(iter(matches))
+		return None
+
+	def make_listing(self):
+		listitem = make_listitem()
+		listitem.setPath(self.url)
+		listitem.setContentLookup(False)
+		if self.is_generic:
+			info_tag = listitem.getVideoInfoTag()
+			info_tag.setMediaType('video')
+			info_tag.setFilenameAndPath(self.url)
+		else:
+			self.tmdb_id, self.imdb_id, self.tvdb_id = self.meta_get('tmdb_id', ''), self.meta_get('imdb_id', ''), self.meta_get('tvdb_id', '')
+			self.media_type, self.title, self.year = self.meta_get('media_type'), self.meta_get('title'), self.meta_get('year')
+			self.season, self.episode = self.meta_get('season', ''), self.meta_get('episode', '')
+			self.auto_resume = auto_resume(self.media_type)
+			poster = self.meta_get('poster') or poster_empty
+			fanart = self.meta_get('fanart') or fanart_empty
+			clearlogo = self.meta_get('clearlogo') or ''
+			duration, plot, genre, trailer, mpaa = self.meta_get('duration'), self.meta_get('plot'), self.meta_get('genre', ''), self.meta_get('trailer'), self.meta_get('mpaa')
+			rating, votes = self.meta_get('rating'), self.meta_get('votes')
+			premiered, studio, tagline = self.meta_get('premiered'), self.meta_get('studio', ''), self.meta_get('tagline')
+			director, writer, cast, country = self.meta_get('director', ''), self.meta_get('writer', ''), self.meta_get('cast', []), self.meta_get('country', '')
+			listitem.setLabel(self.title)
+			if self.media_type == 'movie':
+				listitem.setArt({'poster': poster, 'fanart': fanart, 'icon': poster, 'clearlogo': clearlogo})
+				info_tag = listitem.getVideoInfoTag()
+				info_tag.setMediaType('movie'), info_tag.setTitle(self.title), info_tag.setOriginalTitle(self.meta_get('original_title')), info_tag.setPlot(plot)
+				info_tag.setYear(int(self.year)), info_tag.setRating(rating), info_tag.setVotes(votes), info_tag.setMpaa(mpaa)
+				info_tag.setDuration(duration), info_tag.setCountries(country), info_tag.setTrailer(trailer), info_tag.setPremiered(premiered)
+				info_tag.setTagLine(tagline), info_tag.setStudios(studio), info_tag.setIMDBNumber(self.imdb_id), info_tag.setGenres(genre)
+				info_tag.setWriters(writer), info_tag.setDirectors(director), info_tag.setUniqueIDs({'imdb': self.imdb_id, 'tmdb': str(self.tmdb_id)})
+				info_tag.setCast([xbmc_actor(name=item['name'], role=item['role'], thumbnail=item['thumbnail']) for item in cast])
+			else:
+				listitem.setArt({'poster': poster, 'fanart': fanart, 'icon': poster, 'clearlogo': clearlogo, 'tvshow.poster': poster, 'tvshow.clearlogo': clearlogo})
+				info_tag = listitem.getVideoInfoTag()
+				info_tag.setMediaType('episode'), info_tag.setTitle(self.meta_get('ep_name')), info_tag.setOriginalTitle(self.meta_get('original_title'))
+				info_tag.setTvShowTitle(self.title), info_tag.setTvShowStatus(self.meta_get('status')), info_tag.setSeason(self.season), info_tag.setEpisode(self.episode)
+				info_tag.setPlot(plot), info_tag.setYear(int(self.year)), info_tag.setRating(rating), info_tag.setVotes(votes)
+				info_tag.setMpaa(mpaa), info_tag.setDuration(duration), info_tag.setTrailer(trailer), info_tag.setFirstAired(premiered)
+				info_tag.setStudios(studio), info_tag.setIMDBNumber(self.imdb_id), info_tag.setGenres(genre), info_tag.setWriters(writer)
+				info_tag.setDirectors(director), info_tag.setUniqueIDs({'imdb': self.imdb_id, 'tmdb': str(self.tmdb_id), 'tvdb': str(self.tvdb_id)})
+				info_tag.setCast([xbmc_actor(name=item['name'], role=item['role'], thumbnail=item['thumbnail']) for item in cast])
+				info_tag.setFilenameAndPath(self.url)
+			self.set_resume_point(listitem)
+			self.set_playback_properties()
+		return listitem
+
+	def _hybrid_resolve_handoff(self, listitem):
+		try:
+			set_resolved_url(listitem)
+			for _ in range(10):
+				if self.isPlayingVideo(): return
+				sleep(50)
+		except:
+			pass
+
+	def media_watched_marker(self, force_watched=False):
+		self.media_marked = True
+		try:
+			if self.current_point >= set_watched or force_watched:
+				if self.media_type == 'movie': watched_function = mark_movie
+				else: watched_function = mark_episode
+				watched_params = {'action': 'mark_as_watched', 'tmdb_id': self.tmdb_id, 'title': self.title, 'year': self.year, 'season': self.season, 'episode': self.episode,
+									'tvdb_id': self.tvdb_id, 'from_playback': 'true'}
+				Thread(target=self.run_media_progress, args=(watched_function, watched_params)).start()
+			else:
+				clear_property('fenlight.random_episode_history')
+				if self.current_point >= set_resume:
+					progress_params = {'media_type': self.media_type, 'tmdb_id': self.tmdb_id, 'curr_time': self.curr_time, 'total_time': self.total_time,
+									'title': self.title, 'season': self.season, 'episode': self.episode, 'from_playback': 'true'}
+					Thread(target=self.run_media_progress, args=(set_bookmark, progress_params)).start()
+		except: pass
+
+	def run_media_progress(self, function, params):
+		try: function(params)
+		except: pass
+
+	def schedule_local_bookmark_clear(self):
+		if self.is_generic: return
+		Thread(target=self.clear_local_bookmark_after_stop, args=(self.media_type, self.tmdb_id, self.season, self.episode)).start()
+
+	def clear_local_bookmark_after_stop(self, media_type, tmdb_id, season, episode):
+		sleep(post_stop_bookmark_clear_delay_ms)
+		for count in range(post_stop_bookmark_clear_attempts):
+			try:
+				clear_local_bookmark(media_type, tmdb_id, season, episode)
+			except:
+				logger('Fen Light Patched', 'Player.clear_local_bookmark_after_stop exception | attempt=%s/%s | media_type=%s | tmdb_id=%s | season=%s | episode=%s | error=%s' % (
+					count + 1, post_stop_bookmark_clear_attempts, media_type, tmdb_id, season, episode, traceback.format_exc().strip()))
+			if count < post_stop_bookmark_clear_attempts - 1: sleep(post_stop_bookmark_clear_retry_ms)
+
+	def run_next_ep(self):
+		from modules.episode_tools import EpisodeTools
+		if not self.media_marked: self.media_watched_marker(force_watched=True)
+		EpisodeTools(self.meta, self.nextep_settings).auto_nextep()
+
+	def run_random_continual(self):
+		from modules.episode_tools import EpisodeTools
+		if not self.media_marked: self.media_watched_marker(force_watched=True)
+		EpisodeTools(self.meta).play_random_continual(False)
+
+	def set_resume_point(self, listitem):
+		if self.playback_percent > 0.0: listitem.setProperty('StartPercent', str(self.playback_percent))
+
+	def info_next_ep(self):
+		self.nextep_info_gathered = True
+		play_type = 'autoplay_nextep' if self.autoplay_nextep else 'autoscrape_nextep'
+		try:
+			nextep_settings = auto_nextep_settings(play_type)
+			use_window = nextep_settings['alert_method'] == 0
+			default_action = nextep_settings['default_action']
+			chapter_data = get_infolabel('Player.Chapters') if nextep_settings['use_chapters'] else ''
+			final_chapter = self.final_chapter(chapter_data) if nextep_settings['use_chapters'] else None
+			percentage = 100 - final_chapter if final_chapter is not None else nextep_settings['window_percentage']
+			window_time = max(0, round((percentage/100) * self.total_time))
+			self.start_prep = nextep_settings['scraper_time'] + window_time
+			self.nextep_settings = {'use_window': use_window, 'window_time': window_time, 'default_action': default_action, 'play_type': play_type}
+		except:
+			self.start_prep = 0
+			self.nextep_settings = {'use_window': True, 'window_time': 0, 'default_action': 'cancel', 'play_type': play_type}
+
+	def final_chapter(self, chapter_data=None):
+		try:
+			if chapter_data is None: chapter_data = get_infolabel('Player.Chapters')
+			total_time = float(getattr(self, 'total_time', 0) or 0)
+			chapters = []
+			for item in chapter_data.split(','):
+				item = item.strip()
+				if not item: continue
+				try: chapters.append(float(item))
+				except: continue
+			if not chapters: return None
+			last_value = chapters[-1]
+			if last_value > 100:
+				previous_values = chapters[:-1]
+				max_previous = max(previous_values) if previous_values else None
+				# If Kodi's tail chapter percentage runs past 100, don't trust chapter timing for this file.
+				if total_time and last_value > total_time: return None
+				if max_previous is not None and max_previous <= 100: return None
+			fallback_value = None
+			for value in reversed(chapters):
+				if value == 100:
+					if fallback_value is None: fallback_value = 100.0
+					continue
+				if 90 <= value < 100: return value
+				if total_time and 0 < value <= total_time:
+					value = (value/total_time) * 100
+					if 90 <= value < 100: return round(value, 3)
+			return fallback_value
+		except: pass
+		return None
+
+	def kill_dialog(self):
+		try: self.sources_object._kill_progress_dialog()
+		except: close_all_dialog()
+
+	def set_constants(self, url, obj):
+		self.url = url
+		self.sources_object = obj
+		self.is_generic = self.sources_object == 'video'
+		if not self.is_generic:
+			self.meta = self.sources_object.meta
+			self.meta_get, self.kodi_monitor, self.playback_percent = self.meta.get, xbmc_monitor(), self.sources_object.playback_percent or 0.0
+			self.playing_filename = self.sources_object.playing_filename
+			self.media_marked, self.nextep_info_gathered = False, False
+			self.audio_language_checked, self.audio_language_rejected = False, False
+			self.audio_language_check_attempts = 0
+			self.playback_started = False
+			self.playback_successful, self.cancel_all_playback = None, False
+			self.playing_item = self.sources_object.playing_item
+
+	def set_playback_properties(self):
+		try:
+			trakt_ids = {'tmdb': self.tmdb_id, 'imdb': self.imdb_id, 'slug': make_trakt_slug(self.title)}
+			if self.media_type == 'episode': trakt_ids['tvdb'] = self.tvdb_id
+			set_property('script.trakt.ids', json.dumps(trakt_ids))
+			if self.playing_filename: set_property('subs.player_filename', self.playing_filename)
+			playing_item = getattr(self, 'playing_item', {}) or {}
+			selector_source_key = playing_item.get('selector_source_key')
+			selector_payload = playing_item.get('selector_subtitle_payload')
+			if selector_source_key: set_property('subs.selector_source_key', selector_source_key)
+			else: clear_property('subs.selector_source_key')
+			if selector_payload: set_property('subs.selector_payload', json.dumps(selector_payload))
+			else: clear_property('subs.selector_payload')
+		except: pass
+
+	def clear_playback_properties(self):
+		clear_property('fenlight.window_stack')
+		clear_property('script.trakt.ids')
+		clear_property('subs.player_filename')
+		clear_property('subs.selector_source_key')
+		clear_property('subs.selector_payload')
+
+	def clear_playing_item(self):
+		playing_item = getattr(self, 'playing_item', {}) or {}
+		cache_provider = playing_item.get('cache_provider')
+		if cache_provider == 'Offcloud':
+			if playing_item.get('direct_debrid_link', False): return
+			if store_resolved_to_cloud('Offcloud', 'package' in playing_item): return
+			from apis.offcloud_api import OffcloudAPI
+			OffcloudAPI().clear_played_torrent(playing_item)
+
+	def run_error(self):
+		try: self.sources_object.playback_successful = False
+		except: pass
+		self.clear_playback_properties()
+		notification('Playback Failed', 3500)
+		return False

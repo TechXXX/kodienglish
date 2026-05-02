@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="repository.kodienglish" name="Kodi English Repository" provider-name="Kodi English" version="1.0.1">
+    <extension point="xbmc.addon.repository" name="Kodi English Repository">
+        <dir>
+            <info compressed="false">https://raw.githubusercontent.com/TechXXX/KodiEnglish/main/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/TechXXX/KodiEnglish/main/addons.xml.md5</checksum>
+            <datadir zip="true">https://raw.githubusercontent.com/TechXXX/KodiEnglish/main/zips/</datadir>
+        </dir>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary>Repository for Kodi English add-ons.</summary>
+        <description>Install this repository to receive Kodi English add-on updates from a GitHub Pages-hosted source.</description>
+        <disclaimer></disclaimer>
+        <platform>all</platform>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.jpg</fanart>
+        </assets>
+    </extension>
+</addon>
