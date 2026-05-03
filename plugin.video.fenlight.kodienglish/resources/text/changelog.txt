@@ -1,5 +1,8 @@
 [COLOR darkgoldenrod]GOD BLESS HIM AND KEEP HIM SAFE.[/COLOR]
 
+[COLOR dodgerblue][B]Version 2.0.15.1007[/B][/COLOR]
+- Restore the missing AI Search router dispatch so choosing AI Search actually opens the prompt and results flow.
+
 [COLOR dodgerblue][B]Version 2.0.15.1006[/B][/COLOR]
 - Move the delayed local-bookmark cleanup into a separate background plugin call so stopping playback no longer waits on the addon's stop-time retry thread.
 

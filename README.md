@@ -13,7 +13,7 @@ Current source-tree versions:
 
 - `plugin.video.fenlight` `2.0.15.1003`
   Vanilla Fen Light package kept as the known-good baseline with repo-wide bundled key updates only.
-- `plugin.video.fenlight.kodienglish` `2.0.15.1006`
+- `plugin.video.fenlight.kodienglish` `2.0.15.1007`
   Working copy of vanilla Fen Light for the English-focused fork.
 - `plugin.video.fenlight.patched.kodienglish` `2.0.55.1004`
   Patched Fen Light package copied from the main repo.
