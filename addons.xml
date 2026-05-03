@@ -216,12 +216,12 @@ INFO: For latest changes see Changelog within Tools of add-on.</news>
             </assets>
         </extension>
     </addon>
-    <addon id="repository.kodienglish" name="Kodi English Repository" provider-name="Kodi English" version="1.0.8">
+    <addon id="repository.kodienglish" name="Kodi English Repository" provider-name="Kodi English" version="1.0.9">
         <extension point="xbmc.addon.repository" name="Kodi English Repository">
             <dir>
-                <info compressed="false">https://techxxx.github.io/kodienglish/addons.xml</info>
-                <checksum>https://techxxx.github.io/kodienglish/addons.xml.md5.txt</checksum>
-                <datadir zip="true">https://techxxx.github.io/kodienglish/zips/</datadir>
+                <info compressed="false">https://raw.githubusercontent.com/TechXXX/kodienglish/main/addons.xml</info>
+                <checksum>https://raw.githubusercontent.com/TechXXX/kodienglish/main/addons.xml.md5</checksum>
+                <datadir zip="true">https://raw.githubusercontent.com/TechXXX/kodienglish/main/zips/</datadir>
             </dir>
         </extension>
         <extension point="xbmc.addon.metadata">

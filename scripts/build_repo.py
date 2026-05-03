@@ -16,7 +16,7 @@ import zipfile
 
 
 DEFAULT_BASE_URL = "https://techxxx.github.io/kodienglish/"
-DEFAULT_REPO_DATA_BASE_URL = "https://techxxx.github.io/kodienglish/"
+DEFAULT_REPO_DATA_BASE_URL = "https://raw.githubusercontent.com/TechXXX/kodienglish/main/"
 REPO_ADDON_ID = "repository.kodienglish"
 REPO_ADDON_NAME = "Kodi English Repository"
 REPO_PROVIDER = "Kodi English"
@@ -121,7 +121,7 @@ def ensure_repo_addon_source(root_dir: Path, repo_data_base_url: str) -> tuple[P
             <extension point="xbmc.addon.repository" name="{REPO_ADDON_NAME}">
                 <dir>
                     <info compressed="false">{repo_data_base_url}addons.xml</info>
-                    <checksum>{repo_data_base_url}addons.xml.md5.txt</checksum>
+                    <checksum>{repo_data_base_url}addons.xml.md5</checksum>
                     <datadir zip="true">{repo_data_base_url}zips/</datadir>
                 </dir>
             </extension>
