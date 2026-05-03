@@ -87,6 +87,9 @@ def routing(sys):
 		if mode == 'watched_status.erase_bookmark':
 			from modules.watched_status import erase_bookmark
 			return erase_bookmark(_get('media_type'), _get('tmdb_id'), _get('season', ''), _get('episode', ''), _get('refresh', 'false'))
+		if mode == 'watched_status.clear_local_bookmark':
+			from modules.watched_status import clear_local_bookmark_delayed
+			return clear_local_bookmark_delayed(_get('media_type'), _get('tmdb_id'), _get('season', ''), _get('episode', ''))
 	if 'search.' in mode:
 		if mode == 'search.get_key_id':
 			from modules.search import get_key_id

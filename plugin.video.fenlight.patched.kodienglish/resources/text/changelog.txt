@@ -1,3 +1,6 @@
+[COLOR dodgerblue][B]Version 2.0.55.1004[/B][/COLOR]
+- Move the delayed local-bookmark cleanup into a separate background plugin call so stopping playback no longer waits on the patched addon's stop-time retry thread.
+
 [COLOR dodgerblue][B]Version 2.0.55[/B][/COLOR]
 - Keep the safer next-episode chapter timing fallback, make source shadow snapshots opt-in behind a profile marker file, and trim noisy playback and bookmark debug logging.
 

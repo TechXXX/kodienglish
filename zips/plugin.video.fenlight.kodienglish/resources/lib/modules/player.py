@@ -296,14 +296,11 @@ class FenLightPlayer(xbmc_player):
 
 	def schedule_local_bookmark_clear(self):
 		if self.is_generic: return
-		Thread(target=self.clear_local_bookmark_after_stop, args=(self.media_type, self.tmdb_id, self.season, self.episode)).start()
-
-	def clear_local_bookmark_after_stop(self, media_type, tmdb_id, season, episode):
-		sleep(post_stop_bookmark_clear_delay_ms)
-		for count in range(post_stop_bookmark_clear_attempts):
-			try: clear_local_bookmark(media_type, tmdb_id, season, episode)
-			except: pass
-			if count < post_stop_bookmark_clear_attempts - 1: sleep(post_stop_bookmark_clear_retry_ms)
+		execute_builtin(
+			'RunPlugin(plugin://plugin.video.fenlight.kodienglish/?mode=watched_status.clear_local_bookmark'
+			'&media_type=%s&tmdb_id=%s&season=%s&episode=%s)'
+			% (self.media_type, self.tmdb_id, self.season, self.episode)
+		)
 
 	def run_next_ep(self):
 		from modules.episode_tools import EpisodeTools

@@ -1,5 +1,8 @@
 [COLOR darkgoldenrod]GOD BLESS HIM AND KEEP HIM SAFE.[/COLOR]
 
+[COLOR dodgerblue][B]Version 2.0.15.1006[/B][/COLOR]
+- Move the delayed local-bookmark cleanup into a separate background plugin call so stopping playback no longer waits on the addon's stop-time retry thread.
+
 [COLOR dodgerblue][B]Version 2.0.15.1004[/B][/COLOR]
 - Added Gemini-backed AI Search with support for up to three Gemini API keys and automatic fallback when one key hits rate limits or quota exhaustion.
 - Added clearer Trakt authorization state tracking in settings, plus clearer expired-authorization notifications and sync behavior.
