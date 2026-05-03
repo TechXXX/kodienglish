@@ -17,7 +17,7 @@ Current source-tree versions:
   Working copy of vanilla Fen Light for the English-focused fork.
 - `plugin.video.fenlight.patched.kodienglish` `2.0.55.1004`
   Patched Fen Light package copied from the main repo.
-- `plugin.video.themoviedb.helper.patched.kodienglish` `6.15.2.8.1002`
+- `plugin.video.themoviedb.helper.patched.kodienglish` `6.15.2.8.1003`
   Patched TMDb Helper package used by the patched skin flow.
 - `skin.arctic.horizon.2.patched.kodienglish` `0.8.30.7.1002`
   Patched Arctic Horizon 2 package targeting the patched TMDb Helper addon id.
