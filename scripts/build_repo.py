@@ -121,7 +121,7 @@ def ensure_repo_addon_source(root_dir: Path, repo_data_base_url: str) -> tuple[P
             <extension point="xbmc.addon.repository" name="{REPO_ADDON_NAME}">
                 <dir>
                     <info compressed="false">{repo_data_base_url}addons.xml</info>
-                    <checksum>{repo_data_base_url}addons.xml.md5</checksum>
+                    <checksum>{repo_data_base_url}addons.xml.md5.txt</checksum>
                     <datadir zip="true">{repo_data_base_url}zips/</datadir>
                 </dir>
             </extension>
