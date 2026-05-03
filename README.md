@@ -3,16 +3,18 @@
 This repository is a GitHub Pages Kodi add-on feed focused on the English
 packages copied from the main `kodirepo` line.
 
-All shipped add-on IDs in this repo are forked with a `.kodienglish` suffix so
-Kodi treats them as separate add-ons instead of updates for the same IDs from
-other repositories.
+This repo keeps one untouched vanilla Fen Light copy under the original
+`plugin.video.fenlight` ID as a known-good baseline, and uses the
+`.kodienglish` suffix for the English working copy and the other forked add-ons.
 
 ## Addons In This Repo
 
 Current source-tree versions:
 
-- `plugin.video.fenlight.kodienglish` `2.0.15.1002`
-  Vanilla Fen Light package.
+- `plugin.video.fenlight` `2.0.15.1002`
+  Vanilla Fen Light package kept as the known-good baseline.
+- `plugin.video.fenlight.kodienglish` `2.0.15.1003`
+  Working copy of vanilla Fen Light for the English-focused fork.
 - `plugin.video.fenlight.patched.kodienglish` `2.0.55.1002`
   Patched Fen Light package copied from the main repo.
 - `plugin.video.themoviedb.helper.patched.kodienglish` `6.15.2.8.1002`
@@ -24,8 +26,10 @@ Current source-tree versions:
 
 ## Layout
 
+- `plugin.video.fenlight/`
+  Vanilla Fen Light source tree kept unchanged as the baseline.
 - `plugin.video.fenlight.kodienglish/`
-  Vanilla Fen Light source tree.
+  Working copy of the vanilla Fen Light source tree for English-only changes.
 - `plugin.video.fenlight.patched.kodienglish/`
   Patched Fen Light source tree.
 - `plugin.video.themoviedb.helper.patched.kodienglish/`

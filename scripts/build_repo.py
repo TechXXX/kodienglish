@@ -271,7 +271,11 @@ def build_addons_xml(addon_dirs: list[Path], output_path: Path) -> None:
 
 def write_md5(file_path: Path) -> None:
     digest = hashlib.md5(file_path.read_bytes()).hexdigest()
-    file_path.with_suffix(file_path.suffix + ".md5").write_text(digest, encoding="utf-8")
+    md5_path = file_path.with_suffix(file_path.suffix + ".md5")
+    md5_path.write_text(digest, encoding="utf-8")
+    # GitHub Pages serves unknown extensions like .md5 as octet-stream; keep a
+    # plain-text mirror for Kodi repository checksum fetches.
+    md5_path.with_suffix(md5_path.suffix + ".txt").write_text(digest, encoding="utf-8")
 
 
 def git_output(root_dir: Path, *args: str) -> str:
