@@ -203,7 +203,7 @@ def reset_generated_outputs(root_dir: Path, repo_version: str) -> None:
             remove_path(path)
     remove_path(root_dir / "addons.xml")
     remove_path(root_dir / "addons.xml.md5")
-    remove_path(root_dir / "zips")
+    remove_path(root_dir / "addons.xml.md5.txt")
 
 
 def update_index_html(root_dir: Path, repo_version: str) -> None:
@@ -241,6 +241,14 @@ def mirror_addon_source(addon_dir: Path, output_dir: Path) -> None:
         destination = output_dir / file_path.relative_to(addon_dir)
         destination.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(file_path, destination)
+
+
+def reset_addon_output_dir(output_dir: Path) -> None:
+    output_dir.mkdir(parents=True, exist_ok=True)
+    for path in output_dir.iterdir():
+        if path.is_file() and path.suffix == ".zip":
+            continue
+        remove_path(path)
 
 
 def package_addon(addon_dir: Path, output_dir: Path) -> Path:
@@ -349,6 +357,7 @@ def main() -> None:
     for addon_dir in source_dirs:
         addon_id, _version = get_addon_info(addon_dir / "addon.xml")
         output_dir = root_dir / "zips" / addon_id
+        reset_addon_output_dir(output_dir)
         mirror_addon_source(addon_dir, output_dir)
         package_paths[addon_id] = package_addon(addon_dir, output_dir)
 

@@ -5,7 +5,6 @@ from __future__ import annotations
 
 import argparse
 from pathlib import Path
-import shutil
 import subprocess
 
 from build_repo import (
@@ -15,6 +14,7 @@ from build_repo import (
     import_root_addon_zips,
     mirror_addon_source,
     package_addon,
+    reset_addon_output_dir,
     write_md5,
 )
 
@@ -37,9 +37,7 @@ def update_addon_outputs(root_dir: Path, addon_ids: list[str], source_dirs: list
         if addon_dir is None:
             raise SystemExit(f"Imported addon source missing after extraction: {addon_id}")
         output_dir = root_dir / "zips" / addon_id
-        if output_dir.exists():
-            shutil.rmtree(output_dir)
-        output_dir.mkdir(parents=True, exist_ok=True)
+        reset_addon_output_dir(output_dir)
         mirror_addon_source(addon_dir, output_dir)
         package_addon(addon_dir, output_dir)
 
