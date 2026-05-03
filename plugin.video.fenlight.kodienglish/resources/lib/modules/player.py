@@ -317,22 +317,49 @@ class FenLightPlayer(xbmc_player):
 
 	def info_next_ep(self):
 		self.nextep_info_gathered = True
+		play_type = 'autoplay_nextep' if self.autoplay_nextep else 'autoscrape_nextep'
 		try:
-			play_type = 'autoplay_nextep' if self.autoplay_nextep else 'autoscrape_nextep'
 			nextep_settings = auto_nextep_settings(play_type)
-			final_chapter = self.final_chapter() if nextep_settings['use_chapters'] else None
-			percentage = 100 - final_chapter if final_chapter else nextep_settings['window_percentage']
-			window_time = round((percentage/100) * self.total_time)
 			use_window = nextep_settings['alert_method'] == 0
 			default_action = nextep_settings['default_action']
+			chapter_data = get_infolabel('Player.Chapters') if nextep_settings['use_chapters'] else ''
+			final_chapter = self.final_chapter(chapter_data) if nextep_settings['use_chapters'] else None
+			percentage = 100 - final_chapter if final_chapter is not None else nextep_settings['window_percentage']
+			window_time = max(0, round((percentage/100) * self.total_time))
 			self.start_prep = nextep_settings['scraper_time'] + window_time
 			self.nextep_settings = {'use_window': use_window, 'window_time': window_time, 'default_action': default_action, 'play_type': play_type}
-		except: pass
+		except:
+			self.start_prep = 0
+			self.nextep_settings = {'use_window': True, 'window_time': 0, 'default_action': 'cancel', 'play_type': play_type}
 
-	def final_chapter(self):
+	def final_chapter(self, chapter_data=None):
 		try:
-			final_chapter = float(get_infolabel('Player.Chapters').split(',')[-1])
-			if final_chapter >= 90: return final_chapter
+			if chapter_data is None: chapter_data = get_infolabel('Player.Chapters')
+			total_time = float(getattr(self, 'total_time', 0) or 0)
+			chapters = []
+			for item in chapter_data.split(','):
+				item = item.strip()
+				if not item: continue
+				try: chapters.append(float(item))
+				except: continue
+			if not chapters: return None
+			last_value = chapters[-1]
+			if last_value > 100:
+				previous_values = chapters[:-1]
+				max_previous = max(previous_values) if previous_values else None
+				# If Kodi's tail chapter percentage runs past 100, don't trust chapter timing for this file.
+				if total_time and last_value > total_time: return None
+				if max_previous is not None and max_previous <= 100: return None
+			fallback_value = None
+			for value in reversed(chapters):
+				if value == 100:
+					if fallback_value is None: fallback_value = 100.0
+					continue
+				if 90 <= value < 100: return value
+				if total_time and 0 < value <= total_time:
+					value = (value/total_time) * 100
+					if 90 <= value < 100: return round(value, 3)
+			return fallback_value
 		except: pass
 		return None
 

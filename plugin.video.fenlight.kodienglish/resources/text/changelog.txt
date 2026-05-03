@@ -1,5 +1,8 @@
 [COLOR darkgoldenrod]GOD BLESS HIM AND KEEP HIM SAFE.[/COLOR]
 
+[COLOR dodgerblue][B]Version 2.0.15.1008[/B][/COLOR]
+- Keep the safer next-episode chapter timing fallback so bad Kodi tail chapter values do not break next-up prep timing.
+
 [COLOR dodgerblue][B]Version 2.0.15.1007[/B][/COLOR]
 - Restore the missing AI Search router dispatch so choosing AI Search actually opens the prompt and results flow.
 

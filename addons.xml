@@ -24,7 +24,7 @@
             <news>INFO: For latest changes see Changelog within Tools of add-on.</news>
         </extension>
     </addon>
-    <addon id="plugin.video.fenlight.kodienglish" name="Fen Light English" provider-name="Tikipeter" version="2.0.15.1007">
+    <addon id="plugin.video.fenlight.kodienglish" name="Fen Light English" provider-name="Tikipeter" version="2.0.15.1008">
         <requires>
             <import addon="xbmc.python" version="3.0.0" />
             <import addon="script.module.requests" version="2.19.1" />
@@ -528,7 +528,7 @@ INFO: For latest changes see Changelog within Tools of add-on.</news>
             </assets>
         </extension>
     </addon>
-    <addon id="repository.kodienglish" name="Kodi English Repository" provider-name="Kodi English" version="1.0.11">
+    <addon id="repository.kodienglish" name="Kodi English Repository" provider-name="Kodi English" version="1.0.12">
         <extension point="xbmc.addon.repository" name="Kodi English Repository">
             <dir>
                 <info compressed="false">https://raw.githubusercontent.com/TechXXX/kodienglish/main/addons.xml</info>
