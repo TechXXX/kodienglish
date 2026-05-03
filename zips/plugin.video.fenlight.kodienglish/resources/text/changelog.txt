@@ -1,5 +1,13 @@
 [COLOR darkgoldenrod]GOD BLESS HIM AND KEEP HIM SAFE.[/COLOR]
 
+[COLOR dodgerblue][B]Version 2.0.15.1004[/B][/COLOR]
+- Added Gemini-backed AI Search with support for up to three Gemini API keys and automatic fallback when one key hits rate limits or quota exhaustion.
+- Added clearer Trakt authorization state tracking in settings, plus clearer expired-authorization notifications and sync behavior.
+- Fixed local bookmark clearing to target the exact playback URL for the current movie or episode.
+- Added guarded external scraper provider handling so a crashing provider is skipped instead of taking down the whole search flow.
+- Added autoplay rejection for sources whose detected audio streams are Russian-only, Ukrainian-only, or Chinese-only.
+- Shipped the addon with reuse language invoker disabled by default and bundled a default OMDb API key for extra ratings.
+
 [COLOR dodgerblue][B]Version 2.0.15[/B][/COLOR]
 - Update the built-in default TMDb API key and keep the Restore Default TMDb API Key action aligned with the new bundled value.
 

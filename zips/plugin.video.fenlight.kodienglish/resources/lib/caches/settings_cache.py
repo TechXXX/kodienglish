@@ -297,8 +297,12 @@ default_settings = [
 {'setting_id': 'trakt.secret', 'setting_type': 'string', 'setting_default': trakt_default_secret},
 #==================== TMDb
 {'setting_id': 'tmdb_api', 'setting_type': 'string', 'setting_default': tmdb_default_api},
+#==================== Gemini
+{'setting_id': 'gemini_api', 'setting_type': 'string', 'setting_default': 'empty_setting'},
+{'setting_id': 'gemini_api_2', 'setting_type': 'string', 'setting_default': 'empty_setting'},
+{'setting_id': 'gemini_api_3', 'setting_type': 'string', 'setting_default': 'empty_setting'},
 #==================== OMDb
-{'setting_id': 'omdb_api', 'setting_type': 'string', 'setting_default': 'empty_setting'},
+{'setting_id': 'omdb_api', 'setting_type': 'string', 'setting_default': '987d3ba9'},
 #==================== External
 {'setting_id': 'provider.external', 'setting_type': 'boolean', 'setting_default': 'false'},
 {'setting_id': 'external_scraper.name', 'setting_type': 'string', 'setting_default': 'empty_setting'},
@@ -458,6 +462,8 @@ default_settings = [
 {'setting_id': 'trakt.expires', 'setting_type': 'string', 'setting_default': '0'},
 {'setting_id': 'trakt.refresh', 'setting_type': 'string', 'setting_default': '0'},
 {'setting_id': 'trakt.token', 'setting_type': 'string', 'setting_default': '0'},
+{'setting_id': 'trakt.auth_state', 'setting_type': 'string', 'setting_default': 'not_authorized'},
+{'setting_id': 'trakt.auth_state_display_name', 'setting_type': 'string', 'setting_default': 'Not Authorized'},
 {'setting_id': 'rd.client_id', 'setting_type': 'string', 'setting_default': 'empty_setting'},
 {'setting_id': 'rd.refresh', 'setting_type': 'string', 'setting_default': 'empty_setting'},
 {'setting_id': 'rd.secret', 'setting_type': 'string', 'setting_default': 'empty_setting'},

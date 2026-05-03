@@ -197,14 +197,54 @@ def get_progress_status_all_episode(progress_info, season, episode):
 	return percent
 
 def clear_local_bookmarks():
+	dbcon = None
 	try:
-		dbcon = database.connect(get_video_database_path())
-		file_ids = dbcon.execute("SELECT idFile FROM files WHERE strFilename LIKE 'plugin.video.fenlight.kodienglish%'").fetchall()
+		dbcon, video_database_path = connect_video_database()
+		file_ids = dbcon.execute("SELECT idFile FROM files WHERE strFilename LIKE 'plugin://plugin.video.fenlight.kodienglish/%'").fetchall()
 		for i in ('bookmark', 'streamdetails', 'files'): dbcon.executemany("DELETE FROM %s WHERE idFile=?" % i, file_ids)
+		try: dbcon.commit()
+		except: pass
 	except: pass
+	finally:
+		try: dbcon.close()
+		except: pass
+
+def clear_local_bookmark(media_type, media_id, season='', episode=''):
+	dbcon = None
+	try:
+		media_type, media_id = str(media_type), str(media_id)
+		season, episode = str(season), str(episode)
+		if media_type == 'movie': filename = 'plugin://plugin.video.fenlight.kodienglish/?mode=playback.media&media_type=movie&tmdb_id=%s%%' % media_id
+		elif media_type == 'episode': filename = 'plugin://plugin.video.fenlight.kodienglish/?mode=playback.media&media_type=episode&tmdb_id=%s&season=%s&episode=%s%%' % (media_id, season, episode)
+		else: return
+		dbcon, _ = connect_video_database()
+		file_ids = dbcon.execute('SELECT idFile FROM files WHERE strFilename LIKE ?', (filename,)).fetchall()
+		if not file_ids: return False
+		id_values = [i[0] for i in file_ids]
+		placeholders = ','.join('?' for _ in id_values)
+		before = dbcon.execute('SELECT COUNT(*) FROM bookmark WHERE idFile IN (%s)' % placeholders, id_values).fetchone()[0]
+		dbcon.executemany('DELETE FROM bookmark WHERE idFile=?', file_ids)
+		try: dbcon.commit()
+		except: pass
+		after = dbcon.execute('SELECT COUNT(*) FROM bookmark WHERE idFile IN (%s)' % placeholders, id_values).fetchone()[0]
+		cleared = after < before
+		return cleared
+	except Exception:
+		return False
+	finally:
+		try: dbcon.close()
+		except: pass
+
+def connect_video_database():
+	video_database_path = get_video_database_path()
+	dbcon = database.connect(video_database_path, timeout=2.0, isolation_level=None, check_same_thread=False)
+	try: dbcon.execute('PRAGMA busy_timeout = 2000')
+	except: pass
+	return dbcon, video_database_path
 
 def erase_bookmark(media_type, media_id, season='', episode='', refresh='false'):
 	try:
+		clear_local_bookmark(media_type, media_id, season, episode)
 		watched_indicators = watched_indicators_function()
 		watched_db = get_database(watched_indicators)
 		if watched_indicators == 1:

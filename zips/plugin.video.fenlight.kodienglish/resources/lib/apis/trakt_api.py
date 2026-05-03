@@ -31,6 +31,25 @@ API_ENDPOINT = 'https://api.trakt.tv/%s'
 timeout = 20
 EXPIRY_1_DAY, EXPIRY_1_WEEK = 24, 168
 
+def _set_trakt_auth_state(state, display_name):
+	set_setting('trakt.auth_state', state)
+	set_setting('trakt.auth_state_display_name', display_name)
+
+def sync_trakt_auth_state():
+	token = get_setting('fenlight.trakt.token')
+	refresh_token = get_setting('fenlight.trakt.refresh')
+	user = get_setting('fenlight.trakt.user')
+	try: expires_at = float(get_setting('fenlight.trakt.expires'))
+	except: expires_at = 0.0
+	if token in empty_setting_check or refresh_token in empty_setting_check:
+		_set_trakt_auth_state('not_authorized', 'Not Authorized')
+	elif expires_at and time.time() > expires_at:
+		_set_trakt_auth_state('authorization_expired', 'Authorization Expired')
+	elif user in empty_setting_check:
+		_set_trakt_auth_state('authorization_incomplete', 'Authorization Incomplete')
+	else:
+		_set_trakt_auth_state('authorized', 'Authorized')
+
 def no_client_key():
 	notification('Please set a valid Trakt Client ID Key')
 	return None
@@ -63,8 +82,13 @@ def call_trakt(path, params={}, data=None, is_delete=False, with_auth=True, meth
 				resp = requests.post(API_ENDPOINT % path, json=data, headers=headers, timeout=timeout)
 			elif is_delete: resp = requests.delete(API_ENDPOINT % path, headers=headers, timeout=timeout)
 			else: resp = requests.get(API_ENDPOINT % path, params=params, headers=headers, timeout=timeout)
-			resp.raise_for_status()
 		except Exception as e: return logger('Trakt Error', str(e))
+		if resp.status_code in (401, 429):
+			return resp
+		try: resp.raise_for_status()
+		except Exception as e:
+			logger('Trakt Error', str(e))
+			return None
 		return resp
 	CLIENT_ID = trakt_client()
 	if CLIENT_ID in empty_setting_check: return no_client_key()
@@ -74,11 +98,16 @@ def call_trakt(path, params={}, data=None, is_delete=False, with_auth=True, meth
 	try: status_code = response.status_code
 	except: return None
 	if status_code == 401:
+		_set_trakt_auth_state('authorization_expired', 'Authorization Expired')
 		if xbmc_player().isPlaying() == False:
 			if with_auth and confirm_dialog(heading='Authorize Trakt', text='You must authenticate with Trakt. Do you want to authenticate now?') and trakt_authenticate():
 				response = send_query()
-			else: pass
-		else: return
+			else:
+				notification('Trakt authorization expired', 3500)
+				return None
+		else:
+			notification('Trakt authorization expired', 3500)
+			return None
 	elif status_code == 429:
 		headers = response.headers
 		if 'Retry-After' in headers:
@@ -151,6 +180,7 @@ def trakt_refresh_token():
 		set_setting('trakt.token', response["access_token"])
 		set_setting('trakt.refresh', response["refresh_token"])
 		set_setting('trakt.expires', str(time.time() + 7776000))
+		sync_trakt_auth_state()
 
 def trakt_authenticate(dummy=''):
 	code = trakt_get_device_code()
@@ -165,9 +195,11 @@ def trakt_authenticate(dummy=''):
 			user = call_trakt('/users/me')
 			set_setting('trakt.user', str(user['username']))
 		except: pass
+		sync_trakt_auth_state()
 		notification('Trakt Account Authorized', 3000)
 		trakt_sync_activities(force_update=True)
 		return True
+	sync_trakt_auth_state()
 	notification('Trakt Error Authorizing', 3000)
 	return False
 
@@ -177,6 +209,7 @@ def trakt_revoke_authentication(dummy=''):
 	set_setting('trakt.token', '')
 	set_setting('trakt.refresh', '')
 	set_setting('watched_indicators', '0')
+	sync_trakt_auth_state()
 	clear_all_trakt_cache_data(silent=True, refresh=False)
 	notification('Trakt Account Authorization Reset', 3000)
 	CLIENT_ID = trakt_client()

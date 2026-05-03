@@ -2,13 +2,14 @@
 import time
 import json
 import random
+import traceback
 from threading import Thread
 from caches.external_cache import external_cache
 from caches.settings_cache import get_setting
 from modules import kodi_utils, source_utils
 from modules.debrid import RD_check, PM_check, AD_check, OC_check, ED_check ,TB_check, query_local_cache
 from modules.utils import clean_file_name
-# logger = kodi_utils.logger
+logger = kodi_utils.logger
 
 normalize, get_file_info, pack_enable_check = source_utils.normalize, source_utils.get_file_info, source_utils.pack_enable_check
 sleep, xbmc_monitor, get_property, set_property = kodi_utils.sleep, kodi_utils.xbmc_monitor, kodi_utils.get_property, kodi_utils.set_property
@@ -139,7 +140,10 @@ class source:
 	def get_movie_source(self, provider, module):
 		sources = external_cache.get(provider, self.media_type, self.tmdb_id, self.title, self.year, '', '')
 		if sources == None:
-			sources = module().sources(self.data, self.host_dict)			
+			try: sources = module().sources(self.data, self.host_dict)
+			except:
+				logger('Fen Light', 'External movie provider failed | provider=%s | error=%s' % (provider, traceback.format_exc().replace('\n', ' | ')))
+				return
 			sources = self.process_sources(provider, sources)
 			if not sources: expiry_hours = 1
 			else: expiry_hours = self.single_expiry
@@ -156,15 +160,20 @@ class source:
 		else: s_check, e_check = self.season, self.episode
 		sources = external_cache.get(provider, self.media_type, self.tmdb_id, self.title, self.year, s_check, e_check)
 		if sources == None:
-			if pack == 'Show':
-				expiry_hours = self.show_expiry
-				sources = module().sources_packs(self.data, self.host_dict, search_series=True, total_seasons=self.total_seasons)
-			elif pack == 'Season':
-				expiry_hours = self.season_expiry
-				sources = module().sources_packs(self.data, self.host_dict)
-			else:
-				expiry_hours = self.single_expiry
-				sources = module().sources(self.data, self.host_dict)
+			try:
+				if pack == 'Show':
+					expiry_hours = self.show_expiry
+					sources = module().sources_packs(self.data, self.host_dict, search_series=True, total_seasons=self.total_seasons)
+				elif pack == 'Season':
+					expiry_hours = self.season_expiry
+					sources = module().sources_packs(self.data, self.host_dict)
+				else:
+					expiry_hours = self.single_expiry
+					sources = module().sources(self.data, self.host_dict)
+			except:
+				logger('Fen Light', 'External episode provider failed | provider=%s | pack=%s | error=%s' % (
+					provider, pack or 'single', traceback.format_exc().replace('\n', ' | ')))
+				return
 			sources = self.process_sources(provider, sources)
 			if not sources: expiry_hours = 1
 			external_cache.set(provider, self.media_type, self.tmdb_id, self.title, self.year, s_check, e_check, sources, expiry_hours)
