@@ -15,7 +15,7 @@ Current source-tree versions:
   Vanilla Fen Light package kept as the known-good baseline with repo-wide bundled key updates only.
 - `plugin.video.fenlight.kodienglish` `2.0.15.1007`
   Working copy of vanilla Fen Light for the English-focused fork.
-- `plugin.video.fenlight.patched.kodienglish` `2.0.55.1004`
+- `plugin.video.fenlight.patched.kodienglish` `2.0.55.1005`
   Patched Fen Light package copied from the main repo.
 - `plugin.video.themoviedb.helper.patched.kodienglish` `6.15.2.8.1003`
   Patched TMDb Helper package used by the patched skin flow.
