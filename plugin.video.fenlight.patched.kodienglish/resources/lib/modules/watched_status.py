@@ -15,9 +15,6 @@ notification, kodi_refresh, tmdb_api_key, mpaa_region = kodi_utils.notification,
 tv_progress_location = settings.tv_progress_location
 progress_db_string, indicators_dict = 'fenlight_hidden_progress_items', {0: 'watched_db', 1: 'trakt_db'}
 finished_show_check = ('Ended', 'Canceled')
-post_stop_bookmark_clear_delay_ms = 750
-post_stop_bookmark_clear_retry_ms = 500
-post_stop_bookmark_clear_attempts = 3
 
 def get_database(watched_indicators=None):
 	return connect_database(indicators_dict[watched_indicators or watched_indicators_function()])
@@ -260,13 +257,6 @@ def erase_bookmark(media_type, media_id, season='', episode='', refresh='false')
 		watched_db.execute('DELETE FROM progress where db_type = ? and media_id = ? and season = ? and episode = ?', (media_type, media_id, season, episode))
 		refresh_container(refresh == 'true')
 	except: pass
-
-def clear_local_bookmark_delayed(media_type, media_id, season='', episode=''):
-	sleep(post_stop_bookmark_clear_delay_ms)
-	for count in range(post_stop_bookmark_clear_attempts):
-		try: clear_local_bookmark(media_type, media_id, season, episode)
-		except: pass
-		if count < post_stop_bookmark_clear_attempts - 1: sleep(post_stop_bookmark_clear_retry_ms)
 
 def batch_erase_bookmark(watched_indicators, insert_list, action):
 	try:

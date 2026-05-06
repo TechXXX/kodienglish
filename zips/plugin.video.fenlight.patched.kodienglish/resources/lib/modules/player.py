@@ -342,11 +342,17 @@ class FenLightPlayer(xbmc_player):
 
 	def schedule_local_bookmark_clear(self):
 		if self.is_generic: return
-		execute_builtin(
-			'RunPlugin(plugin://plugin.video.fenlight.patched.kodienglish/?mode=watched_status.clear_local_bookmark'
-			'&media_type=%s&tmdb_id=%s&season=%s&episode=%s)'
-			% (self.media_type, self.tmdb_id, self.season, self.episode)
-		)
+		Thread(target=self.clear_local_bookmark_after_stop, args=(self.media_type, self.tmdb_id, self.season, self.episode)).start()
+
+	def clear_local_bookmark_after_stop(self, media_type, tmdb_id, season, episode):
+		sleep(post_stop_bookmark_clear_delay_ms)
+		for count in range(post_stop_bookmark_clear_attempts):
+			try:
+				clear_local_bookmark(media_type, tmdb_id, season, episode)
+			except:
+				logger('Fen Light Patched', 'Player.clear_local_bookmark_after_stop exception | attempt=%s/%s | media_type=%s | tmdb_id=%s | season=%s | episode=%s | error=%s' % (
+					count + 1, post_stop_bookmark_clear_attempts, media_type, tmdb_id, season, episode, traceback.format_exc().strip()))
+			if count < post_stop_bookmark_clear_attempts - 1: sleep(post_stop_bookmark_clear_retry_ms)
 
 	def run_next_ep(self):
 		from modules.episode_tools import EpisodeTools
@@ -433,6 +439,19 @@ class FenLightPlayer(xbmc_player):
 			trakt_ids = {'tmdb': self.tmdb_id, 'imdb': self.imdb_id, 'slug': make_trakt_slug(self.title)}
 			if self.media_type == 'episode': trakt_ids['tvdb'] = self.tvdb_id
 			set_property('script.trakt.ids', json.dumps(trakt_ids))
+			if self.media_type == 'episode':
+				set_property('fenlight.current_media_type', 'episode')
+				set_property('fenlight.current_tmdb_id', str(self.tmdb_id))
+				set_property('fenlight.current_season', str(self.season))
+				set_property('fenlight.current_episode', str(self.episode))
+				clear_property('fenlight.current_has_next_episode')
+				Thread(target=self.set_next_episode_property, args=(dict(self.meta), str(self.tmdb_id), str(self.season), str(self.episode))).start()
+			else:
+				clear_property('fenlight.current_media_type')
+				clear_property('fenlight.current_tmdb_id')
+				clear_property('fenlight.current_season')
+				clear_property('fenlight.current_episode')
+				clear_property('fenlight.current_has_next_episode')
 			if self.playing_filename: set_property('subs.player_filename', self.playing_filename)
 			playing_item = getattr(self, 'playing_item', {}) or {}
 			selector_source_key = playing_item.get('selector_source_key')
@@ -443,8 +462,29 @@ class FenLightPlayer(xbmc_player):
 			else: clear_property('subs.selector_payload')
 		except: pass
 
+	def set_next_episode_property(self, meta=None, tmdb_id='', season='', episode=''):
+		def current_playback_matches():
+			return all((
+				ku.get_property('fenlight.current_tmdb_id') == tmdb_id,
+				ku.get_property('fenlight.current_season') == season,
+				ku.get_property('fenlight.current_episode') == episode
+			))
+		try:
+			from modules.episode_tools import EpisodeTools
+			url_params = EpisodeTools(meta or dict(self.meta), {'play_type': 'autoplay_nextep'}).next_episode_info()
+			if not current_playback_matches(): return
+			if url_params == 'no_next_episode': set_property('fenlight.current_has_next_episode', 'false')
+			elif url_params == 'error': clear_property('fenlight.current_has_next_episode')
+			else: set_property('fenlight.current_has_next_episode', 'true')
+		except: clear_property('fenlight.current_has_next_episode')
+
 	def clear_playback_properties(self):
 		clear_property('fenlight.window_stack')
+		clear_property('fenlight.current_media_type')
+		clear_property('fenlight.current_tmdb_id')
+		clear_property('fenlight.current_season')
+		clear_property('fenlight.current_episode')
+		clear_property('fenlight.current_has_next_episode')
 		clear_property('script.trakt.ids')
 		clear_property('subs.player_filename')
 		clear_property('subs.selector_source_key')

@@ -200,7 +200,7 @@ default_settings = [
 {'setting_id': 'limit_concurrent_threads', 'setting_type': 'boolean', 'setting_default': 'false'},
 {'setting_id': 'max_threads', 'setting_type': 'action', 'setting_default': '60', 'min_value': '10', 'max_value': '250'},
 #==================== Manage Updates
-{'setting_id': 'update.action', 'setting_type': 'action', 'setting_default': '3', 'settings_options': {'0': 'Prompt', '1': 'Automatic', '2': 'Notification', '3': 'Off'}},
+{'setting_id': 'update.action', 'setting_type': 'action', 'setting_default': '0', 'settings_options': {'0': 'Prompt', '1': 'Automatic', '2': 'Notification', '3': 'Off'}},
 {'setting_id': 'update.delay', 'setting_type': 'action', 'setting_default': '10', 'min_value': '10', 'max_value': '300'},
 {'setting_id': 'update.username', 'setting_type': 'string', 'setting_default': 'TechXXX'},
 {'setting_id': 'update.location', 'setting_type': 'string', 'setting_default': 'kodienglish'},
@@ -468,6 +468,7 @@ default_settings = [
 {'setting_id': 'trakt.token', 'setting_type': 'string', 'setting_default': '0'},
 {'setting_id': 'trakt.auth_state', 'setting_type': 'string', 'setting_default': 'not_authorized'},
 {'setting_id': 'trakt.auth_state_display_name', 'setting_type': 'string', 'setting_default': 'Not Authorized'},
+{'setting_id': 'updatechecks.refresh_addon_keys', 'setting_type': 'string', 'setting_default': 'false'},
 {'setting_id': 'rd.client_id', 'setting_type': 'string', 'setting_default': 'empty_setting'},
 {'setting_id': 'rd.refresh', 'setting_type': 'string', 'setting_default': 'empty_setting'},
 {'setting_id': 'rd.secret', 'setting_type': 'string', 'setting_default': 'empty_setting'},

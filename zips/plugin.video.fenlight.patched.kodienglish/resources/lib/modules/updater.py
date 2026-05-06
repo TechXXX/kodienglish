@@ -93,7 +93,7 @@ def update_check(action=4):
 
 def rollback_check():
 	current_version = get_versions()[0]
-	url = 'https://api.github.com/repos/%s/%s/contents/packages' % ('Tikipeter', 'tikipeter.github.io')#(get_setting('update.username'), get_setting('update.location'))
+	url = 'https://api.github.com/repos/%s/%s/contents/packages' % ('TechXXX', 'kodienglish')
 	show_busy_dialog()
 	results = requests.get(url)
 	hide_busy_dialog()

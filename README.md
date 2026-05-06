@@ -1,7 +1,7 @@
 # Kodi English Repository
 
 This repository is a GitHub Pages Kodi add-on feed focused on the English
-packages copied from the main `kodirepo` line.
+packages copied from the Dutch release line.
 
 This repo keeps one untouched vanilla Fen Light copy under the original
 `plugin.video.fenlight` ID as a known-good baseline, and uses the
@@ -13,14 +13,21 @@ Current source-tree versions:
 
 - `plugin.video.fenlight` `2.0.15.1003`
   Vanilla Fen Light package kept as the known-good baseline with repo-wide bundled key updates only.
-- `plugin.video.fenlight.kodienglish` `2.0.15.1007`
+- `plugin.video.fenlight.kodienglish` `2.0.15.1008`
   Working copy of vanilla Fen Light for the English-focused fork.
-- `plugin.video.fenlight.patched.kodienglish` `2.0.55.1005`
-  Patched Fen Light package copied from the main repo.
-- `plugin.video.themoviedb.helper.patched.kodienglish` `6.15.2.8.1003`
-  Patched TMDb Helper package used by the patched skin flow.
-- `skin.arctic.horizon.2.patched.kodienglish` `0.8.30.7.1002`
+- `plugin.video.fenlight.patched.kodienglish` `2.0.60.1006`
+  Patched Fen Light package carrying the recent Trakt/auth pass, stable Trakt
+  list-id routing, bundled Trakt default-key refresh, and QR-based auth flows
+  for Trakt, Real-Debrid, Premiumize, and AllDebrid.
+- `plugin.video.themoviedb.helper.patched.kodienglish` `6.15.2.10.1004`
+  Patched TMDb Helper package used by the patched skin flow. It now includes
+  the bundled Fen / Fen Patched player definitions, recommendations-window
+  hardening and logging, authenticated Trakt username state, and the newer
+  OMDb default-key and ratings-backfill improvements.
+- `skin.arctic.horizon.2.patched.kodienglish` `0.8.30.11.1003`
   Patched Arctic Horizon 2 package targeting the patched TMDb Helper addon id.
+  It now supports the dedicated next-episode OSD action for Fen playback and
+  hides that action when Fen confirms there is no next aired episode.
 - `repository.kodienglish`
   The repository addon Kodi installs first.
 
