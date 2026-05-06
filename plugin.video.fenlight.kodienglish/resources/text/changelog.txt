@@ -1,5 +1,10 @@
 [COLOR darkgoldenrod]GOD BLESS HIM AND KEEP HIM SAFE.[/COLOR]
 
+[COLOR dodgerblue][B]Version 2.0.15.1009[/B][/COLOR]
+- Port the recent Fen Light Trakt/auth hardening into Fen Light English, including stale-token refresh recovery, invalid Trakt activity-payload protection, stable Trakt list-id handling, and the refreshed default Trakt client credentials.
+- Switch the Trakt, Real-Debrid, Premiumize, and AllDebrid device-code flows to real QR-backed authorization prompts.
+- Publish `fenlight.current_has_next_episode` during episode playback and add the direct in-play next-episode action route for skins that support it.
+
 [COLOR dodgerblue][B]Version 2.0.15.1008[/B][/COLOR]
 - Keep the safer next-episode chapter timing fallback so bad Kodi tail chapter values do not break next-up prep timing.
 
