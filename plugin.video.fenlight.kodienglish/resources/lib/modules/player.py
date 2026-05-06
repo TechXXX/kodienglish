@@ -386,6 +386,7 @@ class FenLightPlayer(xbmc_player):
 			trakt_ids = {'tmdb': self.tmdb_id, 'imdb': self.imdb_id, 'slug': make_trakt_slug(self.title)}
 			if self.media_type == 'episode': trakt_ids['tvdb'] = self.tvdb_id
 			set_property('script.trakt.ids', json.dumps(trakt_ids))
+			set_property('fenlight.current_plugin_id', 'plugin.video.fenlight.kodienglish')
 			if self.media_type == 'episode':
 				set_property('fenlight.current_media_type', 'episode')
 				set_property('fenlight.current_tmdb_id', str(self.tmdb_id))
@@ -421,6 +422,7 @@ class FenLightPlayer(xbmc_player):
 
 	def clear_playback_properties(self):
 		clear_property('fenlight.window_stack')
+		clear_property('fenlight.current_plugin_id')
 		clear_property('fenlight.current_media_type')
 		clear_property('fenlight.current_tmdb_id')
 		clear_property('fenlight.current_season')

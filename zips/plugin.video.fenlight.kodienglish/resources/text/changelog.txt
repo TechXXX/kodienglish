@@ -1,5 +1,8 @@
 [COLOR darkgoldenrod]GOD BLESS HIM AND KEEP HIM SAFE.[/COLOR]
 
+[COLOR dodgerblue][B]Version 2.0.15.1010[/B][/COLOR]
+- Publish the active addon id during playback so the AH2 next-episode OSD button launches Fen Light English directly instead of falling back to the patched addon route.
+
 [COLOR dodgerblue][B]Version 2.0.15.1009[/B][/COLOR]
 - Port the recent Fen Light Trakt/auth hardening into Fen Light English, including stale-token refresh recovery, invalid Trakt activity-payload protection, stable Trakt list-id handling, and the refreshed default Trakt client credentials.
 - Switch the Trakt, Real-Debrid, Premiumize, and AllDebrid device-code flows to real QR-backed authorization prompts.

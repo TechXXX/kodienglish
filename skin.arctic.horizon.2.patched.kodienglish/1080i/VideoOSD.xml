@@ -110,7 +110,8 @@
                         <param name="id" value="6350" />
                         <param name="groupid" value="6359" />
                         <onclick>Close</onclick>
-                        <onclick>RunPlugin(plugin://plugin.video.fenlight.patched.kodienglish/?mode=playback.play_nextep_current)</onclick>
+                        <onclick condition="String.IsEqual(Window(Home).Property(fenlight.current_plugin_id),plugin.video.fenlight.kodienglish)">RunPlugin(plugin://plugin.video.fenlight.kodienglish/?mode=playback.play_nextep_current)</onclick>
+                        <onclick condition="!String.IsEqual(Window(Home).Property(fenlight.current_plugin_id),plugin.video.fenlight.kodienglish)">RunPlugin(plugin://plugin.video.fenlight.patched.kodienglish/?mode=playback.play_nextep_current)</onclick>
                         <onup>8200</onup>
                     </include>
 

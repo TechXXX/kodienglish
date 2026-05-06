@@ -13,11 +13,11 @@ Current source-tree versions:
 
 - `plugin.video.fenlight` `2.0.15.1003`
   Vanilla Fen Light package kept as the known-good baseline with repo-wide bundled key updates only.
-- `plugin.video.fenlight.kodienglish` `2.0.15.1009`
+- `plugin.video.fenlight.kodienglish` `2.0.15.1010`
   Working copy of vanilla Fen Light for the English-focused fork. It now also
   carries the newer Trakt/auth hardening, stable Trakt list-id routing, QR
   auth flows for Trakt, Real-Debrid, Premiumize, and AllDebrid, plus the
-  playback properties and route needed for next-episode OSD support.
+  playback properties and active-addon routing needed for next-episode OSD support.
 - `plugin.video.fenlight.patched.kodienglish` `2.0.60.1006`
   Patched Fen Light package carrying the recent Trakt/auth pass, stable Trakt
   list-id routing, bundled Trakt default-key refresh, and QR-based auth flows
@@ -27,10 +27,11 @@ Current source-tree versions:
   the bundled Fen / Fen Patched player definitions, recommendations-window
   hardening and logging, authenticated Trakt username state, and the newer
   OMDb default-key and ratings-backfill improvements.
-- `skin.arctic.horizon.2.patched.kodienglish` `0.8.30.11.1003`
+- `skin.arctic.horizon.2.patched.kodienglish` `0.8.30.11.1004`
   Patched Arctic Horizon 2 package targeting the patched TMDb Helper addon id.
   It now supports the dedicated next-episode OSD action for Fen playback and
-  hides that action when Fen confirms there is no next aired episode.
+  hides that action when Fen confirms there is no next aired episode, while
+  routing the button to Fen Light English when English playback is active.
 - `repository.kodienglish`
   The repository addon Kodi installs first.
 
