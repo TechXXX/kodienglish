@@ -295,9 +295,16 @@ def make_qrcode(url):
 	if url == None: return
 	try:
 		import segno
-		from os import path
+		from glob import glob
+		from hashlib import md5
+		from os import path, remove
 		from modules.kodi_utils import addon_profile, logger
-		art_path = path.join(addon_profile(), 'auth_qr.png')
+		# Kodi caches image paths aggressively, so rotate the filename per auth URL.
+		art_path = path.join(addon_profile(), 'auth_qr_%s.png' % md5(url.encode('utf-8')).hexdigest()[:12])
+		for old_art in glob(path.join(addon_profile(), 'auth_qr*.png')):
+			if old_art == art_path: continue
+			try: remove(old_art)
+			except: pass
 		qrcode = segno.make(url, micro=False)
 		qrcode.save(art_path, scale=20)
 		return art_path

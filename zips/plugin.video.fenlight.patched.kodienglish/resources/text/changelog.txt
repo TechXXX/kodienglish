@@ -1,3 +1,24 @@
+[COLOR dodgerblue][B]Session Note (2026-05-10, Trakt auth prompt guard)[/B][/COLOR]
+- Guard Trakt re-authorization prompts so only one dialog appears at a time.
+- Skip watched-indicator refresh when Trakt returns an invalid payload instead of trying to thread over bad data.
+- Rotate auth QR image filenames per device URL so Kodi refreshes changed Trakt and Debrid codes instead of reusing stale cached images.
+
+[COLOR dodgerblue][B]Session Note (2026-05-10, fullscreen trailer stop)[/B][/COLOR]
+- Force Extras trailer playback into fullscreen video and stop the trailer when Back leaves fullscreen playback.
+
+[COLOR dodgerblue][B]Session Note (2026-05-10, localized trailer fallback)[/B][/COLOR]
+- Fetch TMDb's standalone videos list in Extras when localized metadata has no trailers, so Dutch metadata can still play English YouTube trailers.
+
+[COLOR dodgerblue][B]Session Note (2026-05-10, trailer playback fallback)[/B][/COLOR]
+- Prefer playable YouTube trailer keys in the extras window.
+- Fall back to the best sorted YouTube trailer when raw trailer metadata is missing or non-plugin.
+- Show a clearer no-trailer notice instead of handing window playback an unusable trailer URL.
+
+[COLOR dodgerblue][B]Session Note (2026-05-08, English-to-Dutch subtitle fallback)[/B][/COLOR]
+- Use OpenSubtitles English matching only as the final fallback after Dutch subtitle matching fails.
+- Pass the selected English OpenSubtitles file to a4k for full-file Dutch translation, while allowing embedded Dutch streams to override the fallback once playback starts.
+- Tighten episodic subtitle matching so unrelated same-episode Dutch results cannot win on generic release tags alone.
+
 [COLOR dodgerblue][B]Session Note (2026-05-06, Trakt list ID reliability)[/B][/COLOR]
 - Use stable Trakt list IDs for custom/user list browsing, pagination, cache keys, like/unlike, and owned-list edits.
 - Fetch full custom list contents page-by-page with Trakt's supported page size, then apply the Trakt sort headers locally across the combined result.
@@ -87,7 +108,7 @@
 - Added local AI Search history alongside the existing movie, TV, anime, people, keyword, Easynews, and Trakt search histories.
 
 [COLOR dodgerblue][B]Version 2.0.30[/B][/COLOR]
-- Clear local Kodi bookmark rows using the real `plugin://plugin.video.fenlight.patched.kodienglish/...` playback URLs so erase-bookmark actions target the active movie or episode instead of relying on the old broad filename match.
+- Clear local Kodi bookmark rows using the real `plugin://plugin.video.fenlight.patched/...` playback URLs so erase-bookmark actions target the active movie or episode instead of relying on the old broad filename match.
 
 [COLOR dodgerblue][B]Session Note (2026-04-11, startup smoothing + selector runtime fix)[/B][/COLOR]
 - Keep the smoother autoplay handoff that waits for fullscreen before closing the resolver window, avoiding the flash back to the skin start screen while still shortening the settle around fullscreen.

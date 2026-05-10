@@ -13,15 +13,22 @@ Current source-tree versions:
 
 - `plugin.video.fenlight` `2.0.15.1003`
   Vanilla Fen Light package kept as the known-good baseline with repo-wide bundled key updates only.
-- `plugin.video.fenlight.kodienglish` `2.0.15.1010`
+- `plugin.video.fenlight.kodienglish` `2.0.15.1011`
   Working copy of vanilla Fen Light for the English-focused fork. It now also
   carries the newer Trakt/auth hardening, stable Trakt list-id routing, QR
   auth flows for Trakt, Real-Debrid, Premiumize, and AllDebrid, plus the
   playback properties and active-addon routing needed for next-episode OSD support.
-- `plugin.video.fenlight.patched.kodienglish` `2.0.60.1006`
+  It now also guards duplicate Trakt re-authorization prompts, skips watched-indicator
+  refresh on invalid Trakt payloads, rotates auth QR image filenames per device URL
+  so Kodi refreshes changed codes, and brings the latest Extras trailer fallback and
+  fullscreen-stop behavior into the English working copy.
+- `plugin.video.fenlight.patched.kodienglish` `2.0.65.1007`
   Patched Fen Light package carrying the recent Trakt/auth pass, stable Trakt
   list-id routing, bundled Trakt default-key refresh, and QR-based auth flows
-  for Trakt, Real-Debrid, Premiumize, and AllDebrid.
+  for Trakt, Real-Debrid, Premiumize, and AllDebrid. It now also carries the
+  latest Extras trailer fallback/fullscreen-stop fixes, the duplicate Trakt
+  re-authorization prompt guard, the invalid watched-indicator payload guard,
+  and per-device-URL QR image filenames so Kodi refreshes changed auth codes.
 - `plugin.video.themoviedb.helper.patched.kodienglish` `6.15.2.10.1004`
   Patched TMDb Helper package used by the patched skin flow. It now includes
   the bundled Fen / Fen Patched player definitions, recommendations-window
