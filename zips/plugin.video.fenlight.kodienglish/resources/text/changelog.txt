@@ -1,5 +1,10 @@
 [COLOR darkgoldenrod]GOD BLESS HIM AND KEEP HIM SAFE.[/COLOR]
 
+[COLOR dodgerblue][B]Version 2.0.15.1012[/B][/COLOR]
+- Refresh the QR-backed Trakt device-auth flow so the QR encodes the activation URL plus device code, renders the styled QR card, and keeps the manual verification URL and code prompt.
+- Refresh the Real-Debrid device-auth flow so the QR and clipboard use the provider's direct verification URL when available instead of only the generic device page.
+- Keep per-device-URL QR filename rotation in the English build so Kodi still refreshes changed auth images instead of reusing stale cached artwork.
+
 [COLOR dodgerblue][B]Version 2.0.15.1011[/B][/COLOR]
 - Guard Trakt re-authorization prompts so only one dialog appears at a time and skip watched-indicator refresh when Trakt returns an invalid payload.
 - Rotate auth QR image filenames per device URL so Kodi refreshes changed Trakt and Debrid codes instead of reusing stale cached images.

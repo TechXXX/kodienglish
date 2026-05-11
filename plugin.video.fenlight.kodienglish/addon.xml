@@ -1,4 +1,4 @@
-<addon id="plugin.video.fenlight.kodienglish" name="Fen Light English" provider-name="Tikipeter" version="2.0.15.1011">
+<addon id="plugin.video.fenlight.kodienglish" name="Fen Light English" provider-name="Tikipeter" version="2.0.15.1012">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
         <import addon="script.module.requests" version="2.19.1"/>
@@ -19,6 +19,9 @@
             <icon>resources/media/fenlight_icon.png</icon>
             <fanart>resources/media/fenlight_fanart2.jpg</fanart>
         </assets>
-        <news>INFO: For latest changes see Changelog within Tools of add-on.</news>
+        <news>[v2.0.15.1012]:
+  * Refresh the Trakt and Real-Debrid QR-backed device-auth flow with styled Trakt QR cards, direct activation QR targets where available, and the latest English auth prompt behavior.
+
+INFO: For latest changes see Changelog within Tools of add-on.</news>
     </extension>
 </addon>

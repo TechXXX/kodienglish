@@ -2,7 +2,7 @@
 import json
 import time
 import requests
-from urllib.parse import unquote
+from urllib.parse import unquote, urlencode
 from caches import trakt_cache
 from caches.settings_cache import get_setting, set_setting
 from caches.main_cache import cache_object
@@ -217,10 +217,11 @@ def trakt_get_device_token(device_codes):
 		expires_in = device_codes['expires_in']
 		sleep_interval = device_codes['interval']
 		user_code = str(device_codes['user_code'])
-		verification_url = str(device_codes['verification_url'])
-		auth_url = '%s?code=%s' % (verification_url.rstrip('/'), user_code)
-		qr_code = make_qrcode(auth_url)
-		try: copy2clip(auth_url)
+		verification_url = str(device_codes.get('verification_url') or 'https://trakt.tv/activate')
+		separator = '&' if '?' in verification_url else '?'
+		auth_url = '%s%s%s' % (verification_url, separator, urlencode({'code': user_code}))
+		qr_code = make_qrcode(auth_url, styled=True)
+		try: copy2clip(user_code)
 		except: pass
 		content = '[CR]Navigate to: [B]%s[/B][CR]Enter the following code: [B]%s[/B]' % (verification_url, user_code)
 		if qr_code: content += '[CR]Or scan the [B]QR Code[/B]'

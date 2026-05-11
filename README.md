@@ -13,7 +13,7 @@ Current source-tree versions:
 
 - `plugin.video.fenlight` `2.0.15.1003`
   Vanilla Fen Light package kept as the known-good baseline with repo-wide bundled key updates only.
-- `plugin.video.fenlight.kodienglish` `2.0.15.1011`
+- `plugin.video.fenlight.kodienglish` `2.0.15.1012`
   Working copy of vanilla Fen Light for the English-focused fork. It now also
   carries the newer Trakt/auth hardening, stable Trakt list-id routing, QR
   auth flows for Trakt, Real-Debrid, Premiumize, and AllDebrid, plus the
@@ -21,19 +21,25 @@ Current source-tree versions:
   It now also guards duplicate Trakt re-authorization prompts, skips watched-indicator
   refresh on invalid Trakt payloads, rotates auth QR image filenames per device URL
   so Kodi refreshes changed codes, and brings the latest Extras trailer fallback and
-  fullscreen-stop behavior into the English working copy.
-- `plugin.video.fenlight.patched.kodienglish` `2.0.65.1007`
+  fullscreen-stop behavior into the English working copy. It now also refreshes
+  the Trakt and Real-Debrid QR-backed auth prompts with styled Trakt QR cards and
+  the latest activation URL / clipboard behavior.
+- `plugin.video.fenlight.patched.kodienglish` `2.0.65.1008`
   Patched Fen Light package carrying the recent Trakt/auth pass, stable Trakt
   list-id routing, bundled Trakt default-key refresh, and QR-based auth flows
   for Trakt, Real-Debrid, Premiumize, and AllDebrid. It now also carries the
   latest Extras trailer fallback/fullscreen-stop fixes, the duplicate Trakt
   re-authorization prompt guard, the invalid watched-indicator payload guard,
   and per-device-URL QR image filenames so Kodi refreshes changed auth codes.
-- `plugin.video.themoviedb.helper.patched.kodienglish` `6.15.2.10.1004`
+  It now also refreshes the English Trakt and Real-Debrid QR-backed auth prompts
+  with styled Trakt QR cards and the latest activation URL / clipboard behavior.
+- `plugin.video.themoviedb.helper.patched.kodienglish` `6.15.2.10.1005`
   Patched TMDb Helper package used by the patched skin flow. It now includes
   the bundled Fen / Fen Patched player definitions, recommendations-window
   hardening and logging, authenticated Trakt username state, and the newer
-  OMDb default-key and ratings-backfill improvements.
+  OMDb default-key and ratings-backfill improvements. It now also ships the
+  custom Trakt QR auth dialog, styled QR generation helpers, clipboard support,
+  and the matching dialog skin assets for the English repo build.
 - `skin.arctic.horizon.2.patched.kodienglish` `0.8.30.11.1004`
   Patched Arctic Horizon 2 package targeting the patched TMDb Helper addon id.
   It now supports the dedicated next-episode OSD action for Fen playback and
