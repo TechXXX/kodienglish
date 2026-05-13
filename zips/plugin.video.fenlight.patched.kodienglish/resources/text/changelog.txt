@@ -1,3 +1,7 @@
+[COLOR dodgerblue][B]Session Note (2026-05-13, English live default settings seed)[/B][/COLOR]
+- Seed first-run Fen Light Patched English settings from the live profile for non-secret preferences.
+- Default new installs to CocoScrapers, live list/result/playback preferences, size filters, pagination, and update behavior while keeping credentials, tokens, account values, local machine paths, and KodiEnglish repository targets out of the package.
+
 [COLOR dodgerblue][B]Session Note (2026-05-12, TorBox web download validation)[/B][/COLOR]
 - Confirm TorBox Web Download playback resolves and starts through Fen Light Patched.
 - Remove temporary scrape/resolver diagnostics while keeping the WebDL cloud support and `short_name` title-match fix.

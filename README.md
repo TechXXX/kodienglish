@@ -25,7 +25,7 @@ Current source-tree versions:
   the Trakt and Real-Debrid QR-backed auth prompts with styled Trakt QR cards and
   the latest activation URL / clipboard behavior, and adds TorBox Web Download
   cloud scraping, browsing, resolving, and deleting for web-hosted uploads.
-- `plugin.video.fenlight.patched.kodienglish` `2.0.70.1009`
+- `plugin.video.fenlight.patched.kodienglish` `2.0.70.1010`
   Patched Fen Light package carrying the recent Trakt/auth pass, stable Trakt
   list-id routing, bundled Trakt default-key refresh, and QR-based auth flows
   for Trakt, Real-Debrid, Premiumize, and AllDebrid. It now also carries the
@@ -35,7 +35,10 @@ Current source-tree versions:
   It now also refreshes the English Trakt and Real-Debrid QR-backed auth prompts
   with styled Trakt QR cards and the latest activation URL / clipboard behavior.
   It now also includes TorBox Web Download cloud support and the WebDL playback
-  validation cleanup without temporary scrape/resolver diagnostics.
+  validation cleanup without temporary scrape/resolver diagnostics. It now also
+  seeds non-secret first-run defaults for CocoScrapers, list/result/playback
+  preferences, size filters, pagination, and update behavior while keeping
+  KodiEnglish repository targets and local/private values clean.
 - `plugin.video.themoviedb.helper.patched.kodienglish` `6.15.2.10.1005`
   Patched TMDb Helper package used by the patched skin flow. It now includes
   the bundled Fen / Fen Patched player definitions, recommendations-window

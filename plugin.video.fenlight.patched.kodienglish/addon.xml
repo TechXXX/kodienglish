@@ -1,4 +1,4 @@
-<addon id="plugin.video.fenlight.patched.kodienglish" name="Fen Light Patched" provider-name="Tikipeter" version="2.0.70.1009">
+<addon id="plugin.video.fenlight.patched.kodienglish" name="Fen Light Patched" provider-name="Tikipeter" version="2.0.70.1010">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
         <import addon="script.module.requests" version="2.19.1"/>
@@ -19,7 +19,11 @@
             <icon>resources/media/fenlight_icon.png</icon>
             <fanart>resources/media/fenlight_fanart2.jpg</fanart>
         </assets>
-        <news>[v2.0.70.1009]:
+        <news>[v2.0.70.1010]:
+  * Seed first-run Fen Light Patched English settings from the live profile for non-secret preferences, including CocoScrapers, list/result/playback preferences, size filters, pagination, and update behavior.
+  * Keep credentials, tokens, account values, local machine paths, and KodiEnglish repository targets out of the seed.
+
+[v2.0.70.1009]:
   * Add TorBox Web Download cloud support so hoster uploads such as GoFile-backed items appear in TorBox cloud scraping, browsing, resolving, and deleting alongside torrent and usenet items.
   * Validate TorBox Web Download playback behavior without shipping temporary scrape/resolver diagnostics, and keep the short-name title-match fix.
 
