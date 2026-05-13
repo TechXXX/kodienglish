@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addons>
-    <addon id="plugin.video.fenlight" name="Fen Light" provider-name="Tikipeter" version="2.0.15.1003">
+    <addon id="plugin.video.fenlight" name="Fen Light" provider-name="Tikipeter" version="2.0.16.1004">
         <requires>
             <import addon="xbmc.python" version="3.0.0" />
             <import addon="script.module.requests" version="2.19.1" />
@@ -21,10 +21,14 @@
                 <icon>resources/media/fenlight_icon.png</icon>
                 <fanart>resources/media/fenlight_fanart2.jpg</fanart>
             </assets>
-            <news>INFO: For latest changes see Changelog within Tools of add-on.</news>
+            <news>[v2.0.16.1004]:
+  * Add TorBox Web Download cloud support so web-hosted uploads can be scraped, browsed, resolved, and deleted alongside TorBox torrent and usenet cloud items.
+  * Prefer TorBox file short names during cloud scraping so webhoster folder prefixes do not block title matching.
+
+INFO: For latest changes see Changelog within Tools of add-on.</news>
         </extension>
     </addon>
-    <addon id="plugin.video.fenlight.kodienglish" name="Fen Light English" provider-name="Tikipeter" version="2.0.15.1012">
+    <addon id="plugin.video.fenlight.kodienglish" name="Fen Light English" provider-name="Tikipeter" version="2.0.16.1013">
         <requires>
             <import addon="xbmc.python" version="3.0.0" />
             <import addon="script.module.requests" version="2.19.1" />
@@ -45,13 +49,17 @@
                 <icon>resources/media/fenlight_icon.png</icon>
                 <fanart>resources/media/fenlight_fanart2.jpg</fanart>
             </assets>
-            <news>[v2.0.15.1012]:
+            <news>[v2.0.16.1013]:
+  * Add TorBox Web Download cloud support so web-hosted uploads can be scraped, browsed, resolved, and deleted alongside TorBox torrent and usenet cloud items.
+  * Prefer TorBox file short names during cloud scraping so webhoster folder prefixes do not block title matching.
+
+[v2.0.15.1012]:
   * Refresh the Trakt and Real-Debrid QR-backed device-auth flow with styled Trakt QR cards, direct activation QR targets where available, and the latest English auth prompt behavior.
 
 INFO: For latest changes see Changelog within Tools of add-on.</news>
         </extension>
     </addon>
-    <addon id="plugin.video.fenlight.patched.kodienglish" name="Fen Light Patched" provider-name="Tikipeter" version="2.0.65.1008">
+    <addon id="plugin.video.fenlight.patched.kodienglish" name="Fen Light Patched" provider-name="Tikipeter" version="2.0.70.1009">
         <requires>
             <import addon="xbmc.python" version="3.0.0" />
             <import addon="script.module.requests" version="2.19.1" />
@@ -72,7 +80,11 @@ INFO: For latest changes see Changelog within Tools of add-on.</news>
                 <icon>resources/media/fenlight_icon.png</icon>
                 <fanart>resources/media/fenlight_fanart2.jpg</fanart>
             </assets>
-            <news>[v2.0.65.1008]:
+            <news>[v2.0.70.1009]:
+  * Add TorBox Web Download cloud support so hoster uploads such as GoFile-backed items appear in TorBox cloud scraping, browsing, resolving, and deleting alongside torrent and usenet items.
+  * Validate TorBox Web Download playback behavior without shipping temporary scrape/resolver diagnostics, and keep the short-name title-match fix.
+
+[v2.0.65.1008]:
   * Refresh the English Trakt and Real-Debrid QR-backed device-auth flow with styled Trakt QR cards, direct activation QR targets where available, and the latest QR prompt behavior.
 
 [v2.0.65]:

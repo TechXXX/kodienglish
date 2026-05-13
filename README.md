@@ -11,9 +11,9 @@ This repo keeps one untouched vanilla Fen Light copy under the original
 
 Current source-tree versions:
 
-- `plugin.video.fenlight` `2.0.15.1003`
-  Vanilla Fen Light package kept as the known-good baseline with repo-wide bundled key updates only.
-- `plugin.video.fenlight.kodienglish` `2.0.15.1012`
+- `plugin.video.fenlight` `2.0.16.1004`
+  Vanilla Fen Light package kept as the known-good baseline with repo-wide bundled key updates plus TorBox Web Download cloud support.
+- `plugin.video.fenlight.kodienglish` `2.0.16.1013`
   Working copy of vanilla Fen Light for the English-focused fork. It now also
   carries the newer Trakt/auth hardening, stable Trakt list-id routing, QR
   auth flows for Trakt, Real-Debrid, Premiumize, and AllDebrid, plus the
@@ -23,8 +23,9 @@ Current source-tree versions:
   so Kodi refreshes changed codes, and brings the latest Extras trailer fallback and
   fullscreen-stop behavior into the English working copy. It now also refreshes
   the Trakt and Real-Debrid QR-backed auth prompts with styled Trakt QR cards and
-  the latest activation URL / clipboard behavior.
-- `plugin.video.fenlight.patched.kodienglish` `2.0.65.1008`
+  the latest activation URL / clipboard behavior, and adds TorBox Web Download
+  cloud scraping, browsing, resolving, and deleting for web-hosted uploads.
+- `plugin.video.fenlight.patched.kodienglish` `2.0.70.1009`
   Patched Fen Light package carrying the recent Trakt/auth pass, stable Trakt
   list-id routing, bundled Trakt default-key refresh, and QR-based auth flows
   for Trakt, Real-Debrid, Premiumize, and AllDebrid. It now also carries the
@@ -33,6 +34,8 @@ Current source-tree versions:
   and per-device-URL QR image filenames so Kodi refreshes changed auth codes.
   It now also refreshes the English Trakt and Real-Debrid QR-backed auth prompts
   with styled Trakt QR cards and the latest activation URL / clipboard behavior.
+  It now also includes TorBox Web Download cloud support and the WebDL playback
+  validation cleanup without temporary scrape/resolver diagnostics.
 - `plugin.video.themoviedb.helper.patched.kodienglish` `6.15.2.10.1005`
   Patched TMDb Helper package used by the patched skin flow. It now includes
   the bundled Fen / Fen Patched player definitions, recommendations-window

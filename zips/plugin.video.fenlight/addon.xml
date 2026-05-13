@@ -1,4 +1,4 @@
-<addon id="plugin.video.fenlight" name="Fen Light" provider-name="Tikipeter" version="2.0.15.1003">
+<addon id="plugin.video.fenlight" name="Fen Light" provider-name="Tikipeter" version="2.0.16.1004">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
         <import addon="script.module.requests" version="2.19.1"/>
@@ -19,6 +19,10 @@
             <icon>resources/media/fenlight_icon.png</icon>
             <fanart>resources/media/fenlight_fanart2.jpg</fanart>
         </assets>
-        <news>INFO: For latest changes see Changelog within Tools of add-on.</news>
+        <news>[v2.0.16.1004]:
+  * Add TorBox Web Download cloud support so web-hosted uploads can be scraped, browsed, resolved, and deleted alongside TorBox torrent and usenet cloud items.
+  * Prefer TorBox file short names during cloud scraping so webhoster folder prefixes do not block title matching.
+
+INFO: For latest changes see Changelog within Tools of add-on.</news>
     </extension>
 </addon>
