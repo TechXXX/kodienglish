@@ -183,15 +183,20 @@ class DataFunctions:
                     continue
 
             if tree is not None and process_shortcuts:
-                # If this is a user-selected list of shortcuts...
-                if group == "mainmenu":
-                    self._get_skin_required(tree)
+                try:
+                    # If this is a user-selected list of shortcuts...
+                    if group == "mainmenu":
+                        self._get_skin_required(tree)
 
-                if path == user_shortcuts:
-                    # Process shortcuts, marked as user-selected
-                    self._process_shortcuts(tree, group, profile_dir, True)
-                else:
-                    self._process_shortcuts(tree, group, profile_dir)
+                    if path == user_shortcuts:
+                        # Process shortcuts, marked as user-selected
+                        self._process_shortcuts(tree, group, profile_dir, True)
+                    else:
+                        self._process_shortcuts(tree, group, profile_dir)
+                except:
+                    log(print_exc())
+                    log("Failed to process shortcuts file %s" % path)
+                    continue
 
                 log("Loaded file")
                 return tree
