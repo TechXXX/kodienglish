@@ -4,11 +4,11 @@
 # License: GPL v.3 https://www.gnu.org/copyleft/gpl.html
 import os
 import re
+import shutil
 import sys
 import xbmc
 import xbmcaddon
 import xbmcvfs
-from PIL import Image, ImageChops
 
 ADDON = xbmcaddon.Addon('script.texturemaker')
 ADDONPATH = ADDON.getAddonInfo('path')
@@ -16,6 +16,12 @@ ADDONDATA = 'special://profile/addon_data/script.texturemaker/'
 
 GRADIENT = xbmcvfs.translatePath('{}/resources/images/gradient.png'.format(ADDONPATH))
 SETTINGS = ['fg', 'bg', 'alpha', 'folder', 'reload', 'no_reload']
+
+try:
+    from PIL import Image, ImageChops
+except ImportError:
+    Image = None
+    ImageChops = None
 
 
 """ Usage
@@ -132,48 +138,102 @@ class Script(object):
         self.gradient_v_file = xbmcvfs.translatePath('{}/gradient_v.png'.format(self.save_dir))
         self.gradient_v.save(self.gradient_v_file)
 
-    def run(self):
-        if not os.path.exists(xbmcvfs.translatePath(self.save_dir)):
-            os.makedirs(xbmcvfs.translatePath(self.save_dir))
+    def _copy_fallback_texture(self, source, *names):
+        source = xbmcvfs.translatePath(source)
+        if not os.path.exists(source):
+            return
+        for name in names:
+            target = xbmcvfs.translatePath('{}/{}.png'.format(self.save_dir, name))
+            shutil.copy2(source, target)
 
-        self.make_gradients(self.fg_color, self.bg_color, self.alpha)
+    def make_fallback_textures(self):
+        fallback = xbmcvfs.translatePath(GRADIENT)
+        self._copy_fallback_texture(fallback, 'gradient_h', 'gradient_v')
 
         for k, v in self.params.items():
             if k in SETTINGS:
                 continue
 
-            # Get multiply keyword
-            multiply = True if '+multiply' in k else False
             k = k.replace('+multiply', '')
-
-            # Get overlay keyword
-            overlay = True if '+overlay' in k else False
             k = k.replace('+overlay', '')
 
-            # Get padded keyword
-            r = re.search(r'\+padding\{(.*?)\}', k)
-            k, padding = (k.replace(r.group(0), ''), [int(i) for i in r.group(1).split('|')]) if r else (k, None)
+            padding = re.search(r'\+padding\{(.*?)\}', k)
+            if padding:
+                k = k.replace(padding.group(0), '')
 
-            # Get slicing keyword
-            r = re.search(r'\+slicing\{(.*?)\}', k)
-            k, slicing = (k.replace(r.group(0), ''), r.group(1).split('|')) if r else (k, None)
+            slicing = re.search(r'\+slicing\{(.*?)\}', k)
+            if slicing:
+                k = k.replace(slicing.group(0), '')
 
-            # Create masked images
-            mask = xbmcvfs.translatePath(v)
-            for i, j in [('h', self.gradient_h), ('v', self.gradient_v)]:
-                mask_file = xbmcvfs.translatePath(f'{self.save_dir}/{k}_{i}')
-                mask_img = make_masked(j, mask, multiply=multiply, overlay=overlay, padding=padding)
-                mask_img.save(f'{mask_file}.png')
-                if not slicing:
-                    continue
-                sliced_img_y = mask_img
-                if int(slicing[0]):
-                    sliced_img_x, sliced_img_y = make_slices(sliced_img_y, 'left', int(slicing[0]))
-                    sliced_img_x.save(f'{mask_file}_x.png')
-                if int(slicing[1]):
-                    sliced_img_y, sliced_img_z = make_slices(sliced_img_y, 'right', int(slicing[1]))
-                    sliced_img_z.save(f'{mask_file}_z.png')
-                sliced_img_y.save(f'{mask_file}_y.png')
+            names = ['{}_h'.format(k), '{}_v'.format(k)]
+            if slicing:
+                names.extend([
+                    '{}_h_x'.format(k),
+                    '{}_h_y'.format(k),
+                    '{}_h_z'.format(k),
+                    '{}_v_x'.format(k),
+                    '{}_v_y'.format(k),
+                    '{}_v_z'.format(k),
+                ])
+            self._copy_fallback_texture(v, *names)
+
+    @staticmethod
+    def _log_fallback(exc):
+        xbmc.log(
+            msg='script.texturemaker - using fallback textures: {}'.format(exc),
+            level=xbmc.LOGWARNING,
+        )
+
+    def run(self):
+        if not os.path.exists(xbmcvfs.translatePath(self.save_dir)):
+            os.makedirs(xbmcvfs.translatePath(self.save_dir))
+
+        if Image is None:
+            self._log_fallback('PIL is not available')
+            self.make_fallback_textures()
+        else:
+            try:
+                self.make_gradients(self.fg_color, self.bg_color, self.alpha)
+
+                for k, v in self.params.items():
+                    if k in SETTINGS:
+                        continue
+
+                    # Get multiply keyword
+                    multiply = True if '+multiply' in k else False
+                    k = k.replace('+multiply', '')
+
+                    # Get overlay keyword
+                    overlay = True if '+overlay' in k else False
+                    k = k.replace('+overlay', '')
+
+                    # Get padded keyword
+                    r = re.search(r'\+padding\{(.*?)\}', k)
+                    k, padding = (k.replace(r.group(0), ''), [int(i) for i in r.group(1).split('|')]) if r else (k, None)
+
+                    # Get slicing keyword
+                    r = re.search(r'\+slicing\{(.*?)\}', k)
+                    k, slicing = (k.replace(r.group(0), ''), r.group(1).split('|')) if r else (k, None)
+
+                    # Create masked images
+                    mask = xbmcvfs.translatePath(v)
+                    for i, j in [('h', self.gradient_h), ('v', self.gradient_v)]:
+                        mask_file = xbmcvfs.translatePath(f'{self.save_dir}/{k}_{i}')
+                        mask_img = make_masked(j, mask, multiply=multiply, overlay=overlay, padding=padding)
+                        mask_img.save(f'{mask_file}.png')
+                        if not slicing:
+                            continue
+                        sliced_img_y = mask_img
+                        if int(slicing[0]):
+                            sliced_img_x, sliced_img_y = make_slices(sliced_img_y, 'left', int(slicing[0]))
+                            sliced_img_x.save(f'{mask_file}_x.png')
+                        if int(slicing[1]):
+                            sliced_img_y, sliced_img_z = make_slices(sliced_img_y, 'right', int(slicing[1]))
+                            sliced_img_z.save(f'{mask_file}_z.png')
+                        sliced_img_y.save(f'{mask_file}_y.png')
+            except Exception as exc:
+                self._log_fallback(exc)
+                self.make_fallback_textures()
 
         if 'no_reload' not in self.params:
             xbmc.executebuiltin('ReloadSkin()')
