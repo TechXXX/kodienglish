@@ -41,11 +41,10 @@ Current source-tree versions:
   seeds non-secret first-run defaults for CocoScrapers, list/result/playback
   preferences, size filters, pagination, and update behavior while keeping
   KodiEnglish repository targets and local/private values clean.
-- `plugin.program.famyt` `0.4.0`
-  Family setup helper copied from the production release line. It contains no
-  credentials, prompts for the shared bridge password, and can install YouTube
-  credentials, TorBox API settings for Fen Light / Fen Light English, a4kSubtitles
-  Patched settings, and CocoScrapers undesirable filters.
+- `plugin.program.famyt` `0.4.2`
+  Private family setup helper copied from the production release line. It
+  contains no credentials; operational notes are kept outside the public
+  repository.
 - `plugin.video.themoviedb.helper.patched.kodienglish` `6.15.2.10.1005`
   Patched TMDb Helper package used by the patched skin flow. It now includes
   the bundled Fen / Fen Patched player definitions, recommendations-window
@@ -70,8 +69,8 @@ Current source-tree versions:
 - `plugin.video.fenlight.patched.kodienglish/`
   Patched Fen Light source tree.
 - `plugin.program.famyt/`
-  famYT setup add-on source. Credentials live in the separate famYT bridge, not
-  in this repository.
+  Private family setup helper source. Credentials are not stored in this
+  repository.
 - `plugin.video.themoviedb.helper.patched.kodienglish/`
   Patched TMDb Helper source tree.
 - `skin.arctic.horizon.2.patched.kodienglish/`
