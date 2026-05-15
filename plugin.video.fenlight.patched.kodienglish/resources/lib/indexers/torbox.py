@@ -65,7 +65,8 @@ def browse_tb_cloud(folder_id, media_type):
 	if media_type == 'torrent': files = TorBox.user_cloud_info(folder_id)
 	elif media_type == 'usenet': files = TorBox.user_cloud_info_usenet(folder_id)
 	else: files = TorBox.user_cloud_info_webdl(folder_id)
-	video_files = [{**i, 'media_type': media_type} for i in files['data']['files'] if i['short_name'].lower().endswith(tuple(extensions))]
+	video_files = [{**i, 'short_name': i.get('short_name') or i.get('name') or '', 'media_type': media_type} for i in files['data']['files']
+					if (i.get('short_name') or i.get('name') or '').lower().endswith(tuple(extensions))]
 	handle = int(sys.argv[1])
 	add_items(handle, list(_builder()))
 	set_content(handle, 'files')

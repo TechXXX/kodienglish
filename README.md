@@ -13,7 +13,7 @@ Current source-tree versions:
 
 - `plugin.video.fenlight` `2.0.16.1004`
   Vanilla Fen Light package kept as the known-good baseline with repo-wide bundled key updates plus TorBox Web Download cloud support.
-- `plugin.video.fenlight.kodienglish` `2.0.16.1014`
+- `plugin.video.fenlight.kodienglish` `2.0.16.1013`
   Working copy of vanilla Fen Light for the English-focused fork. It now also
   carries the newer Trakt/auth hardening, stable Trakt list-id routing, QR
   auth flows for Trakt, Real-Debrid, Premiumize, and AllDebrid, plus the
@@ -24,10 +24,8 @@ Current source-tree versions:
   fullscreen-stop behavior into the English working copy. It now also refreshes
   the Trakt and Real-Debrid QR-backed auth prompts with styled Trakt QR cards and
   the latest activation URL / clipboard behavior, and adds TorBox Web Download
-  cloud scraping, browsing, resolving, and deleting for web-hosted uploads. It
-  now enables TorBox Search Cloud Storage by default and migrates existing Fen
-  Light English installs to turn it on without touching TorBox authorization.
-- `plugin.video.fenlight.patched.kodienglish` `2.0.71.1011`
+  cloud scraping, browsing, resolving, and deleting for web-hosted uploads.
+- `plugin.video.fenlight.patched.kodienglish` `2.0.70.1010`
   Patched Fen Light package carrying the recent Trakt/auth pass, stable Trakt
   list-id routing, bundled Trakt default-key refresh, and QR-based auth flows
   for Trakt, Real-Debrid, Premiumize, and AllDebrid. It now also carries the
@@ -40,19 +38,12 @@ Current source-tree versions:
   validation cleanup without temporary scrape/resolver diagnostics. It now also
   seeds non-secret first-run defaults for CocoScrapers, list/result/playback
   preferences, size filters, pagination, and update behavior while keeping
-  KodiEnglish repository targets and local/private values clean. It now also
-  adds TorBox Usenet Search controls for movies and TV shows, plus automatic
-  no-results retry with cached TorBox Usenet Search, while deliberately leaving
-  the normal-repo a4k subtitle-service changes out of the English build.
-- `plugin.program.famyt` `0.4.2`
-  Private family setup helper copied from the production release line. It
-  contains no credentials; operational notes are kept outside the public
-  repository.
-- `plugin.program.autocompletion` `2.1.4`
-  Bundled virtual keyboard autocomplete helper so Arctic Fuse 3 can install it
-  from this repo instead of the broken upstream `2.1.3` package URL.
-- `script.module.autocompletion` `2.1.1`
-  Library dependency for the virtual keyboard autocomplete helper.
+  KodiEnglish repository targets and local/private values clean.
+- `plugin.program.famyt` `0.4.0`
+  Family setup helper copied from the production release line. It contains no
+  credentials, prompts for the shared bridge password, and can install YouTube
+  credentials, TorBox API settings for Fen Light / Fen Light English, a4kSubtitles
+  Patched settings, and CocoScrapers undesirable filters.
 - `plugin.video.themoviedb.helper.patched.kodienglish` `6.15.2.10.1005`
   Patched TMDb Helper package used by the patched skin flow. It now includes
   the bundled Fen / Fen Patched player definitions, recommendations-window
@@ -60,14 +51,11 @@ Current source-tree versions:
   OMDb default-key and ratings-backfill improvements. It now also ships the
   custom Trakt QR auth dialog, styled QR generation helpers, clipboard support,
   and the matching dialog skin assets for the English repo build.
-- `skin.arctic.horizon.2.patched.kodienglish` `0.8.30.12.1005`
+- `skin.arctic.horizon.2.patched.kodienglish` `0.8.30.11.1004`
   Patched Arctic Horizon 2 package targeting the patched TMDb Helper addon id.
   It now supports the dedicated next-episode OSD action for Fen playback and
   hides that action when Fen confirms there is no next aired episode, while
-  routing the button to Fen Light English when English playback is active. It
-  now also adds a Kodi/Android voice-search button to the virtual keyboard,
-  uses Kodi's `VoiceRecognizer`, and auto-submits once Android voice input
-  fills the keyboard text.
+  routing the button to Fen Light English when English playback is active.
 - `repository.kodienglish`
   The repository addon Kodi installs first.
 
@@ -80,12 +68,8 @@ Current source-tree versions:
 - `plugin.video.fenlight.patched.kodienglish/`
   Patched Fen Light source tree.
 - `plugin.program.famyt/`
-  Private family setup helper source. Credentials are not stored in this
-  repository.
-- `plugin.program.autocompletion/`
-  Bundled virtual keyboard autocomplete helper source.
-- `script.module.autocompletion/`
-  Bundled virtual keyboard autocomplete library source.
+  famYT setup add-on source. Credentials live in the separate famYT bridge, not
+  in this repository.
 - `plugin.video.themoviedb.helper.patched.kodienglish/`
   Patched TMDb Helper source tree.
 - `skin.arctic.horizon.2.patched.kodienglish/`

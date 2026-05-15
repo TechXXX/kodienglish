@@ -1,9 +1,5 @@
 [COLOR darkgoldenrod]GOD BLESS HIM AND KEEP HIM SAFE.[/COLOR]
 
-[COLOR dodgerblue][B]Version 2.0.16.1014[/B][/COLOR]
-- Enable TorBox Search Cloud Storage by default for Fen Light English.
-- Add a one-time update migration that turns on `provider.tb_cloud` for existing installs without changing TorBox authorization, tokens, or account state.
-
 [COLOR dodgerblue][B]Version 2.0.16.1013[/B][/COLOR]
 - Add TorBox Web Download cloud support so web-hosted uploads can be scraped, browsed, resolved, and deleted alongside TorBox torrent and usenet cloud items.
 - Prefer TorBox file `short_name` values during cloud scraping so webhoster folder prefixes do not block title matching.

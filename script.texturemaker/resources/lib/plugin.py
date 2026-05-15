@@ -18,10 +18,7 @@ class ListGetColorSwatches(ContainerDirectory):
         import os
         import json
         import xbmcvfs
-        try:
-            from PIL import Image
-        except ImportError:
-            Image = None
+        from PIL import Image
 
         def load_colors(filename=None, meta=None):
             filename = 'special://skin/{}'.format(filename) if filename else COLORDEFS
@@ -42,11 +39,11 @@ class ListGetColorSwatches(ContainerDirectory):
             rrggbb = '#{}'.format(k[2:])
             swatch = xbmcvfs.translatePath('{}/{}.png'.format(save_dir, k))
 
-            if Image and not os.path.exists(swatch):
+            if not os.path.exists(swatch):
                 img = Image.new('RGB', (16, 16), rrggbb)
                 img.save(swatch)
 
-            items.append(self.get_list_item(k, v, swatch if os.path.exists(swatch) else '', is_folder=False))
+            items.append(self.get_list_item(k, v, swatch, is_folder=False))
 
         self.add_items(items)
 
@@ -62,10 +59,7 @@ class ListGetPixelValue(ContainerDirectory):
         except (TypeError, ValueError):
             return
 
-        try:
-            from PIL import ImageGrab
-        except ImportError:
-            return
+        from PIL import ImageGrab
         rgb = ImageGrab.grab().getpixel((x, y,))
 
         label = f'FF{rgb[0]:02x}{rgb[1]:02x}{rgb[2]:02x}'

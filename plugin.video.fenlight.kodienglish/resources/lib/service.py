@@ -55,10 +55,7 @@ class OnUpdateChanges:
 		logger('Fen Light', 'OnUpdateChanges Service Starting')
 		from caches.settings_cache import get_setting, set_setting
 		try:
-			migrations = (
-				('refresh_addon_keys', self.refresh_addon_keys),
-				('enable_torbox_cloud_search', self.enable_torbox_cloud_search),
-			)
+			migrations = (('refresh_addon_keys', self.refresh_addon_keys),)
 			for setting_id, migration in migrations:
 				update_setting_id = 'updatechecks.%s' % setting_id
 				if get_setting('fenlight.%s' % update_setting_id, 'false') == 'true': continue
@@ -94,11 +91,6 @@ class OnUpdateChanges:
 			heading='Trakt Credentials Reset',
 			text='Fen Light English has replaced an old Trakt app key with the current default.[CR][CR]Please re-authorize your Trakt account.'
 		)
-
-	def enable_torbox_cloud_search(self):
-		from caches.settings_cache import set_setting
-		set_setting('provider.tb_cloud', 'true')
-		logger('Fen Light', 'TorBox cloud storage search enabled for Fen Light English.')
 
 class CustomFonts:
 	def run(self):
