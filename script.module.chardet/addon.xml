@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="script.module.chardet" name="chardet" version="5.1.0" provider-name="Character Encoding Detector">
+<addon id="script.module.chardet" name="chardet" version="5.1.1" provider-name="Character Encoding Detector">
   <requires>
     <import addon="xbmc.python" version="3.0.0"/>
   </requires>
