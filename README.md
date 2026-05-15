@@ -45,6 +45,11 @@ Current source-tree versions:
   Private family setup helper copied from the production release line. It
   contains no credentials; operational notes are kept outside the public
   repository.
+- `plugin.program.autocompletion` `2.1.4`
+  Bundled virtual keyboard autocomplete helper so Arctic Fuse 3 can install it
+  from this repo instead of the broken upstream `2.1.3` package URL.
+- `script.module.autocompletion` `2.1.1`
+  Library dependency for the virtual keyboard autocomplete helper.
 - `plugin.video.themoviedb.helper.patched.kodienglish` `6.15.2.10.1005`
   Patched TMDb Helper package used by the patched skin flow. It now includes
   the bundled Fen / Fen Patched player definitions, recommendations-window
@@ -71,6 +76,10 @@ Current source-tree versions:
 - `plugin.program.famyt/`
   Private family setup helper source. Credentials are not stored in this
   repository.
+- `plugin.program.autocompletion/`
+  Bundled virtual keyboard autocomplete helper source.
+- `script.module.autocompletion/`
+  Bundled virtual keyboard autocomplete library source.
 - `plugin.video.themoviedb.helper.patched.kodienglish/`
   Patched TMDb Helper source tree.
 - `skin.arctic.horizon.2.patched.kodienglish/`
