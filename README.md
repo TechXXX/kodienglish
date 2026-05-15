@@ -13,7 +13,7 @@ Current source-tree versions:
 
 - `plugin.video.fenlight` `2.0.16.1004`
   Vanilla Fen Light package kept as the known-good baseline with repo-wide bundled key updates plus TorBox Web Download cloud support.
-- `plugin.video.fenlight.kodienglish` `2.0.16.1013`
+- `plugin.video.fenlight.kodienglish` `2.0.16.1014`
   Working copy of vanilla Fen Light for the English-focused fork. It now also
   carries the newer Trakt/auth hardening, stable Trakt list-id routing, QR
   auth flows for Trakt, Real-Debrid, Premiumize, and AllDebrid, plus the
@@ -24,7 +24,9 @@ Current source-tree versions:
   fullscreen-stop behavior into the English working copy. It now also refreshes
   the Trakt and Real-Debrid QR-backed auth prompts with styled Trakt QR cards and
   the latest activation URL / clipboard behavior, and adds TorBox Web Download
-  cloud scraping, browsing, resolving, and deleting for web-hosted uploads.
+  cloud scraping, browsing, resolving, and deleting for web-hosted uploads. It
+  now enables TorBox Search Cloud Storage by default and migrates existing Fen
+  Light English installs to turn it on without touching TorBox authorization.
 - `plugin.video.fenlight.patched.kodienglish` `2.0.70.1010`
   Patched Fen Light package carrying the recent Trakt/auth pass, stable Trakt
   list-id routing, bundled Trakt default-key refresh, and QR-based auth flows
