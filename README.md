@@ -60,11 +60,14 @@ Current source-tree versions:
   OMDb default-key and ratings-backfill improvements. It now also ships the
   custom Trakt QR auth dialog, styled QR generation helpers, clipboard support,
   and the matching dialog skin assets for the English repo build.
-- `skin.arctic.horizon.2.patched.kodienglish` `0.8.30.11.1004`
+- `skin.arctic.horizon.2.patched.kodienglish` `0.8.30.12.1005`
   Patched Arctic Horizon 2 package targeting the patched TMDb Helper addon id.
   It now supports the dedicated next-episode OSD action for Fen playback and
   hides that action when Fen confirms there is no next aired episode, while
-  routing the button to Fen Light English when English playback is active.
+  routing the button to Fen Light English when English playback is active. It
+  now also adds a Kodi/Android voice-search button to the virtual keyboard,
+  uses Kodi's `VoiceRecognizer`, and auto-submits once Android voice input
+  fills the keyboard text.
 - `repository.kodienglish`
   The repository addon Kodi installs first.
 
