@@ -13,7 +13,7 @@ Current source-tree versions:
 
 - `plugin.video.fenlight` `2.0.16.1004`
   Vanilla Fen Light package kept as the known-good baseline with repo-wide bundled key updates plus TorBox Web Download cloud support.
-- `plugin.video.fenlight.kodienglish` `2.0.16.1013`
+- `plugin.video.fenlight.kodienglish` `2.0.16.1014`
   Working copy of vanilla Fen Light for the English-focused fork. It now also
   carries the newer Trakt/auth hardening, stable Trakt list-id routing, QR
   auth flows for Trakt, Real-Debrid, Premiumize, and AllDebrid, plus the
@@ -24,8 +24,10 @@ Current source-tree versions:
   fullscreen-stop behavior into the English working copy. It now also refreshes
   the Trakt and Real-Debrid QR-backed auth prompts with styled Trakt QR cards and
   the latest activation URL / clipboard behavior, and adds TorBox Web Download
-  cloud scraping, browsing, resolving, and deleting for web-hosted uploads.
-- `plugin.video.fenlight.patched.kodienglish` `2.0.70.1010`
+  cloud scraping, browsing, resolving, and deleting for web-hosted uploads. It
+  now enables TorBox Search Cloud Storage by default and migrates existing Fen
+  Light English installs to turn it on without touching TorBox authorization.
+- `plugin.video.fenlight.patched.kodienglish` `2.0.71.1011`
   Patched Fen Light package carrying the recent Trakt/auth pass, stable Trakt
   list-id routing, bundled Trakt default-key refresh, and QR-based auth flows
   for Trakt, Real-Debrid, Premiumize, and AllDebrid. It now also carries the
@@ -38,12 +40,14 @@ Current source-tree versions:
   validation cleanup without temporary scrape/resolver diagnostics. It now also
   seeds non-secret first-run defaults for CocoScrapers, list/result/playback
   preferences, size filters, pagination, and update behavior while keeping
-  KodiEnglish repository targets and local/private values clean.
-- `plugin.program.famyt` `0.4.0`
-  Family setup helper copied from the production release line. It contains no
-  credentials, prompts for the shared bridge password, and can install YouTube
-  credentials, TorBox API settings for Fen Light / Fen Light English, a4kSubtitles
-  Patched settings, and CocoScrapers undesirable filters.
+  KodiEnglish repository targets and local/private values clean. It now also
+  adds TorBox Usenet Search controls for movies and TV shows, plus automatic
+  no-results retry with cached TorBox Usenet Search, while deliberately leaving
+  the normal-repo a4k subtitle-service changes out of the English build.
+- `plugin.program.famyt` `0.4.2`
+  Private family setup helper copied from the production release line. It
+  contains no credentials; operational notes are kept outside the public
+  repository.
 - `plugin.video.themoviedb.helper.patched.kodienglish` `6.15.2.10.1005`
   Patched TMDb Helper package used by the patched skin flow. It now includes
   the bundled Fen / Fen Patched player definitions, recommendations-window
@@ -68,8 +72,8 @@ Current source-tree versions:
 - `plugin.video.fenlight.patched.kodienglish/`
   Patched Fen Light source tree.
 - `plugin.program.famyt/`
-  famYT setup add-on source. Credentials live in the separate famYT bridge, not
-  in this repository.
+  Private family setup helper source. Credentials are not stored in this
+  repository.
 - `plugin.video.themoviedb.helper.patched.kodienglish/`
   Patched TMDb Helper source tree.
 - `skin.arctic.horizon.2.patched.kodienglish/`

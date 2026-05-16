@@ -1,4 +1,4 @@
-<addon id="plugin.video.fenlight.patched.kodienglish" name="Fen Light Patched" provider-name="Tikipeter" version="2.0.70.1010">
+<addon id="plugin.video.fenlight.patched.kodienglish" name="Fen Light Patched" provider-name="Tikipeter" version="2.0.71.1011">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
         <import addon="script.module.requests" version="2.19.1"/>
@@ -19,7 +19,11 @@
             <icon>resources/media/fenlight_icon.png</icon>
             <fanart>resources/media/fenlight_fanart2.jpg</fanart>
         </assets>
-        <news>[v2.0.70.1010]:
+        <news>[v2.0.71.1011]:
+  * Add TorBox Usenet Search controls for movies and TV shows, plus automatic no-results retry support for cached TorBox Usenet Search.
+  * Keep the English build free of the normal-repo a4k subtitle-service changes.
+
+[v2.0.70.1010]:
   * Seed first-run Fen Light Patched English settings from the live profile for non-secret preferences, including CocoScrapers, list/result/playback preferences, size filters, pagination, and update behavior.
   * Keep credentials, tokens, account values, local machine paths, and KodiEnglish repository targets out of the seed.
 

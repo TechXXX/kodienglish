@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addons>
-    <addon id="plugin.program.famyt" name="famYT" version="0.4.0" provider-name="DutchTech">
+    <addon id="plugin.program.famyt" name="famYT" version="0.4.2" provider-name="DutchTech">
         <requires>
             <import addon="xbmc.python" version="3.0.0" />
         </requires>
@@ -8,27 +8,32 @@
             <provides>executable</provides>
         </extension>
         <extension point="xbmc.addon.metadata">
-            <summary lang="en_GB">Install family streaming setup values</summary>
-            <description lang="en_GB">Fetches private setup values from the famYT bridge and installs YouTube credentials, a TorBox API key for Fen Light, a4kSubtitles Patched account settings, Cocoscrapers filters, or everything at once.</description>
+            <summary lang="en_GB">Private family setup helper</summary>
+            <description lang="en_GB">Private setup helper for a configured family Kodi environment. Contains no credentials.</description>
             <assets>
                 <icon>resources/icon.png</icon>
                 <fanart>resources/fanart.jpg</fanart>
             </assets>
             <platform>all</platform>
             <license>MIT</license>
-            <source>https://github.com/TechXXX/kodirepo</source>
-            <news>v0.4.0
-- Added Cocoscrapers undesirable filter installer
+            <source>https://github.com/TechXXX/kodienglish</source>
+            <news>v0.4.2
+- Public metadata cleanup
+
+v0.4.1
+- Internal setup flow cleanup
+
+v0.4.0
+- Internal setup updates
 
 v0.3.0
-- Added a4kSubtitles Patched settings installer
+- Internal setup updates
 
 v0.2.0
 - Added setup menu
-- Added TorBox API key installer for Fen Light
 
 v0.1.0
-- Initial famYT installer add-on</news>
+- Initial private helper add-on</news>
         </extension>
     </addon>
     <addon id="plugin.video.fenlight" name="Fen Light" provider-name="Tikipeter" version="2.0.16.1004">
@@ -59,7 +64,7 @@ v0.1.0
 INFO: For latest changes see Changelog within Tools of add-on.</news>
         </extension>
     </addon>
-    <addon id="plugin.video.fenlight.kodienglish" name="Fen Light English" provider-name="Tikipeter" version="2.0.16.1013">
+    <addon id="plugin.video.fenlight.kodienglish" name="Fen Light English" provider-name="Tikipeter" version="2.0.16.1014">
         <requires>
             <import addon="xbmc.python" version="3.0.0" />
             <import addon="script.module.requests" version="2.19.1" />
@@ -80,7 +85,10 @@ INFO: For latest changes see Changelog within Tools of add-on.</news>
                 <icon>resources/media/fenlight_icon.png</icon>
                 <fanart>resources/media/fenlight_fanart2.jpg</fanart>
             </assets>
-            <news>[v2.0.16.1013]:
+            <news>[v2.0.16.1014]:
+  * Enable TorBox Search Cloud Storage by default and migrate existing Fen Light English installs to turn it on without changing TorBox authorization.
+
+[v2.0.16.1013]:
   * Add TorBox Web Download cloud support so web-hosted uploads can be scraped, browsed, resolved, and deleted alongside TorBox torrent and usenet cloud items.
   * Prefer TorBox file short names during cloud scraping so webhoster folder prefixes do not block title matching.
 
@@ -90,7 +98,7 @@ INFO: For latest changes see Changelog within Tools of add-on.</news>
 INFO: For latest changes see Changelog within Tools of add-on.</news>
         </extension>
     </addon>
-    <addon id="plugin.video.fenlight.patched.kodienglish" name="Fen Light Patched" provider-name="Tikipeter" version="2.0.70.1010">
+    <addon id="plugin.video.fenlight.patched.kodienglish" name="Fen Light Patched" provider-name="Tikipeter" version="2.0.71.1011">
         <requires>
             <import addon="xbmc.python" version="3.0.0" />
             <import addon="script.module.requests" version="2.19.1" />
@@ -111,7 +119,11 @@ INFO: For latest changes see Changelog within Tools of add-on.</news>
                 <icon>resources/media/fenlight_icon.png</icon>
                 <fanart>resources/media/fenlight_fanart2.jpg</fanart>
             </assets>
-            <news>[v2.0.70.1010]:
+            <news>[v2.0.71.1011]:
+  * Add TorBox Usenet Search controls for movies and TV shows, plus automatic no-results retry support for cached TorBox Usenet Search.
+  * Keep the English build free of the normal-repo a4k subtitle-service changes.
+
+[v2.0.70.1010]:
   * Seed first-run Fen Light Patched English settings from the live profile for non-secret preferences, including CocoScrapers, list/result/playback preferences, size filters, pagination, and update behavior.
   * Keep credentials, tokens, account values, local machine paths, and KodiEnglish repository targets out of the seed.
 

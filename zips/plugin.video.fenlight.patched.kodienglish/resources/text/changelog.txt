@@ -1,3 +1,7 @@
+[COLOR dodgerblue][B]Session Note (2026-05-15, English TorBox Usenet Search)[/B][/COLOR]
+- Add TorBox Usenet Search settings for movies and TV shows to the English patched build.
+- Retry with cached TorBox Usenet Search when a scrape finds no playable results, without adding the normal-repo a4k subtitle-service changes to English.
+
 [COLOR dodgerblue][B]Session Note (2026-05-13, English live default settings seed)[/B][/COLOR]
 - Seed first-run Fen Light Patched English settings from the live profile for non-secret preferences.
 - Default new installs to CocoScrapers, live list/result/playback preferences, size filters, pagination, and update behavior while keeping credentials, tokens, account values, local machine paths, and KodiEnglish repository targets out of the package.
