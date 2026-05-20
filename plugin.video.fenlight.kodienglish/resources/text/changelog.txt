@@ -1,5 +1,9 @@
 [COLOR darkgoldenrod]GOD BLESS HIM AND KEEP HIM SAFE.[/COLOR]
 
+[COLOR dodgerblue][B]Version 2.0.16.1016[/B][/COLOR]
+- Mix TorBox Usenet Search rows into the normal source list instead of pinning them above other TorBox/cloud results.
+- Display TorBox Usenet Search rows as TB USENET with NZB info labels.
+
 [COLOR dodgerblue][B]Version 2.0.16.1015[/B][/COLOR]
 - Add TorBox cached Usenet Search support to Fen Light English.
 - Add TorBox account toggles for cached Usenet Search during movie and episode source scrapes.

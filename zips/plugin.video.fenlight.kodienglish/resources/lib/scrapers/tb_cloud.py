@@ -49,9 +49,11 @@ class source:
 						display_name = clean_file_name(file_name).replace('html', ' ').replace('+', ' ').replace('-', ' ')
 						direct_debrid_link = item.get('direct_debrid_link', False)
 						source_label = ''
+						source_site = self.scrape_provider
 						if direct_debrid_link == 'usenet_search':
 							is_pack = item.get('package') and not item.get('package') == 'episode'
-							source_label = 'TB USENET SEARCH PACK' if is_pack else 'TB USENET SEARCH'
+							source_label = 'NZB PACK' if is_pack else 'NZB'
+							source_site = 'torbox'
 							file_dl = item['nzb']
 							source_id = file_name
 						else:
@@ -59,7 +61,6 @@ class source:
 							source_id = file_dl
 							if direct_debrid_link == 'usenet': source_label = 'TB USENET CLOUD'
 							elif direct_debrid_link == 'webdl': source_label = 'TB WEBDL CLOUD'
-						if source_label: display_name = '[%s] %s' % (source_label, display_name)
 						try: size_bytes = int(item.get('size') or 0)
 						except: size_bytes = 0
 						size = round(float(size_bytes)/1073741824, 2)
@@ -70,7 +71,7 @@ class source:
 						video_quality, details = get_file_info(name_info=release_info_format(file_name))
 						if source_label: details = ' | '.join([i for i in (details, source_label) if i])
 						source_item = {'name': file_name, 'display_name': display_name, 'quality': video_quality, 'size': size, 'size_label': size_label,
-									'extraInfo': details, 'url_dl': file_dl, 'id': source_id, 'downloads': False, 'direct': True, 'source': self.scrape_provider,
+									'extraInfo': details, 'url_dl': file_dl, 'id': source_id, 'downloads': False, 'direct': True, 'source': source_site,
 									'scrape_provider': self.scrape_provider, 'direct_debrid_link': direct_debrid_link, 'hash': item.get('hash')}
 						yield source_item
 					except: pass
