@@ -64,7 +64,7 @@ v0.1.0
 INFO: For latest changes see Changelog within Tools of add-on.</news>
         </extension>
     </addon>
-    <addon id="plugin.video.fenlight.kodienglish" name="Fen Light English" provider-name="Tikipeter" version="2.0.16.1016">
+    <addon id="plugin.video.fenlight.kodienglish" name="Fen Light English" provider-name="Tikipeter" version="2.0.16.1017">
         <requires>
             <import addon="xbmc.python" version="3.0.0" />
             <import addon="script.module.requests" version="2.19.1" />
@@ -85,7 +85,11 @@ INFO: For latest changes see Changelog within Tools of add-on.</news>
                 <icon>resources/media/fenlight_icon.png</icon>
                 <fanart>resources/media/fenlight_fanart2.jpg</fanart>
             </assets>
-            <news>[v2.0.16.1016]:
+            <news>[v2.0.16.1017]:
+  * Add optional AIOStreams manifest support for TorBox Usenet Search cached streams, with direct TorBox Search API fallback when unset.
+  * Trust ID-matched AIOStreams TorBox Usenet Search rows so official prefix text in release names does not hide valid cached results.
+
+[v2.0.16.1016]:
   * Mix TorBox Usenet Search rows into the normal result sort and display them as TB USENET/NZB.
 
 [v2.0.16.1015]:

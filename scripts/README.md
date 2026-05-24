@@ -3,6 +3,12 @@
 This directory contains the helper scripts that build and publish the
 `KodiEnglish` Kodi repository.
 
+## Guardrail
+
+Do not use these scripts to publish subtitle selector or a4k subtitle
+integration changes into KodiEnglish. See `../HANDOVER.md` before publishing Fen
+Light or Fen Light Patched updates.
+
 ## `build_repo.py`
 
 Use this when the repository addon or the repo-wide metadata needs a full

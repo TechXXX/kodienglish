@@ -7,6 +7,20 @@ This repo keeps one untouched vanilla Fen Light copy under the original
 `plugin.video.fenlight` ID as a known-good baseline, and uses the
 `.kodienglish` suffix for the English working copy and the other forked add-ons.
 
+## Maintenance Guardrail
+
+Do not port, cherry-pick, test, or publish subtitle selector work into this
+KodiEnglish repository. That includes changes from `TechXXX/kodirepo`,
+`TechXXX/DutchTechTestRepo`, or any other branch/repo touching bundled selector
+logic, a4k subtitle selector integration, subtitle-backed autoplay retry
+ranking, `resources/lib/fenlightsubs/`, or matching mirrored files under
+`zips/`.
+
+If a requested change touches subtitle selector code or a4k subtitle integration,
+stop and ask before editing. KodiEnglish should keep only explicitly requested
+English repo fixes such as Fen/TorBox/famYT work, dependency recovery, or skin
+repo maintenance.
+
 ## Addons In This Repo
 
 Current source-tree versions:

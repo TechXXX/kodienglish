@@ -1,5 +1,9 @@
 [COLOR darkgoldenrod]GOD BLESS HIM AND KEEP HIM SAFE.[/COLOR]
 
+[COLOR dodgerblue][B]Version 2.0.16.1017[/B][/COLOR]
+- Add optional AIOStreams manifest support for TorBox Usenet Search cached streams, with direct TorBox Search API fallback when unset.
+- Trust ID-matched AIOStreams TorBox Usenet Search rows so official prefix text in release names does not hide valid cached results.
+
 [COLOR dodgerblue][B]Version 2.0.16.1016[/B][/COLOR]
 - Mix TorBox Usenet Search rows into the normal source list instead of pinning them above other TorBox/cloud results.
 - Display TorBox Usenet Search rows as TB USENET with NZB info labels.
