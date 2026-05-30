@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addons>
-    <addon id="plugin.program.famyt" name="famYT" version="0.4.4" provider-name="DutchTech">
+    <addon id="plugin.program.famyt" name="famYT" version="0.5.0" provider-name="DutchTech">
         <requires>
             <import addon="xbmc.python" version="3.0.0" />
         </requires>
@@ -17,7 +17,10 @@
             <platform>all</platform>
             <license>MIT</license>
             <source>https://github.com/TechXXX/kodirepo</source>
-            <news>v0.4.4
+            <news>v0.5.0
+- Add Kodi network advanced settings installer
+
+v0.4.4
 - Rename TorBox setup menu item
 
 v0.4.3
@@ -347,6 +350,26 @@ INFO: For latest changes see Changelog within Tools of add-on.</news>
             <summary lang="en">White Weather Icons</summary>
             <description lang="en">White Weather Icons</description>
             <platform>all</platform>
+        </extension>
+    </addon>
+    <addon id="script.fenlight.quickrescrape.kodienglish" name="Fen Light Quick Rescrape English" version="0.0.4.1001" provider-name="DutchTech">
+        <requires>
+            <import addon="xbmc.python" version="3.0.0" />
+        </requires>
+        <extension point="xbmc.python.script" library="default.py">
+            <provides>executable</provides>
+        </extension>
+        <extension point="xbmc.addon.metadata">
+            <summary lang="en">Install Shield shortcuts for Fen Light English rescrape/source select</summary>
+            <description lang="en">Helper that installs a Kodi keymap and runs Fen Light English rescrape/source select for the focused AH2 movie or episode item.</description>
+            <assets>
+                <icon>resources/icon.png</icon>
+                <fanart>resources/fanart.jpg</fanart>
+            </assets>
+            <platform>android</platform>
+            <license>MIT</license>
+            <news>v0.0.4.1001
+- Add the KodiEnglish Quick Rescrape helper with package artwork.</news>
         </extension>
     </addon>
     <addon id="script.kodiskin.widget.importer" name="KodiSkin Widget Importer" version="0.1.5" provider-name="Kalter">
