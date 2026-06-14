@@ -375,7 +375,7 @@ INFO: For latest changes see Changelog within Tools of add-on.</news>
 - Add the KodiEnglish Quick Rescrape helper with package artwork.</news>
         </extension>
     </addon>
-    <addon id="script.kodiskin.widget.importer" name="KodiSkin Widget Importer" version="0.1.14" provider-name="Kalter">
+    <addon id="script.kodiskin.widget.importer" name="KodiSkin Widget Importer" version="0.1.15" provider-name="Kalter">
         <requires>
             <import addon="xbmc.python" version="3.0.0" />
         </requires>
