@@ -1,1 +1,1 @@
-# Kodi strings placeholder for famYT.
+# Kodi strings placeholder for Kodi Setup Kit.
