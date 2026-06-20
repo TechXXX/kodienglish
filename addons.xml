@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addons>
-    <addon id="plugin.program.famyt" name="Kodi Setup Kit" version="0.9.0" provider-name="DutchTech">
+    <addon id="plugin.program.famyt" name="Kodi Setup Kit" version="0.9.1" provider-name="DutchTech">
         <requires>
             <import addon="xbmc.python" version="3.0.0" />
         </requires>
@@ -17,7 +17,10 @@
             <platform>all</platform>
             <license>MIT</license>
             <source>https://github.com/TechXXX/kodirepo</source>
-            <news>v0.9.0
+            <news>v0.9.1
+- Add rename and delete tools for settings presets
+
+v0.9.0
 - Add named GUI and skin settings presets
 - Add save-current-profile preset tools
 
