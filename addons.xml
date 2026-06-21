@@ -146,7 +146,7 @@ INFO: For latest changes see Changelog within Tools of add-on.</news>
 INFO: For latest changes see Changelog within Tools of add-on.</news>
         </extension>
     </addon>
-    <addon id="plugin.video.fenlight.patched.kodienglish" name="Fen Light Patched" provider-name="Tikipeter" version="2.0.71.1013">
+    <addon id="plugin.video.fenlight.patched.kodienglish" name="Fen Light Patched" provider-name="Tikipeter" version="2.0.71.1014">
         <requires>
             <import addon="xbmc.python" version="3.0.0" />
             <import addon="script.module.requests" version="2.19.1" />
@@ -167,7 +167,10 @@ INFO: For latest changes see Changelog within Tools of add-on.</news>
                 <icon>resources/media/fenlight_icon.png</icon>
                 <fanart>resources/media/fenlight_fanart2.jpg</fanart>
             </assets>
-            <news>[v2.0.71.1013]:
+            <news>[v2.0.71.1014]:
+  * Enable TheIntroDB support, intro skip, recap skip, and next-episode timing by default.
+
+[v2.0.71.1013]:
   * Ship the default TheIntroDB API key with Kodi English repo installs.
 
 [v2.0.71.1012]:
