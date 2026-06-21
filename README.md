@@ -7,6 +7,25 @@ This repo keeps one untouched vanilla Fen Light copy under the original
 `plugin.video.fenlight` ID as a known-good baseline, and uses the
 `.kodienglish` suffix for the English working copy and the other forked add-ons.
 
+## Brother Target Addon
+
+The user's brother uses:
+
+`plugin.video.fenlight.kodienglish`
+
+That addon is the English-speaker Fen Light working copy. Keep it simpler than
+the patched selector stack:
+
+- do not port subtitle-selector architecture into it
+- do not add `resources/lib/fenlightsubs/` selector behavior
+- do not wire it into patched a4k subtitle-selector integration
+- keep English-focused fixes and repo maintenance flowing there when asked
+- IntroDB support is wanted for this addon; it is the explicit exception to the
+  "no selector stack" simplification
+
+Do not confuse it with `plugin.video.fenlight.patched.kodienglish`, which is a
+separate patched package.
+
 ## Maintenance Guardrail
 
 Do not port, cherry-pick, test, or publish subtitle selector work into this
@@ -27,7 +46,7 @@ Current source-tree versions:
 
 - `plugin.video.fenlight` `2.0.16.1004`
   Vanilla Fen Light package kept as the known-good baseline with repo-wide bundled key updates plus TorBox Web Download cloud support.
-- `plugin.video.fenlight.kodienglish` `2.0.16.1014`
+- `plugin.video.fenlight.kodienglish` `2.0.16.1017`
   Working copy of vanilla Fen Light for the English-focused fork. It now also
   carries the newer Trakt/auth hardening, stable Trakt list-id routing, QR
   auth flows for Trakt, Real-Debrid, Premiumize, and AllDebrid, plus the
@@ -41,7 +60,9 @@ Current source-tree versions:
   cloud scraping, browsing, resolving, and deleting for web-hosted uploads. It
   now enables TorBox Search Cloud Storage by default and migrates existing Fen
   Light English installs to turn it on without touching TorBox authorization.
-- `plugin.video.fenlight.patched.kodienglish` `2.0.71.1011`
+  It should stay free of the subtitle-selector/a4k patched stack, while IntroDB
+  support is wanted for this addon.
+- `plugin.video.fenlight.patched.kodienglish` `2.0.71.1014`
   Patched Fen Light package carrying the recent Trakt/auth pass, stable Trakt
   list-id routing, bundled Trakt default-key refresh, and QR-based auth flows
   for Trakt, Real-Debrid, Premiumize, and AllDebrid. It now also carries the
@@ -58,7 +79,7 @@ Current source-tree versions:
   adds TorBox Usenet Search controls for movies and TV shows, plus automatic
   no-results retry with cached TorBox Usenet Search, while deliberately leaving
   the normal-repo a4k subtitle-service changes out of the English build.
-- `plugin.program.famyt` `0.4.2`
+- `plugin.program.famyt` `0.9.4`
   Private family setup helper copied from the production release line. It
   contains no credentials; operational notes are kept outside the public
   repository.
@@ -66,19 +87,19 @@ Current source-tree versions:
   Shield/Android shortcut helper for the English repo. It installs a
   KodiEnglish-specific keymap and opens Fen Light English source-select/rescrape
   for the focused AH2 movie or episode item.
-- `plugin.video.themoviedb.helper.patched.kodienglish` `6.15.2.10.1006`
+- `plugin.video.themoviedb.helper.patched.kodienglish` `6.15.2.12.1007`
   Patched TMDb Helper package used by the patched skin flow. It now includes
   the bundled Fen / Fen Patched player definitions, recommendations-window
   hardening and logging, authenticated Trakt username state, and the newer
   OMDb default-key and ratings-backfill improvements. It now also ships the
   custom Trakt QR auth dialog, styled QR generation helpers, clipboard support,
   and the matching dialog skin assets for the English repo build.
-- `skin.arctic.horizon.2.patched.kodienglish` `0.8.30.11.1004`
+- `skin.arctic.horizon.2.patched.kodienglish` `0.8.30.13.1006`
   Patched Arctic Horizon 2 package targeting the patched TMDb Helper addon id.
   It now supports the dedicated next-episode OSD action for Fen playback and
   hides that action when Fen confirms there is no next aired episode, while
   routing the button to Fen Light English when English playback is active.
-- `skin.dutchtech.fuse.3.kodienglish` `3.2.9.1004`
+- `skin.dutchtech.fuse.3.kodienglish` `3.2.9.1007`
   Kodi English fork of the latest Arctic Fuse 3 `v3.2.9` release with a
   separate addon id, Kodi English name/provider metadata, custom icon/fanart,
   and KodiEnglish patched TMDb Helper routing. Its non-core dependencies are
