@@ -32,6 +32,21 @@ def gemini_api_key():
 	keys = gemini_api_keys()
 	return keys[0] if keys else 'empty_setting'
 
+def introdb_enabled():
+	return get_setting('fenlight.introdb.enabled', 'false') == 'true'
+
+def introdb_skip_intro():
+	return get_setting('fenlight.introdb.skip_intro', 'false') == 'true'
+
+def introdb_skip_recap():
+	return get_setting('fenlight.introdb.skip_recap', 'false') == 'true'
+
+def introdb_next_episode_timing():
+	return get_setting('fenlight.introdb.next_episode_timing', 'false') == 'true'
+
+def introdb_api_key():
+	return get_setting('fenlight.introdb.api_key', 'empty_setting')
+
 def trakt_client():
 	return get_setting('fenlight.trakt.client', '')
 

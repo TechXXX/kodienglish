@@ -46,7 +46,7 @@ Current source-tree versions:
 
 - `plugin.video.fenlight` `2.0.16.1004`
   Vanilla Fen Light package kept as the known-good baseline with repo-wide bundled key updates plus TorBox Web Download cloud support.
-- `plugin.video.fenlight.kodienglish` `2.0.16.1017`
+- `plugin.video.fenlight.kodienglish` `2.0.16.1018`
   Working copy of vanilla Fen Light for the English-focused fork. It now also
   carries the newer Trakt/auth hardening, stable Trakt list-id routing, QR
   auth flows for Trakt, Real-Debrid, Premiumize, and AllDebrid, plus the
@@ -60,8 +60,9 @@ Current source-tree versions:
   cloud scraping, browsing, resolving, and deleting for web-hosted uploads. It
   now enables TorBox Search Cloud Storage by default and migrates existing Fen
   Light English installs to turn it on without touching TorBox authorization.
-  It should stay free of the subtitle-selector/a4k patched stack, while IntroDB
-  support is wanted for this addon.
+  It should stay free of the subtitle-selector/a4k patched stack. It now includes
+  TheIntroDB support with the shipped default API key, English skip intro/recap
+  buttons, and next-episode timing support for episode playback.
 - `plugin.video.fenlight.patched.kodienglish` `2.0.71.1014`
   Patched Fen Light package carrying the recent Trakt/auth pass, stable Trakt
   list-id routing, bundled Trakt default-key refresh, and QR-based auth flows
