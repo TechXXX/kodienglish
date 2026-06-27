@@ -32,3 +32,14 @@ maintenance, for example:
 Before any publish, verify `git diff --name-only` does not include new selector
 or a4k subtitle integration paths unless the user explicitly overrode this
 handover in the same conversation.
+
+## Kodi Setup Kit / famYT
+
+`plugin.program.famyt` is now user-facing as Kodi Setup Kit. For installer
+changes, read `KODI_SETUP_KIT_HANDOVER.md` in this repo and the full canonical
+runbook at `/Users/kalter/Documents/CODEX/kodirepo/KODI_SETUP_KIT_HANDOVER.md`.
+
+Keep the Setup Kit behavior aligned with the main repo unless the user asks
+for an English-specific difference. Do not store credentials here; the matching
+Vercel bridge supplies private values after the shared family password is
+provided.

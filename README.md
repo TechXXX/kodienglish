@@ -80,10 +80,12 @@ Current source-tree versions:
   adds TorBox Usenet Search controls for movies and TV shows, plus automatic
   no-results retry with cached TorBox Usenet Search, while deliberately leaving
   the normal-repo a4k subtitle-service changes out of the English build.
-- `plugin.program.famyt` `0.9.4`
-  Private family setup helper copied from the production release line. It
-  contains no credentials; operational notes are kept outside the public
-  repository.
+- `plugin.program.famyt` `0.9.15`
+  Kodi Setup Kit, the private family bootstrap helper copied from the
+  production release line. It contains no credentials; the matching Vercel
+  bridge supplies YouTube, TorBox, a4kSubtitles, and Kodi webserver secrets
+  after the shared password is provided. Read `KODI_SETUP_KIT_HANDOVER.md`
+  before changing its install flow.
 - `script.fenlight.quickrescrape.kodienglish` `0.0.4.1001`
   Shield/Android shortcut helper for the English repo. It installs a
   KodiEnglish-specific keymap and opens Fen Light English source-select/rescrape
@@ -119,8 +121,8 @@ Current source-tree versions:
 - `plugin.video.fenlight.patched.kodienglish/`
   Patched Fen Light source tree.
 - `plugin.program.famyt/`
-  Private family setup helper source. Credentials are not stored in this
-  repository.
+  Kodi Setup Kit source. Credentials are not stored in this repository; the
+  matching Vercel bridge is documented in `KODI_SETUP_KIT_HANDOVER.md`.
 - `script.fenlight.quickrescrape.kodienglish/`
   English Quick Rescrape helper source and package artwork.
 - `plugin.video.themoviedb.helper.patched.kodienglish/`
