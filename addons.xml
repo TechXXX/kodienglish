@@ -111,7 +111,7 @@ v0.1.0
 INFO: For latest changes see Changelog within Tools of add-on.</news>
         </extension>
     </addon>
-    <addon id="plugin.video.fenlight.kodienglish" name="Fen Light English" provider-name="Tikipeter" version="2.0.16.1019">
+    <addon id="plugin.video.fenlight.kodienglish" name="Fen Light English" provider-name="Tikipeter" version="2.0.16.1020">
         <requires>
             <import addon="xbmc.python" version="3.0.0" />
             <import addon="script.module.requests" version="2.19.1" />
@@ -132,7 +132,10 @@ INFO: For latest changes see Changelog within Tools of add-on.</news>
                 <icon>resources/media/fenlight_icon.png</icon>
                 <fanart>resources/media/fenlight_fanart2.jpg</fanart>
             </assets>
-            <news>[v2.0.16.1019]:
+            <news>[v2.0.16.1020]:
+  * Add local decade and provider artwork for navigator menus, with poster art support where available.
+
+[v2.0.16.1019]:
   * Try IntroDB's app segments endpoint before the TheIntroDB.org fallback and parse single segment objects from either endpoint.
 
 [v2.0.16.1018]:
@@ -161,7 +164,7 @@ INFO: For latest changes see Changelog within Tools of add-on.</news>
 INFO: For latest changes see Changelog within Tools of add-on.</news>
         </extension>
     </addon>
-    <addon id="plugin.video.fenlight.patched.kodienglish" name="Fen Light Patched" provider-name="Tikipeter" version="2.0.71.1015">
+    <addon id="plugin.video.fenlight.patched.kodienglish" name="Fen Light Patched" provider-name="Tikipeter" version="2.0.71.1016">
         <requires>
             <import addon="xbmc.python" version="3.0.0" />
             <import addon="script.module.requests" version="2.19.1" />
@@ -182,7 +185,10 @@ INFO: For latest changes see Changelog within Tools of add-on.</news>
                 <icon>resources/media/fenlight_icon.png</icon>
                 <fanart>resources/media/fenlight_fanart2.jpg</fanart>
             </assets>
-            <news>[v2.0.71.1015]:
+            <news>[v2.0.71.1016]:
+  * Add local decade and provider artwork for navigator menus, with poster art support where available.
+
+[v2.0.71.1015]:
   * Try IntroDB's app segments endpoint before the TheIntroDB.org fallback and parse single segment objects from either endpoint.
 
 [v2.0.71.1014]:
