@@ -1,3 +1,6 @@
+[COLOR dodgerblue][B]Version 2.0.71.1018[/B][/COLOR]
+- Add restore-default actions for the OMDb and TheIntroDB API keys in Accounts settings.
+
 [COLOR dodgerblue][B]Session Note (2026-05-15, English TorBox Usenet Search)[/B][/COLOR]
 - Add TorBox Usenet Search settings for movies and TV shows to the English patched build.
 - Retry with cached TorBox Usenet Search when a scrape finds no playable results, without adding the normal-repo a4k subtitle-service changes to English.

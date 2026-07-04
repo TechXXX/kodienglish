@@ -1236,6 +1236,14 @@
                           <property name="setting_description">Enter here your OMDb API key. This will allow you to utilize extra ratings information in Fen Light Patcheds Extras window</property>
                           <onclick>RunPlugin(plugin://plugin.video.fenlight.patched.kodienglish/?mode=settings_manager.set_string&amp;setting_id=omdb_api)</onclick>
                       </item>
+                      <item>
+                          <visible>Container(2000).HasFocus(50)</visible>
+                          <property name="setting_label">    - Restore Default API Key</property>
+                          <property name="setting_type">action</property>
+                          <property name="setting_value">...</property>
+                          <property name="setting_description">Restore default OMDb API key</property>
+                          <onclick>RunPlugin(plugin://plugin.video.fenlight.patched.kodienglish/?mode=settings_manager.restore_setting_default&amp;setting_id=omdb_api)</onclick>
+                      </item>
         <!-- TheIntroDB -->
                       <item>
                           <visible>Container(2000).HasFocus(50)</visible>
@@ -1250,6 +1258,14 @@
                           <property name="setting_value">$INFO[Window(10000).Property(fenlight.introdb.api_key)]</property>
                           <property name="setting_description">Optional TheIntroDB API key used for intro, recap, and end-credit timing lookups</property>
                           <onclick>RunPlugin(plugin://plugin.video.fenlight.patched.kodienglish/?mode=settings_manager.set_string&amp;setting_id=introdb.api_key)</onclick>
+                      </item>
+                      <item>
+                          <visible>Container(2000).HasFocus(50)</visible>
+                          <property name="setting_label">    - Restore Default API Key</property>
+                          <property name="setting_type">action</property>
+                          <property name="setting_value">...</property>
+                          <property name="setting_description">Restore default TheIntroDB API key</property>
+                          <onclick>RunPlugin(plugin://plugin.video.fenlight.patched.kodienglish/?mode=settings_manager.restore_setting_default&amp;setting_id=introdb.api_key)</onclick>
                       </item>
         <!-- External Scrapers -->
                       <item>

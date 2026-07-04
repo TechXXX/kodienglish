@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addons>
-    <addon id="plugin.program.famyt" name="Kodi Setup Kit" version="0.9.16" provider-name="DutchTech">
+    <addon id="plugin.program.famyt" name="Kodi Setup Kit" version="0.9.17" provider-name="DutchTech">
         <requires>
             <import addon="xbmc.python" version="3.0.0" />
             <import addon="script.kodiskin.widget.importer" version="0.1.19" />
@@ -18,7 +18,10 @@
             <platform>all</platform>
             <license>MIT</license>
             <source>https://github.com/TechXXX/kodirepo</source>
-            <news>v0.9.16
+            <news>v0.9.17
+- Install Fen Light Gemini AI Search keys from the private Vercel bridge
+
+v0.9.16
 - Fix target add-on settings writes so Fen Light, a4kSubtitles, Cocoscrapers, and skin presets save to their real profile folders
 
 v0.9.15
@@ -139,7 +142,7 @@ v0.1.0
 INFO: For latest changes see Changelog within Tools of add-on.</news>
         </extension>
     </addon>
-    <addon id="plugin.video.fenlight.kodienglish" name="Fen Light English" provider-name="Tikipeter" version="2.0.16.1020">
+    <addon id="plugin.video.fenlight.kodienglish" name="Fen Light English" provider-name="Tikipeter" version="2.0.16.1021">
         <requires>
             <import addon="xbmc.python" version="3.0.0" />
             <import addon="script.module.requests" version="2.19.1" />
@@ -160,7 +163,10 @@ INFO: For latest changes see Changelog within Tools of add-on.</news>
                 <icon>resources/media/fenlight_icon.png</icon>
                 <fanart>resources/media/fenlight_fanart2.jpg</fanart>
             </assets>
-            <news>[v2.0.16.1020]:
+            <news>[v2.0.16.1021]:
+  * Add restore-default actions for the OMDb and TheIntroDB API keys in Accounts settings.
+
+[v2.0.16.1020]:
   * Add local decade and provider artwork for navigator menus, with poster art support where available.
 
 [v2.0.16.1019]:
@@ -192,7 +198,7 @@ INFO: For latest changes see Changelog within Tools of add-on.</news>
 INFO: For latest changes see Changelog within Tools of add-on.</news>
         </extension>
     </addon>
-    <addon id="plugin.video.fenlight.patched.kodienglish" name="Fen Light Patched" provider-name="Tikipeter" version="2.0.71.1017">
+    <addon id="plugin.video.fenlight.patched.kodienglish" name="Fen Light Patched" provider-name="Tikipeter" version="2.0.71.1018">
         <requires>
             <import addon="xbmc.python" version="3.0.0" />
             <import addon="script.module.requests" version="2.19.1" />
@@ -213,7 +219,10 @@ INFO: For latest changes see Changelog within Tools of add-on.</news>
                 <icon>resources/media/fenlight_icon.png</icon>
                 <fanart>resources/media/fenlight_fanart2.jpg</fanart>
             </assets>
-            <news>[v2.0.71.1017]:
+            <news>[v2.0.71.1018]:
+  * Add restore-default actions for the OMDb and TheIntroDB API keys in Accounts settings.
+
+[v2.0.71.1017]:
   * Tidy debrid cloud folder rows by removing the redundant FOLDER label from folder names.
 
 [v2.0.71.1016]:

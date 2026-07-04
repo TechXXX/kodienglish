@@ -1,5 +1,8 @@
 [COLOR darkgoldenrod]GOD BLESS HIM AND KEEP HIM SAFE.[/COLOR]
 
+[COLOR dodgerblue][B]Version 2.0.16.1021[/B][/COLOR]
+- Add restore-default actions for the OMDb and TheIntroDB API keys in Accounts settings.
+
 [COLOR dodgerblue][B]Version 2.0.16.1017[/B][/COLOR]
 - Add optional AIOStreams manifest support for TorBox Usenet Search cached streams, with direct TorBox Search API fallback when unset.
 - Trust ID-matched AIOStreams TorBox Usenet Search rows so official prefix text in release names does not hide valid cached results.
