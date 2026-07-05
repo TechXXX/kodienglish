@@ -46,7 +46,7 @@ Current source-tree versions:
 
 - `plugin.video.fenlight` `2.0.16.1004`
   Vanilla Fen Light package kept as the known-good baseline with repo-wide bundled key updates plus TorBox Web Download cloud support.
-- `plugin.video.fenlight.kodienglish` `2.0.16.1018`
+- `plugin.video.fenlight.kodienglish` `2.0.16.1022`
   Working copy of vanilla Fen Light for the English-focused fork. It now also
   carries the newer Trakt/auth hardening, stable Trakt list-id routing, QR
   auth flows for Trakt, Real-Debrid, Premiumize, and AllDebrid, plus the
@@ -62,8 +62,11 @@ Current source-tree versions:
   Light English installs to turn it on without touching TorBox authorization.
   It should stay free of the subtitle-selector/a4k patched stack. It now includes
   TheIntroDB support with the shipped default API key, English skip intro/recap
-  buttons, and next-episode timing support for episode playback.
-- `plugin.video.fenlight.patched.kodienglish` `2.0.71.1014`
+  buttons, and next-episode timing support for episode playback. It now also
+  tracks Trakt's 2026 watched endpoint change by requesting TV watched data
+  with `extended=progress`, guarding missing `seasons` payloads, and running a
+  one-time empty episode-watched cache repair after update.
+- `plugin.video.fenlight.patched.kodienglish` `2.0.71.1019`
   Patched Fen Light package carrying the recent Trakt/auth pass, stable Trakt
   list-id routing, bundled Trakt default-key refresh, and QR-based auth flows
   for Trakt, Real-Debrid, Premiumize, and AllDebrid. It now also carries the
@@ -79,7 +82,10 @@ Current source-tree versions:
   KodiEnglish repository targets and local/private values clean. It now also
   adds TorBox Usenet Search controls for movies and TV shows, plus automatic
   no-results retry with cached TorBox Usenet Search, while deliberately leaving
-  the normal-repo a4k subtitle-service changes out of the English build.
+  the normal-repo a4k subtitle-service changes out of the English build. It now
+  also carries the Trakt watched TV/episode cache repair from the main repo:
+  `sync/watched/shows?extended=progress`, missing-`seasons` guarding, and the
+  one-time `trakt_tv_watched_progress_repair_20260704` cache marker.
 - `plugin.program.famyt` `0.9.15`
   Kodi Setup Kit, the private family bootstrap helper copied from the
   production release line. It contains no credentials; the matching Vercel
