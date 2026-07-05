@@ -14,6 +14,7 @@ from build_repo import (
     import_root_addon_zips,
     mirror_addon_source,
     package_addon,
+    prune_stale_package_zips,
     reset_addon_output_dir,
     write_md5,
 )
@@ -92,6 +93,7 @@ def main() -> None:
 
     source_dirs = get_source_dirs(root_dir)
     update_addon_outputs(root_dir, imported_ids, source_dirs)
+    prune_stale_package_zips(root_dir, source_dirs)
     build_addons_xml(source_dirs, root_dir / "addons.xml")
     write_md5(root_dir / "addons.xml")
 

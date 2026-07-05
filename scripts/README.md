@@ -19,6 +19,7 @@ What it does:
 - ensures the repository addon source exists
 - bumps the repository addon version
 - rebuilds every addon package under `zips/`
+- removes stale package zips that are no longer advertised in `addons.xml`
 - regenerates `addons.xml` and `addons.xml.md5`
 - updates the repository install zip in the repo root
 - commits and pushes to `main`
@@ -37,6 +38,7 @@ What it does:
 
 - imports the root zip into the matching source directory
 - rebuilds the matching `zips/<addon-id>/` output
+- removes stale package zips that are no longer advertised in `addons.xml`
 - regenerates `addons.xml` and `addons.xml.md5`
 - commits and pushes to `main`
 
@@ -47,3 +49,7 @@ Never hand-edit:
 - `zips/`
 - `addons.xml`
 - `addons.xml.md5`
+
+Keep only the package zip for each addon's currently advertised version. Older
+unreferenced package zips make the GitHub Pages artifact too large and can
+cause Pages deployment failures even when the build succeeds.

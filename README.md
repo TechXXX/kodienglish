@@ -160,6 +160,9 @@ Kodi should consume the GitHub Pages path:
 ## Generated Output Rules
 
 - Treat `zips/` as generated output.
+- Keep only the package zip for each addon's currently advertised version;
+  unreferenced old zips can push the GitHub Pages artifact over the deploy
+  limit.
 - If an addon `addon.xml` changes, regenerate `addons.xml`.
 - Do not edit `addons.xml.md5` by hand.
 - Do not ship `__pycache__` or `.pyc` files in packages.

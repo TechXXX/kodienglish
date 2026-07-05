@@ -251,10 +251,26 @@ def reset_addon_output_dir(output_dir: Path) -> None:
         remove_path(path)
 
 
+def remove_stale_package_zips(addon_id: str, version: str, output_dir: Path) -> None:
+    keep_name = f"{addon_id}-{version}.zip"
+    for zip_path in output_dir.glob(f"{addon_id}-*.zip"):
+        if zip_path.name != keep_name:
+            remove_path(zip_path)
+
+
+def prune_stale_package_zips(root_dir: Path, source_dirs: list[Path]) -> None:
+    for addon_dir in source_dirs:
+        addon_id, version = get_addon_info(addon_dir / "addon.xml")
+        output_dir = root_dir / "zips" / addon_id
+        if output_dir.exists():
+            remove_stale_package_zips(addon_id, version, output_dir)
+
+
 def package_addon(addon_dir: Path, output_dir: Path) -> Path:
     addon_id, version = get_addon_info(addon_dir / "addon.xml")
     output_dir.mkdir(parents=True, exist_ok=True)
     archive_path = output_dir / f"{addon_id}-{version}.zip"
+    remove_stale_package_zips(addon_id, version, output_dir)
     with zipfile.ZipFile(archive_path, "w", compression=zipfile.ZIP_DEFLATED) as zf:
         for file_path in sorted(addon_dir.rglob("*")):
             if file_path.is_dir() or should_skip_file(addon_id, file_path):
@@ -360,6 +376,7 @@ def main() -> None:
         reset_addon_output_dir(output_dir)
         mirror_addon_source(addon_dir, output_dir)
         package_paths[addon_id] = package_addon(addon_dir, output_dir)
+    prune_stale_package_zips(root_dir, source_dirs)
 
     build_addons_xml(source_dirs, root_dir / "addons.xml")
     write_md5(root_dir / "addons.xml")
