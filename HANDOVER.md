@@ -33,6 +33,13 @@ Before any publish, verify `git diff --name-only` does not include new selector
 or a4k subtitle integration paths unless the user explicitly overrode this
 handover in the same conversation.
 
+## Release Version Rule
+
+Every Kodi-visible addon update must advertise a version strictly higher than
+the version already published in `addons.xml`. Kodi decides whether an update
+exists from `addon.xml` / `addons.xml`, and clients may cache same-version zips.
+Do not replace an already-published same-version package and call it an update.
+
 ## Kodi Setup Kit / famYT
 
 `plugin.program.famyt` is now user-facing as Kodi Setup Kit. For installer

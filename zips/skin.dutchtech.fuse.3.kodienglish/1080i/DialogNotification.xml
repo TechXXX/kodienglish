@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <window>
     <zorder>1000</zorder>
+    <onload>AlarmClock(DTSkinUpdateRecoverHome,RunScript(special://skin/scripts/dt_update_recover_home.py),00:01,silent)</onload>
     <controls>
 
         <control type="group">

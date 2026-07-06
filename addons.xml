@@ -875,7 +875,7 @@ INFO: For latest changes see Changelog within Tools of add-on.</news>
             </assets>
         </extension>
     </addon>
-    <addon id="skin.dutchtech.fuse.3.kodienglish" name="Kodi English Fuse 3" provider-name="DutchTech" version="3.2.9.1008">
+    <addon id="skin.dutchtech.fuse.3.kodienglish" name="Kodi English Fuse 3" provider-name="DutchTech" version="3.2.9.1010">
         <requires>
             <import addon="xbmc.gui" version="5.17.0" />
             <import addon="script.skinvariables" version="2.2.2" />
@@ -916,7 +916,7 @@ INFO: For latest changes see Changelog within Tools of add-on.</news>
             </assets>
         </extension>
     </addon>
-    <addon id="repository.kodienglish" name="Kodi English Repository" provider-name="Kodi English" version="1.0.12">
+    <addon id="repository.kodienglish" name="Kodi English Repository" provider-name="Kodi English" version="1.0.13">
         <extension point="xbmc.addon.repository" name="Kodi English Repository">
             <dir>
                 <info compressed="false">https://raw.githubusercontent.com/TechXXX/kodienglish/main/addons.xml</info>

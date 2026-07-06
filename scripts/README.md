@@ -9,6 +9,14 @@ Do not use these scripts to publish subtitle selector or a4k subtitle
 integration changes into KodiEnglish. See `../HANDOVER.md` before publishing Fen
 Light or Fen Light Patched updates.
 
+## Versioning
+
+Before publishing any Kodi-visible addon update, bump the affected addon's
+`addon.xml` version to a number strictly higher than the version already
+advertised in `addons.xml`. Kodi decides update availability from those metadata
+versions, and clients may cache same-version zips, so replacing a zip without a
+higher version is not a real update.
+
 ## `build_repo.py`
 
 Use this when the repository addon or the repo-wide metadata needs a full
