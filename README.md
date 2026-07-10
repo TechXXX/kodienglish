@@ -108,16 +108,14 @@ Current source-tree versions:
   It now supports the dedicated next-episode OSD action for Fen playback and
   hides that action when Fen confirms there is no next aired episode, while
   routing the button to Fen Light English when English playback is active.
-- `skin.dutchtech.fuse.3.kodienglish` `3.2.9.1010`
+- `skin.dutchtech.fuse.3.kodienglish` `3.2.9.1011`
   Kodi English fork of the latest Arctic Fuse 3 `v3.2.9` release with a
-  separate addon id, Kodi English name/provider metadata, custom icon/fanart,
-  and KodiEnglish patched TMDb Helper routing. Its non-core dependencies are
-  all carried by this repo: Skin Variables, Texture Maker, the KodiEnglish
-  patched TMDb Helper, weather icons, studio icons, and the Roboto CJK font
-  resource. It also routes favourites through Kodi's native favourites browser
-  with the skin's dialog-style list layout and runs a small notification
-  recovery script that returns Kodi to Home only when the active window and
-  dialog ids are invalid.
+  separate addon id and KodiEnglish patched TMDb Helper routing. It is now
+  kept intentionally in lockstep with `/Users/kalter/Documents/CODEX/kodirepo/skin.dutchtech.fuse.3`,
+  with only the KodiEnglish addon identity and plugin target ids diverging.
+  Its non-core dependencies are all carried by this repo: Skin Variables,
+  Texture Maker, the KodiEnglish patched TMDb Helper, weather icons, studio
+  icons, and the Roboto CJK font resource.
 - `repository.kodienglish`
   The repository addon Kodi installs first.
 

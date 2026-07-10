@@ -4,18 +4,17 @@
 This work is licensed under Creative Commons Attribution-NonCommercial-ShareAlike 4.0 Unported License. To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/4.0/
 or send a letter to Creative Commons, 171 Second Street, Suite 300, San Francisco, California, 94105, USA.
 
-## DutchTech Fork
+## KodiEnglish Fork
 
-This package is a DutchTech-maintained fork of Jurialmunkey's Arctic Fuse 3 v3.2.9 with a separate Kodi addon id, custom artwork, and patched TMDb Helper routing.
+This package is a DutchTech-maintained fork of Jurialmunkey's Arctic Fuse 3 v3.2.9 with a separate Kodi addon id and KodiEnglish patched TMDb Helper routing.
 
 ## Maintainer Notes
 
 - Add-on id: `skin.dutchtech.fuse.3.kodienglish`.
-- Current source version: `3.2.9.1002`.
-- Patched TMDb Helper dependency:
-  `plugin.video.themoviedb.helper.patched.kodienglish`.
-- Most fork-specific differences from the normal DutchTech fork are add-on
-  identity and KodiEnglish TMDb Helper route rewrites.
+- Current source version: `3.2.9.1011`.
+- Patched TMDb Helper dependency: `plugin.video.themoviedb.helper.patched.kodienglish`.
+- This fork is intentionally kept in lockstep with `/Users/kalter/Documents/CODEX/kodirepo/skin.dutchtech.fuse.3`.
+- The expected differences are the KodiEnglish addon id/name, KodiEnglish TMDb Helper and Fen Light target ids, and repo-local documentation.
 - Main XML entry points:
   - `1080i/Home.xml` starts the home window and delegates to `Hub_Window`.
   - `1080i/Includes.xml` is the include index for constants, views, widgets,
@@ -32,5 +31,18 @@ This package is a DutchTech-maintained fork of Jurialmunkey's Arctic Fuse 3 v3.2
 - Home menu and widget defaults are generated from files under `shortcuts/`,
   especially `shortcuts/skinvariables-generator.json` and
   `shortcuts/generator/data/`.
-- Keep the KodiEnglish guardrail in mind: do not port subtitle selector or a4k
-  subtitle integration work into this repository unless explicitly requested.
+- When syncing from the normal DutchTech fork, copy the skin tree first and then
+  reapply the KodiEnglish addon id and plugin target rewrites instead of
+  hand-porting XML one file at a time.
+
+## 2026-07-05 Favourites Browser Note
+
+The custom favourites dialog now hands off to Kodi's native favourites browser,
+and `MyFavourites.xml` uses the skin's dialog panel/list treatment instead of
+the older media-info panel layout.
+
+## 2026-07-06 Notification Recovery Note
+
+`DialogNotification.xml` now schedules a silent recovery script. The script only
+calls `ReplaceWindow(Home)` when Kodi reports invalid active window and dialog
+ids, which avoids forcing Home during ordinary notifications.

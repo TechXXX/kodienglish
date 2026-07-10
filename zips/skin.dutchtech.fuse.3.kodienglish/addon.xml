@@ -1,9 +1,9 @@
-<addon id="skin.dutchtech.fuse.3.kodienglish" name="Kodi English Fuse 3" provider-name="DutchTech" version="3.2.9.1010">
+<addon id="skin.dutchtech.fuse.3.kodienglish" name="Kodi English Fuse 3" provider-name="DutchTech" version="3.2.9.1011">
     <requires>
         <import addon="xbmc.gui" version="5.17.0" />
         <import addon="script.skinvariables" version="2.2.2" />
         <import addon="script.texturemaker" version="0.2.12" />
-        <import addon="plugin.video.themoviedb.helper.patched.kodienglish" version="6.15.2.12.1007" />
+        <import addon="plugin.video.themoviedb.helper.patched.kodienglish" version="6.15.2.12.1008" />
         <import addon="resource.images.weathericons.white" version="0.0.7" />
         <import addon="resource.images.studios.coloured" version="0.0.24" />
         <import addon="resource.font.robotocjksc" version="0.0.4" />
