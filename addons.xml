@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addons>
-    <addon id="plugin.program.famyt" name="Kodi Setup Kit" version="0.9.18" provider-name="DutchTech">
+    <addon id="plugin.program.famyt" name="Kodi Setup Kit" version="0.9.19" provider-name="DutchTech">
         <requires>
             <import addon="xbmc.python" version="3.0.0" />
             <import addon="script.kodiskin.widget.importer" version="0.1.19" />
@@ -18,7 +18,12 @@
             <platform>all</platform>
             <license>MIT</license>
             <source>https://github.com/TechXXX/kodirepo</source>
-            <news>v0.9.18
+            <news>v0.9.19
+- Skip live GUI JSON-RPC writes for deferred or device-specific settings like webserver auth and device UUID
+- Coerce GUI preset values to Kodi's real setting types and trigger missing language resource installs
+- Preserve a real OMDb key across Fen Light preset restores while allowing blanks to fall back to Fen defaults
+
+v0.9.18
 - Preserve existing Trakt and debrid login settings during Fen Light preset restores
 - Let Fen Light reseed its public TMDb/IntroDB defaults by omitting blank bundled rows
 
