@@ -1,6 +1,6 @@
 # Kodi Setup Kit Handover For KodiEnglish
 
-Last updated: 2026-06-27.
+Last updated: 2026-07-12.
 
 This repo carries the English-feed copy of `plugin.program.famyt`, user-facing
 as **Kodi Setup Kit**. The canonical long-form Setup Kit runbook is in the main
@@ -20,7 +20,7 @@ contract, or `Install everything` order. The same concepts apply here:
 - missing optional add-ons should skip cleanly instead of aborting the whole
   setup run
 
-Current Setup Kit version at this handover: `0.9.15`.
+Current Setup Kit version at this handover: `0.9.20`.
 
 ## KodiEnglish-Specific Notes
 
@@ -33,6 +33,9 @@ has its own packaging context:
   unless the user explicitly asks for that in the same conversation
 - regenerate `addons.xml`, `addons.xml.md5`, and `addons.xml.md5.txt` when
   publishing a Kodi-visible Setup Kit update
+- keep `plugin.program.autocompletion` and `script.module.autocompletion`
+  available in this repo because Kodi English Fuse 3 now depends on the
+  virtual keyboard autocomplete helper
 
 ## Quick Publish Reminder
 

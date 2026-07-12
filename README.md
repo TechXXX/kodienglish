@@ -86,12 +86,20 @@ Current source-tree versions:
   also carries the Trakt watched TV/episode cache repair from the main repo:
   `sync/watched/shows?extended=progress`, missing-`seasons` guarding, and the
   one-time `trakt_tv_watched_progress_repair_20260704` cache marker.
-- `plugin.program.famyt` `0.9.15`
+- `plugin.program.famyt` `0.9.20`
   Kodi Setup Kit, the private family bootstrap helper copied from the
   production release line. It contains no credentials; the matching Vercel
   bridge supplies YouTube, TorBox, a4kSubtitles, and Kodi webserver secrets
-  after the shared password is provided. Read `KODI_SETUP_KIT_HANDOVER.md`
+  after the shared password is provided. It now also merges bundled default
+  favourites into the live Kodi profile with a backup-first restore path and
+  includes that step in Install everything. Read `KODI_SETUP_KIT_HANDOVER.md`
   before changing its install flow.
+- `plugin.program.autocompletion` `2.1.4`
+  Bundled virtual keyboard autocomplete helper so Kodi English Fuse 3 can pull
+  the dependency from this repo instead of the broken upstream `2.1.3` package
+  URL.
+- `script.module.autocompletion` `2.1.1`
+  Library dependency for the virtual keyboard autocomplete helper.
 - `script.fenlight.quickrescrape.kodienglish` `0.0.4.1001`
   Shield/Android shortcut helper for the English repo. It installs a
   KodiEnglish-specific keymap and opens Fen Light English source-select/rescrape
@@ -108,14 +116,16 @@ Current source-tree versions:
   It now supports the dedicated next-episode OSD action for Fen playback and
   hides that action when Fen confirms there is no next aired episode, while
   routing the button to Fen Light English when English playback is active.
-- `skin.dutchtech.fuse.3.kodienglish` `3.2.9.1011`
+- `skin.dutchtech.fuse.3.kodienglish` `3.2.9.1012`
   Kodi English fork of the latest Arctic Fuse 3 `v3.2.9` release with a
   separate addon id and KodiEnglish patched TMDb Helper routing. It is now
   kept intentionally in lockstep with `/Users/kalter/Documents/CODEX/kodirepo/skin.dutchtech.fuse.3`,
   with only the KodiEnglish addon identity and plugin target ids diverging.
   Its non-core dependencies are all carried by this repo: Skin Variables,
   Texture Maker, the KodiEnglish patched TMDb Helper, weather icons, studio
-  icons, and the Roboto CJK font resource.
+  icons, the Roboto CJK font resource, and the bundled virtual keyboard
+  autocomplete helper. It now also keeps category selector labels static when
+  unfocused and scrolls only the focused row.
 - `repository.kodienglish`
   The repository addon Kodi installs first.
 
@@ -130,6 +140,10 @@ Current source-tree versions:
 - `plugin.program.famyt/`
   Kodi Setup Kit source. Credentials are not stored in this repository; the
   matching Vercel bridge is documented in `KODI_SETUP_KIT_HANDOVER.md`.
+- `plugin.program.autocompletion/`
+  Virtual keyboard autocomplete helper source.
+- `script.module.autocompletion/`
+  Virtual keyboard autocomplete library source.
 - `script.fenlight.quickrescrape.kodienglish/`
   English Quick Rescrape helper source and package artwork.
 - `plugin.video.themoviedb.helper.patched.kodienglish/`
