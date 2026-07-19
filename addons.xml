@@ -179,7 +179,7 @@ v0.1.0
 INFO: For latest changes see Changelog within Tools of add-on.</news>
         </extension>
     </addon>
-    <addon id="plugin.video.fenlight.kodienglish" name="Fen Light English" provider-name="Tikipeter" version="2.0.16.1022">
+    <addon id="plugin.video.fenlight.kodienglish" name="Fen Light English" provider-name="Tikipeter" version="2.0.16.1023">
         <requires>
             <import addon="xbmc.python" version="3.0.0" />
             <import addon="script.module.requests" version="2.19.1" />
@@ -200,7 +200,10 @@ INFO: For latest changes see Changelog within Tools of add-on.</news>
                 <icon>resources/media/fenlight_icon.png</icon>
                 <fanart>resources/media/fenlight_fanart2.jpg</fanart>
             </assets>
-            <news>[v2.0.16.1021]:
+            <news>[v2.0.16.1023]:
+  * Preserve Kodi resume points for direct TorBox cloud-storage playback by resolving files through Kodi's stable plugin URL.
+
+[v2.0.16.1021]:
   * Add restore-default actions for the OMDb and TheIntroDB API keys in Accounts settings.
 
 [v2.0.16.1020]:
