@@ -1,4 +1,4 @@
-<addon id="skin.dutchtech.fuse.3.kodienglish" name="Kodi English Fuse 3" provider-name="DutchTech" version="3.2.9.1013">
+<addon id="skin.dutchtech.fuse.3.kodienglish" name="Kodi English Fuse 3" provider-name="DutchTech" version="3.2.9.1014">
     <requires>
         <import addon="xbmc.gui" version="5.17.0" />
         <import addon="script.skinvariables" version="2.2.2" />
@@ -38,5 +38,10 @@
             <icon>icon.png</icon>
             <fanart>fanart.jpg</fanart>
         </assets>
+        <news>[v3.2.9.1014]:
+  * Restore default home-menu icons for the Next Aired, PVR, and Addons switcher entries so Omega no longer logs undefined Home_Icon variables at startup.
+
+[v3.2.9.1013]:
+  * Retarget the bundled search-path setup data and docs to Fen Light English after removing the retired patched English Fen addon.</news>
     </extension>
 </addon>
