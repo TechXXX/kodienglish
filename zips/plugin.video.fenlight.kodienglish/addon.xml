@@ -1,7 +1,8 @@
-<addon id="plugin.video.fenlight.kodienglish" name="Fen Light English" provider-name="Tikipeter" version="2.0.16.1023">
+<addon id="plugin.video.fenlight.kodienglish" name="Fen Light English" provider-name="Tikipeter" version="2.0.16.1024">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
         <import addon="script.module.requests" version="2.19.1"/>
+        <import addon="script.module.magneto" version="6.07.05"/>
     </requires>
     <extension point="xbmc.python.pluginsource" library="resources/lib/fenlight.py">
         <provides>video</provides>
@@ -19,7 +20,10 @@
             <icon>resources/media/fenlight_icon.png</icon>
             <fanart>resources/media/fenlight_fanart2.jpg</fanart>
         </assets>
-        <news>[v2.0.16.1023]:
+        <news>[v2.0.16.1024]:
+  * Add Magneto as Fen Light English's default external scraper dependency, migrate CocoScrapers users to Magneto, carry over Coco undesirables settings, and support Magneto's legacy external scraper entrypoint.
+
+[v2.0.16.1023]:
   * Preserve Kodi resume points for direct TorBox cloud-storage playback by resolving files through Kodi's stable plugin URL.
 
 [v2.0.16.1021]:
