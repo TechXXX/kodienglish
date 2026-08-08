@@ -1,3 +1,8 @@
+[COLOR dodgerblue][B]Version 2.0.71.1020[/B][/COLOR]
+- Ship Magneto in KodiEnglish and make it the default external scraper for Fen Light Patched.
+- Migrate existing CocoScrapers users, undesirables settings, and undesirables database rows to Magneto.
+- Keep Fen Light Patched compatible with Magneto's legacy external scraper import path.
+
 [COLOR dodgerblue][B]Version 2.0.71.1018[/B][/COLOR]
 - Add restore-default actions for the OMDb and TheIntroDB API keys in Accounts settings.
 

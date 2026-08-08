@@ -241,10 +241,11 @@ INFO: For latest changes see Changelog within Tools of add-on.</news>
 INFO: For latest changes see Changelog within Tools of add-on.</news>
         </extension>
     </addon>
-    <addon id="plugin.video.fenlight.patched.kodienglish" name="Fen Light Patched" provider-name="Tikipeter" version="2.0.71.1019">
+    <addon id="plugin.video.fenlight.patched.kodienglish" name="Fen Light Patched" provider-name="Tikipeter" version="2.0.71.1020">
         <requires>
             <import addon="xbmc.python" version="3.0.0" />
             <import addon="script.module.requests" version="2.19.1" />
+            <import addon="script.module.magneto" version="6.07.04" />
         </requires>
         <extension point="xbmc.python.pluginsource" library="resources/lib/fenlight.py">
             <provides>video</provides>
@@ -262,7 +263,10 @@ INFO: For latest changes see Changelog within Tools of add-on.</news>
                 <icon>resources/media/fenlight_icon.png</icon>
                 <fanart>resources/media/fenlight_fanart2.jpg</fanart>
             </assets>
-            <news>[v2.0.71.1018]:
+            <news>[v2.0.71.1020]:
+  * Ship Magneto in KodiEnglish, make it the default Fen Light Patched external scraper, migrate existing CocoScrapers users and undesirables data to Magneto, and keep the legacy external scraper import path compatible.
+
+[v2.0.71.1018]:
   * Add restore-default actions for the OMDb and TheIntroDB API keys in Accounts settings.
 
 [v2.0.71.1017]:
@@ -650,6 +654,26 @@ INFO: For latest changes see Changelog within Tools of add-on.</news>
             <website>https://github.com/jurialmunkey/script.module.jurialmunkey</website>
             <assets>
                 <icon>icon.png</icon>
+            </assets>
+        </extension>
+    </addon>
+    <addon id="script.module.magneto" version="6.07.04" name="Magneto Module" provider-name="Magneto">
+        <requires>
+            <import addon="xbmc.python" version="3.0.0" />
+            <import addon="script.module.requests" />
+        </requires>
+        <extension point="xbmc.python.pluginsource" library="lib/router.py">
+            <provides>executable video</provides>
+        </extension>
+        <extension point="xbmc.service" library="lib/service.py" />
+        <extension point="xbmc.python.module" library="lib" />
+        <extension point="xbmc.addon.metadata">
+            <license>GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007</license>
+            <summary>Magneto Module</summary>
+            <description>A module to query magnet providers.[CR][CR]This is a Non-profit resource, organized solely for educational purposes which is protected under the Fair-Use doctrine of the Copyright Act, Specifically section 107, which does promote freedom of expression, by permitting the unlicensed use of copyright-protected works.</description>
+            <disclaimer>The author does not host or own any content found within this addon. The author is not responsible for the content found using this addon. The author is not responsible for the use of this addon.</disclaimer>
+            <assets>
+                <icon>resources/magneto.png</icon>
             </assets>
         </extension>
     </addon>

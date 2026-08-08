@@ -66,7 +66,7 @@ Current source-tree versions:
   tracks Trakt's 2026 watched endpoint change by requesting TV watched data
   with `extended=progress`, guarding missing `seasons` payloads, and running a
   one-time empty episode-watched cache repair after update.
-- `plugin.video.fenlight.patched.kodienglish` `2.0.71.1019`
+- `plugin.video.fenlight.patched.kodienglish` `2.0.71.1020`
   Patched Fen Light package carrying the recent Trakt/auth pass, stable Trakt
   list-id routing, bundled Trakt default-key refresh, and QR-based auth flows
   for Trakt, Real-Debrid, Premiumize, and AllDebrid. It now also carries the
@@ -77,15 +77,19 @@ Current source-tree versions:
   with styled Trakt QR cards and the latest activation URL / clipboard behavior.
   It now also includes TorBox Web Download cloud support and the WebDL playback
   validation cleanup without temporary scrape/resolver diagnostics. It now also
-  seeds non-secret first-run defaults for CocoScrapers, list/result/playback
-  preferences, size filters, pagination, and update behavior while keeping
-  KodiEnglish repository targets and local/private values clean. It now also
+  ships the bundled Magneto module, makes Magneto the default external scraper,
+  migrates existing CocoScrapers users and undesirables data to Magneto, and
+  keeps the legacy external scraper import path working. It now also
   adds TorBox Usenet Search controls for movies and TV shows, plus automatic
   no-results retry with cached TorBox Usenet Search, while deliberately leaving
   the normal-repo a4k subtitle-service changes out of the English build. It now
   also carries the Trakt watched TV/episode cache repair from the main repo:
   `sync/watched/shows?extended=progress`, missing-`seasons` guarding, and the
   one-time `trakt_tv_watched_progress_repair_20260704` cache marker.
+- `script.module.magneto` `6.07.04`
+  Magnet provider aggregation module carried directly in KodiEnglish so Fen
+  Light Patched installs can resolve the dependency and use the same curated
+  defaults as the main repo feed.
 - `plugin.program.famyt` `0.9.20`
   Kodi Setup Kit, the private family bootstrap helper copied from the
   production release line. It contains no credentials; the matching Vercel
@@ -144,6 +148,8 @@ Current source-tree versions:
   Virtual keyboard autocomplete helper source.
 - `script.module.autocompletion/`
   Virtual keyboard autocomplete library source.
+- `script.module.magneto/`
+  Magneto module source.
 - `script.fenlight.quickrescrape.kodienglish/`
   English Quick Rescrape helper source and package artwork.
 - `plugin.video.themoviedb.helper.patched.kodienglish/`

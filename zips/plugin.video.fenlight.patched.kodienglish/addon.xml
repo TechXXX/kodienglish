@@ -1,7 +1,8 @@
-<addon id="plugin.video.fenlight.patched.kodienglish" name="Fen Light Patched" provider-name="Tikipeter" version="2.0.71.1019">
+<addon id="plugin.video.fenlight.patched.kodienglish" name="Fen Light Patched" provider-name="Tikipeter" version="2.0.71.1020">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
         <import addon="script.module.requests" version="2.19.1"/>
+        <import addon="script.module.magneto" version="6.07.04"/>
     </requires>
     <extension point="xbmc.python.pluginsource" library="resources/lib/fenlight.py">
         <provides>video</provides>
@@ -19,7 +20,10 @@
             <icon>resources/media/fenlight_icon.png</icon>
             <fanart>resources/media/fenlight_fanart2.jpg</fanart>
         </assets>
-        <news>[v2.0.71.1018]:
+        <news>[v2.0.71.1020]:
+  * Ship Magneto in KodiEnglish, make it the default Fen Light Patched external scraper, migrate existing CocoScrapers users and undesirables data to Magneto, and keep the legacy external scraper import path compatible.
+
+[v2.0.71.1018]:
   * Add restore-default actions for the OMDb and TheIntroDB API keys in Accounts settings.
 
 [v2.0.71.1017]:
