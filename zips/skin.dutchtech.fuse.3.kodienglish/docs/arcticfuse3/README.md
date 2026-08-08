@@ -11,7 +11,7 @@ targets:
 - add-on id: `skin.dutchtech.fuse.3.kodienglish`
 - skin id references: `skin.dutchtech.fuse.3.kodienglish`
 - TMDb Helper target: `plugin.video.themoviedb.helper.patched.kodienglish`
-- Fen Light target paths where applicable: `plugin.video.fenlight.patched.kodienglish`
+- Fen Light target paths where applicable: `plugin.video.fenlight.kodienglish`
 
 Canonical historical customization notes live with the main DutchTech fork.
 This folder only keeps short KodiEnglish-specific reminders so the packaged skin

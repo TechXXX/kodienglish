@@ -13,4 +13,4 @@ KodiEnglish-specific route targets that must remain preserved after sync:
 
 - `skin.dutchtech.fuse.3.kodienglish`
 - `plugin.video.themoviedb.helper.patched.kodienglish`
-- `plugin.video.fenlight.patched.kodienglish`
+- `plugin.video.fenlight.kodienglish`

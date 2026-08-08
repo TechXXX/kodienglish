@@ -16,7 +16,6 @@ import xbmcvfs
 ADDON_ID = "script.fenlight.quickrescrape.kodienglish"
 FEN_ADDON_IDS = (
     "plugin.video.fenlight.kodienglish",
-    "plugin.video.fenlight.patched.kodienglish",
 )
 HOME_WINDOW_ID = 10000
 MY_VIDEO_NAV_WINDOW_ID = 10025

@@ -98,7 +98,6 @@ KNOWN_VIDEO_TARGETS = [
     ("plugin.video.fenlight.aisearch", "Fen Light AI Search"),
     ("plugin.video.fenlight", "Fen Light"),
     ("plugin.video.fenlight.kodienglish", "Fen Light English"),
-    ("plugin.video.fenlight.patched.kodienglish", "Fen Light Patched English"),
     ("plugin.video.fen", "Fen"),
 ]
 

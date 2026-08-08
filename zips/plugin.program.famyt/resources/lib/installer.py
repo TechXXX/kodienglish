@@ -101,13 +101,11 @@ FENLIGHT_ADDON_IDS = (
     "plugin.video.fenlight",
     "plugin.video.fenlight.patched",
     "plugin.video.fenlight.kodienglish",
-    "plugin.video.fenlight.patched.kodienglish",
 )
 FENLIGHT_ADDON_LABELS = {
     "plugin.video.fenlight": "Fen Light",
     "plugin.video.fenlight.patched": "Fen Light Patched",
     "plugin.video.fenlight.kodienglish": "Fen Light KodiEnglish",
-    "plugin.video.fenlight.patched.kodienglish": "Fen Light Patched KodiEnglish",
 }
 FENLIGHT_SETTINGS_DB = os.path.join("databases", "settings.db")
 FENLIGHT_SETTINGS_XML = "settings.xml"

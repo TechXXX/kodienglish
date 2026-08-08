@@ -23,9 +23,6 @@ the patched selector stack:
 - IntroDB support is wanted for this addon; it is the explicit exception to the
   "no selector stack" simplification
 
-Do not confuse it with `plugin.video.fenlight.patched.kodienglish`, which is a
-separate patched package.
-
 ## Maintenance Guardrail
 
 Do not port, cherry-pick, test, or publish subtitle selector work into this
@@ -66,31 +63,11 @@ Current source-tree versions:
   tracks Trakt's 2026 watched endpoint change by requesting TV watched data
   with `extended=progress`, guarding missing `seasons` payloads, and running a
   one-time empty episode-watched cache repair after update.
-- `plugin.video.fenlight.patched.kodienglish` `2.0.71.1020`
-  Patched Fen Light package carrying the recent Trakt/auth pass, stable Trakt
-  list-id routing, bundled Trakt default-key refresh, and QR-based auth flows
-  for Trakt, Real-Debrid, Premiumize, and AllDebrid. It now also carries the
-  latest Extras trailer fallback/fullscreen-stop fixes, the duplicate Trakt
-  re-authorization prompt guard, the invalid watched-indicator payload guard,
-  and per-device-URL QR image filenames so Kodi refreshes changed auth codes.
-  It now also refreshes the English Trakt and Real-Debrid QR-backed auth prompts
-  with styled Trakt QR cards and the latest activation URL / clipboard behavior.
-  It now also includes TorBox Web Download cloud support and the WebDL playback
-  validation cleanup without temporary scrape/resolver diagnostics. It now also
-  ships the bundled Magneto module, makes Magneto the default external scraper,
-  migrates existing CocoScrapers users and undesirables data to Magneto, and
-  keeps the legacy external scraper import path working. It now also
-  adds TorBox Usenet Search controls for movies and TV shows, plus automatic
-  no-results retry with cached TorBox Usenet Search, while deliberately leaving
-  the normal-repo a4k subtitle-service changes out of the English build. It now
-  also carries the Trakt watched TV/episode cache repair from the main repo:
-  `sync/watched/shows?extended=progress`, missing-`seasons` guarding, and the
-  one-time `trakt_tv_watched_progress_repair_20260704` cache marker.
 - `script.module.magneto` `6.07.04`
   Magnet provider aggregation module carried directly in KodiEnglish so Fen
-  Light Patched installs can resolve the dependency and use the same curated
+  Light English installs can resolve the dependency and use the same curated
   defaults as the main repo feed.
-- `plugin.program.famyt` `0.9.20`
+- `plugin.program.famyt` `0.9.22`
   Kodi Setup Kit, the private family bootstrap helper copied from the
   production release line. It contains no credentials; the matching Vercel
   bridge supplies YouTube, TorBox, a4kSubtitles, and Kodi webserver secrets
@@ -104,23 +81,23 @@ Current source-tree versions:
   URL.
 - `script.module.autocompletion` `2.1.1`
   Library dependency for the virtual keyboard autocomplete helper.
-- `script.fenlight.quickrescrape.kodienglish` `0.0.4.1001`
+- `script.fenlight.quickrescrape.kodienglish` `0.0.4.1002`
   Shield/Android shortcut helper for the English repo. It installs a
   KodiEnglish-specific keymap and opens Fen Light English source-select/rescrape
   for the focused AH2 movie or episode item.
-- `plugin.video.themoviedb.helper.patched.kodienglish` `6.15.2.12.1007`
+- `plugin.video.themoviedb.helper.patched.kodienglish` `6.15.2.12.1009`
   Patched TMDb Helper package used by the patched skin flow. It now includes
   the bundled Fen / Fen Patched player definitions, recommendations-window
   hardening and logging, authenticated Trakt username state, and the newer
   OMDb default-key and ratings-backfill improvements. It now also ships the
   custom Trakt QR auth dialog, styled QR generation helpers, clipboard support,
   and the matching dialog skin assets for the English repo build.
-- `skin.arctic.horizon.2.patched.kodienglish` `0.8.30.13.1006`
+- `skin.arctic.horizon.2.patched.kodienglish` `0.8.30.13.1007`
   Patched Arctic Horizon 2 package targeting the patched TMDb Helper addon id.
   It now supports the dedicated next-episode OSD action for Fen playback and
   hides that action when Fen confirms there is no next aired episode, while
   routing the button to Fen Light English when English playback is active.
-- `skin.dutchtech.fuse.3.kodienglish` `3.2.9.1012`
+- `skin.dutchtech.fuse.3.kodienglish` `3.2.9.1013`
   Kodi English fork of the latest Arctic Fuse 3 `v3.2.9` release with a
   separate addon id and KodiEnglish patched TMDb Helper routing. It is now
   kept intentionally in lockstep with `/Users/kalter/Documents/CODEX/kodirepo/skin.dutchtech.fuse.3`,
@@ -139,8 +116,6 @@ Current source-tree versions:
   Vanilla Fen Light source tree kept as the baseline, with only repo-wide bundled key updates.
 - `plugin.video.fenlight.kodienglish/`
   Working copy of the vanilla Fen Light source tree for English-only changes.
-- `plugin.video.fenlight.patched.kodienglish/`
-  Patched Fen Light source tree.
 - `plugin.program.famyt/`
   Kodi Setup Kit source. Credentials are not stored in this repository; the
   matching Vercel bridge is documented in `KODI_SETUP_KIT_HANDOVER.md`.
