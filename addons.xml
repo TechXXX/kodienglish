@@ -185,7 +185,7 @@ v0.1.0
 INFO: For latest changes see Changelog within Tools of add-on.</news>
         </extension>
     </addon>
-    <addon id="plugin.video.fenlight.kodienglish" name="Fen Light English" provider-name="Tikipeter" version="2.0.16.1025">
+    <addon id="plugin.video.fenlight.kodienglish" name="Fen Light English" provider-name="Tikipeter" version="2.0.16.1026">
         <requires>
             <import addon="xbmc.python" version="3.0.0" />
             <import addon="script.module.requests" version="2.19.1" />
@@ -207,7 +207,10 @@ INFO: For latest changes see Changelog within Tools of add-on.</news>
                 <icon>resources/media/fenlight_icon.png</icon>
                 <fanart>resources/media/fenlight_fanart2.jpg</fanart>
             </assets>
-            <news>[v2.0.16.1025]:
+            <news>[v2.0.16.1026]:
+  * Set Fen Light English's preferred Magneto providers during the Magneto migration so fresh and migrated installs land on the curated provider mix automatically.
+
+[v2.0.16.1025]:
   * Add the missing Magneto migration update flag so the Coco-to-Magneto startup migration records completion instead of retrying every launch.
 
 [v2.0.16.1024]:

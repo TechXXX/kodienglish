@@ -59,6 +59,7 @@ class OnUpdateChanges:
 				('refresh_addon_keys', self.refresh_addon_keys),
 				('enable_torbox_cloud_search', self.enable_torbox_cloud_search),
 				('migrate_external_scraper_to_magneto', self.migrate_external_scraper_to_magneto),
+				('set_magneto_provider_selection', self.set_magneto_provider_selection),
 			)
 			for setting_id, migration in migrations:
 				update_setting_id = 'updatechecks.%s' % setting_id
@@ -134,6 +135,22 @@ class OnUpdateChanges:
 			logger('Fen Light', 'Applied %s Magneto provider defaults for Fen Light English.' % len(provider_defaults))
 		except Exception as e:
 			logger('Fen Light', 'Magneto provider defaults sync failed: %s' % str(e))
+
+	def set_magneto_provider_selection(self):
+		from caches.settings_cache import get_setting
+		if get_setting('fenlight.external_scraper.module', '') != 'script.module.magneto': return
+		import os, xbmcaddon, xml.etree.ElementTree as ET
+		enabled_providers = ('provider.comet', 'provider.mediafusion', 'provider.torrentio')
+		magneto_addon = xbmcaddon.Addon('script.module.magneto')
+		settings_path = os.path.join(magneto_addon.getAddonInfo('path'), 'resources', 'settings.xml')
+		settings_root = ET.parse(settings_path).getroot()
+		provider_settings = []
+		for item in settings_root.iter('setting'):
+			setting_id = item.attrib.get('id', '')
+			if setting_id.startswith('provider.'): provider_settings.append(setting_id)
+		for setting_id in provider_settings:
+			magneto_addon.setSetting(setting_id, 'true' if setting_id in enabled_providers else 'false')
+		logger('Fen Light', 'Enabled preferred Magneto providers for Fen Light English: %s' % ', '.join(enabled_providers))
 
 	def sync_magneto_undesirables_from_coco(self):
 		coco_settings = {
