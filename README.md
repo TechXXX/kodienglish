@@ -81,6 +81,11 @@ Current source-tree versions:
   Bundled virtual keyboard autocomplete helper so Kodi English Fuse 3 can pull
   the dependency from this repo instead of the broken upstream `2.1.3` package
   URL.
+- `resource.images.studios.coloured` `0.0.25`
+  Coloured studio-logo resource used by the Kodi English skins. This build is
+  based on the official `0.0.24` texture bundle and adds a plain Apple TV
+  studio icon entry (`Apple TV.png`) generated from Fen Light's provider
+  artwork, keeping it aligned with the main DutchTech repo resource.
 - `script.module.autocompletion` `2.1.1`
   Library dependency for the virtual keyboard autocomplete helper.
 - `script.fenlight.quickrescrape.kodienglish` `0.0.4.1002`
@@ -123,6 +128,9 @@ Current source-tree versions:
   matching Vercel bridge is documented in `KODI_SETUP_KIT_HANDOVER.md`.
 - `plugin.program.autocompletion/`
   Virtual keyboard autocomplete helper source.
+- `resource.images.studios.coloured/`
+  Coloured studio-logo image resource, including the Apple TV studio-icon
+  source PNG and patched texture bundle.
 - `script.module.autocompletion/`
   Virtual keyboard autocomplete library source.
 - `script.module.magneto/`
