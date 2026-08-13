@@ -306,8 +306,8 @@ default_settings = [
 #==================== TheIntroDB
 {'setting_id': 'introdb.api_key', 'setting_type': 'string', 'setting_default': 'theintrodb:user_3FPNGy5GsmygafofvZVtaClYgqC:zw2mD7IyUBpi-sFfMae5P1VLlc5llIXqPrIVtesZmAY'},
 #==================== External
-{'setting_id': 'provider.external', 'setting_type': 'boolean', 'setting_default': 'true'},
-{'setting_id': 'external_scraper.name', 'setting_type': 'string', 'setting_default': 'Magneto Module'},
+{'setting_id': 'provider.external', 'setting_type': 'boolean', 'setting_default': 'false'},
+{'setting_id': 'external_scraper.name', 'setting_type': 'string', 'setting_default': 'empty_setting'},
 #==================== Real Debrid
 {'setting_id': 'rd.token', 'setting_type': 'string', 'setting_default': 'empty_setting'},
 {'setting_id': 'rd.enabled', 'setting_type': 'boolean', 'setting_default': 'false'},
@@ -469,7 +469,7 @@ default_settings = [
 #=========================================================================================#
 {'setting_id': 'widget_refresh_timer_name', 'setting_type': 'string', 'setting_default': 'Off'},
 {'setting_id': 'mpaa_region_display_name', 'setting_type': 'string', 'setting_default': 'United States'},
-{'setting_id': 'external_scraper.module', 'setting_type': 'string', 'setting_default': 'script.module.magneto'},
+{'setting_id': 'external_scraper.module', 'setting_type': 'string', 'setting_default': 'empty_setting'},
 {'setting_id': 'trakt.next_daily_clear', 'setting_type': 'string', 'setting_default': '0'},
 {'setting_id': 'trakt.expires', 'setting_type': 'string', 'setting_default': '0'},
 {'setting_id': 'trakt.refresh', 'setting_type': 'string', 'setting_default': '0'},
@@ -478,8 +478,7 @@ default_settings = [
 {'setting_id': 'trakt.auth_state_display_name', 'setting_type': 'string', 'setting_default': 'Not Authorized'},
 {'setting_id': 'updatechecks.refresh_addon_keys', 'setting_type': 'string', 'setting_default': 'false'},
 {'setting_id': 'updatechecks.enable_torbox_cloud_search', 'setting_type': 'string', 'setting_default': 'false'},
-{'setting_id': 'updatechecks.migrate_external_scraper_to_magneto', 'setting_type': 'string', 'setting_default': 'false'},
-{'setting_id': 'updatechecks.set_magneto_provider_selection', 'setting_type': 'string', 'setting_default': 'false'},
+{'setting_id': 'updatechecks.rollback_magneto_external_scraper', 'setting_type': 'string', 'setting_default': 'false'},
 {'setting_id': 'rd.client_id', 'setting_type': 'string', 'setting_default': 'empty_setting'},
 {'setting_id': 'rd.refresh', 'setting_type': 'string', 'setting_default': 'empty_setting'},
 {'setting_id': 'rd.secret', 'setting_type': 'string', 'setting_default': 'empty_setting'},
