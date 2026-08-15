@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<settings>
+  <category label="Log Server">
+    <setting id="server_url" type="text" label="Server URL" default="https://logs.basaio.duckdns.org/upload"/>
+    <setting id="auth_token" type="text" label="Upload token" default="27c45ed5c5c31c47c1f22f230c350604ce0c6a77418ced1d158543d87bb82548" option="hidden"/>
+    <setting id="device_name" type="text" label="Device name" default=""/>
+    <setting id="upload_now_action" type="action" label="Upload logs now" action="RunPlugin(plugin://service.kodilog.uploader/?action=upload_now)"/>
+  </category>
+  <category label="Automatic Uploads">
+    <setting id="upload_on_startup" type="bool" label="Upload once on Kodi startup" default="true"/>
+    <setting id="auto_error_upload" type="bool" label="Auto-upload when Fen Light errors appear" default="false"/>
+    <setting id="startup_delay_seconds" type="number" label="Startup upload delay in seconds" default="45"/>
+    <setting id="error_scan_interval_minutes" type="number" label="Error scan interval in minutes" default="5"/>
+    <setting id="min_auto_upload_gap_minutes" type="number" label="Minimum minutes between auto uploads" default="60"/>
+    <setting id="defaults.tv_safe_v1" type="bool" label="TV-safe defaults applied" default="false" visible="false"/>
+  </category>
+  <category label="Diagnostic Content">
+    <setting id="target_addon_id" type="text" label="Fen Light add-on ID" default="plugin.video.fenlight.kodienglish"/>
+    <setting id="include_fenlight_settings" type="bool" label="Include redacted Fen Light settings.xml" default="true"/>
+    <setting id="max_log_kb" type="number" label="Maximum KB per log file" default="4096"/>
+  </category>
+</settings>

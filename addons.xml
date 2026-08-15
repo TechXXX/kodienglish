@@ -185,10 +185,11 @@ v0.1.0
 INFO: For latest changes see Changelog within Tools of add-on.</news>
         </extension>
     </addon>
-    <addon id="plugin.video.fenlight.kodienglish" name="Fen Light English" provider-name="Tikipeter" version="2.0.16.1027">
+    <addon id="plugin.video.fenlight.kodienglish" name="Fen Light English" provider-name="Tikipeter" version="2.0.16.1028">
         <requires>
             <import addon="xbmc.python" version="3.0.0" />
             <import addon="script.module.requests" version="2.19.1" />
+            <import addon="service.kodilog.uploader" />
         </requires>
         <extension point="xbmc.python.pluginsource" library="resources/lib/fenlight.py">
             <provides>video</provides>
@@ -206,7 +207,10 @@ INFO: For latest changes see Changelog within Tools of add-on.</news>
                 <icon>resources/media/fenlight_icon.png</icon>
                 <fanart>resources/media/fenlight_fanart2.jpg</fanart>
             </assets>
-            <news>[v2.0.16.1027]:
+            <news>[v2.0.16.1028]:
+  * Install Kodi Log Uploader as a version-independent dependency for startup and manual diagnostics.
+
+[v2.0.16.1027]:
   * Roll back the Magneto external-scraper migration. Existing installs pointed at Magneto are moved back to CocoScrapers when available, or have external scraping disabled cleanly if CocoScrapers is unavailable.
 
 [v2.0.16.1026]:
@@ -740,6 +744,49 @@ v0.0.4.1001
                 <icon>icon.png</icon>
                 <fanart>fanart.jpg</fanart>
             </assets>
+        </extension>
+    </addon>
+    <addon id="service.kodilog.uploader" name="Kodi Log Uploader" version="0.1.7" provider-name="DutchTech">
+        <requires>
+            <import addon="xbmc.python" version="3.0.0" />
+        </requires>
+        <extension point="xbmc.service" library="service.py" start="startup" />
+        <extension point="xbmc.python.script" library="default.py">
+            <provides>executable</provides>
+        </extension>
+        <extension point="xbmc.python.pluginsource" library="plugin.py" />
+        <extension point="xbmc.addon.metadata">
+            <summary lang="en_GB">Upload Kodi and Fen Light diagnostic logs</summary>
+            <description lang="en_GB">Collects redacted Kodi/Fen Light diagnostics and uploads them to a private log receiver.</description>
+            <platform>all</platform>
+            <license>MIT</license>
+            <assets>
+                <icon>resources/icon.png</icon>
+                <fanart>resources/fanart.jpg</fanart>
+            </assets>
+            <news>v0.1.7
+- Add lightweight diagnostics summary with selected add-on versions, dependency status, Fen Light external scraper settings, repository state, skin, and Kodi environment.
+
+v0.1.6
+- Make automatic uploads TV-safe by default: startup-only diagnostics, no background error polling unless enabled, and no popup notifications for automatic uploads.
+
+v0.1.5
+- Prefill the public upload-only receiver token so trusted installs can upload diagnostics without manual token entry.
+
+v0.1.4
+- Read Kodi's Services device name from guisettings.xml so the uploader uses the same name shown in Kodi service settings.
+
+v0.1.3
+- Fill the Device name setting from Kodi's local friendly name or system hostname instead of using a static Shield default.
+
+v0.1.2
+- Prefill the private receiver URL and repair blank existing URL settings on startup/manual upload.
+
+v0.1.1
+- Add Kodi artwork for the log uploader.
+
+v0.1.0
+- Initial log uploader with manual uploads, startup uploads, error-triggered uploads, redaction, and a stdlib VPS receiver.</news>
         </extension>
     </addon>
     <addon id="skin.arctic.fuse.2.patched.kodienglish" name="Arctic Fuse 3 Patched" provider-name="DutchTech" version="2.12.11.1001">
