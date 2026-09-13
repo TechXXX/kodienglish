@@ -159,10 +159,12 @@ class TVShows:
 				if self.all_episodes == 1 and total_seasons > 1: url_params = build_url({'mode': 'build_season_list', 'tmdb_id': tmdb_id})
 				else: url_params = build_url({'mode': 'build_episode_list', 'tmdb_id': tmdb_id, 'season': 'all'})
 			else: url_params = build_url({'mode': 'build_season_list', 'tmdb_id': tmdb_id})
+			browse_params = url_params
 			if self.open_extras:
 				cm_append(('[B]Browse[/B]', container_update % url_params))
 				url_params = extras_params
 			else: cm_append(('[B]Extras[/B]', run_plugin % extras_params))
+			cm.insert(1, ('[B]Add to favourites[/B]', run_plugin % build_url({'mode': 'kodi_favourites.add', 'name': title, 'title': title, 'path': browse_params, 'thumb': poster, 'is_folder': 'true', 'media_type': 'tvshow', 'tmdb_id': tmdb_id, 'is_anime': self.is_anime})))
 			cm_append(('[B]Options[/B]', run_plugin % options_params))
 			cm_append(('[B]Browse Recommended[/B]', self.window_command % \
 					build_url({'mode': 'build_tvshow_list', 'action': 'tmdb_tv_recommendations', 'key_id': tmdb_id, 'name': 'Recommended based on %s' % title})))

@@ -152,6 +152,7 @@ class Movies:
 			movieset_active = self.open_movieset and belongs_to_movieset == 'true'
 			if self.open_extras or movieset_active: cm_append(('[B]Playback[/B]', run_plugin % play_params))
 			if not self.open_extras or movieset_active: cm_append(('[B]Extras[/B]', run_plugin % extras_params))
+			cm.insert(1, ('[B]Add to favourites[/B]', run_plugin % build_url({'mode': 'kodi_favourites.add', 'name': title, 'title': title, 'path': play_params, 'thumb': poster, 'media_type': 'movie', 'tmdb_id': tmdb_id})))
 			if movieset_active: url_params = build_url({'mode': 'open_movieset_choice', 'key_id': movieset_id, 'name': movieset_name, 'is_external': self.is_external})
 			elif self.open_extras: url_params = extras_params
 			else: url_params = play_params
