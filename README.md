@@ -92,13 +92,15 @@ Current source-tree versions:
   Shield/Android shortcut helper for the English repo. It installs a
   KodiEnglish-specific keymap and opens Fen Light English source-select/rescrape
   for the focused AH2 movie or episode item.
-- `plugin.video.themoviedb.helper.patched.kodienglish` `6.15.2.12.1009`
+- `plugin.video.themoviedb.helper.patched.kodienglish` `6.15.2.12.1010`
   Patched TMDb Helper package used by the patched skin flow. It now includes
   the bundled Fen / Fen Patched player definitions, recommendations-window
   hardening and logging, authenticated Trakt username state, and the newer
   OMDb default-key and ratings-backfill improvements. It now also ships the
   custom Trakt QR auth dialog, styled QR generation helpers, clipboard support,
   and the matching dialog skin assets for the English repo build.
+  It now also ignores unexpected TMDb artwork buckets before reading artwork
+  paths and safely handles missing or invalid Trakt stats JSON responses.
 - `skin.arctic.horizon.2.patched.kodienglish` `0.8.30.13.1007`
   Patched Arctic Horizon 2 package targeting the patched TMDb Helper addon id.
   It now supports the dedicated next-episode OSD action for Fen playback and
