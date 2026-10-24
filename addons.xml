@@ -755,7 +755,7 @@ v0.0.4.1001
             </assets>
         </extension>
     </addon>
-    <addon id="service.kodilog.uploader" name="Kodi Log Uploader" version="0.1.9" provider-name="DutchTech">
+    <addon id="service.kodilog.uploader" name="Kodi Log Uploader" version="0.1.10" provider-name="DutchTech">
         <requires>
             <import addon="xbmc.python" version="3.0.0" />
         </requires>
@@ -773,7 +773,10 @@ v0.0.4.1001
                 <icon>resources/icon.png</icon>
                 <fanart>resources/fanart.jpg</fanart>
             </assets>
-            <news>v0.1.9
+            <news>v0.1.10
+- Include a safe CocoScrapers provider snapshot: provider IDs and enabled states only.
+
+v0.1.9
 - Add Kodi's configured weather location to diagnostics, allowing the private log page to show a city when available.
 
 v0.1.8
