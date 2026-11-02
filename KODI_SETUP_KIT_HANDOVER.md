@@ -20,7 +20,7 @@ contract, or `Install everything` order. The same concepts apply here:
 - missing optional add-ons should skip cleanly instead of aborting the whole
   setup run
 
-Current Setup Kit version at this handover: `0.9.20`.
+Current Setup Kit version at this handover: `0.9.23`.
 
 ## KodiEnglish-Specific Notes
 
