@@ -56,6 +56,7 @@ class OnUpdateChanges:
 		from caches.settings_cache import get_setting, set_setting
 		try:
 			migrations = (
+				('enable_digital_release_indicators_trakt_trending', self.enable_digital_release_indicators_trakt_trending),
 				('refresh_addon_keys', self.refresh_addon_keys),
 				('enable_torbox_cloud_search', self.enable_torbox_cloud_search),
 				('rollback_magneto_external_scraper', self.rollback_magneto_external_scraper),
@@ -100,6 +101,11 @@ class OnUpdateChanges:
 		from caches.settings_cache import set_setting
 		set_setting('provider.tb_cloud', 'true')
 		logger('Fen Light', 'TorBox cloud storage search enabled for Fen Light English.')
+
+	def enable_digital_release_indicators_trakt_trending(self):
+		from caches.settings_cache import set_setting
+		set_setting('digital_release_indicators_trakt_trending', 'true')
+		logger('Fen Light', 'Digital release indicators for Trakt Trending enabled by update.')
 
 	def rollback_magneto_external_scraper(self):
 		from caches.settings_cache import get_setting, set_setting

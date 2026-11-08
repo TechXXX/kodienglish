@@ -188,7 +188,7 @@ v0.1.0
 INFO: For latest changes see Changelog within Tools of add-on.</news>
         </extension>
     </addon>
-    <addon id="plugin.video.fenlight.kodienglish" name="Fen Light English" provider-name="Tikipeter" version="2.0.16.1033">
+    <addon id="plugin.video.fenlight.kodienglish" name="Fen Light English" provider-name="Tikipeter" version="2.0.16.1034">
         <requires>
             <import addon="xbmc.python" version="3.0.0" />
             <import addon="script.module.requests" version="2.19.1" />
@@ -873,7 +873,7 @@ v0.1.0
             </assets>
         </extension>
     </addon>
-    <addon id="skin.dutchtech.fuse.3.kodienglish" name="Kodi English Fuse 3" provider-name="DutchTech" version="3.2.9.1014">
+    <addon id="skin.dutchtech.fuse.3.kodienglish" name="Kodi English Fuse 3" provider-name="DutchTech" version="3.2.9.1015">
         <requires>
             <import addon="xbmc.gui" version="5.17.0" />
             <import addon="script.skinvariables" version="2.2.2" />

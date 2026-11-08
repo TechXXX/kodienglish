@@ -43,11 +43,13 @@ Current source-tree versions:
 
 - `plugin.video.fenlight` `2.0.16.1004`
   Vanilla Fen Light package kept as the known-good baseline with repo-wide bundled key updates plus TorBox Web Download cloud support.
-- `plugin.video.fenlight.kodienglish` `2.0.16.1026`
+- `plugin.video.fenlight.kodienglish` `2.0.16.1034`
   Working copy of vanilla Fen Light for the English-focused fork. It now also
   carries the newer Trakt/auth hardening, stable Trakt list-id routing, QR
   auth flows for Trakt, Real-Debrid, Premiumize, and AllDebrid, plus the
   playback properties and active-addon routing needed for next-episode OSD support.
+  Its Trakt Trending Movies view can optionally show TMDb's worldwide digital
+  or physical release state, including an explicit Unknown state for incomplete data.
   It now also guards duplicate Trakt re-authorization prompts, skips watched-indicator
   refresh on invalid Trakt payloads, rotates auth QR image filenames per device URL
   so Kodi refreshes changed codes, and brings the latest Extras trailer fallback and
@@ -106,7 +108,7 @@ Current source-tree versions:
   It now supports the dedicated next-episode OSD action for Fen playback and
   hides that action when Fen confirms there is no next aired episode, while
   routing the button to Fen Light English when English playback is active.
-- `skin.dutchtech.fuse.3.kodienglish` `3.2.9.1013`
+- `skin.dutchtech.fuse.3.kodienglish` `3.2.9.1015`
   Kodi English fork of the latest Arctic Fuse 3 `v3.2.9` release with a
   separate addon id and KodiEnglish patched TMDb Helper routing. It is now
   kept intentionally in lockstep with `/Users/kalter/Documents/CODEX/kodirepo/skin.dutchtech.fuse.3`,

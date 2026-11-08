@@ -2,7 +2,7 @@
 import sys
 from modules import meta_lists
 from modules import kodi_utils, settings
-from modules.metadata import movie_meta, movieset_meta
+from modules.metadata import movie_meta, movieset_meta, digital_release_info
 from modules.utils import manual_function_import, get_datetime, make_thread_list_enumerate, make_thread_list_multi_arg, get_current_timestamp, paginate_list, jsondate_to_datetime
 from modules.watched_status import get_database, watched_info_movie, get_watched_status_movie, get_bookmarks_movie, get_progress_status_movie
 logger = kodi_utils.logger
@@ -15,6 +15,7 @@ sleep, xbmc_actor, set_category = kodi_utils.sleep, kodi_utils.xbmc_actor, kodi_
 add_item, home = kodi_utils.add_item, kodi_utils.home
 watched_indicators, widget_hide_next_page = settings.watched_indicators, settings.widget_hide_next_page
 widget_hide_watched, media_open_action, page_limit, paginate = settings.widget_hide_watched, settings.media_open_action, settings.page_limit, settings.paginate
+digital_release_indicators_trakt_trending = settings.digital_release_indicators_trakt_trending
 tmdb_api_key, mpaa_region = settings.tmdb_api_key, settings.mpaa_region
 run_plugin = 'RunPlugin(%s)'
 main = ('tmdb_movies_popular', 'tmdb_movies_popular_today','tmdb_movies_blockbusters','tmdb_movies_in_theaters', 'tmdb_movies_upcoming', 'tmdb_movies_latest_releases',
@@ -123,7 +124,7 @@ class Movies:
 		
 	def build_movie_content(self, _position, _id):
 		try:
-			meta = movie_meta(self.id_type, _id, self.tmdb_api_key, self.mpaa_region, self.current_date, self.current_time)
+			meta = movie_meta(self.id_type, _id, self.tmdb_api_key, self.mpaa_region, self.current_date, self.current_time, self.digital_release_indicators)
 			if not meta or 'blank_entry' in meta: return
 			listitem = make_listitem()
 			cm = []
@@ -198,13 +199,19 @@ class Movies:
 			listitem.setLabel(title)
 			listitem.addContextMenuItems(cm)
 			listitem.setArt({'poster': poster, 'fanart': fanart, 'icon': poster, 'clearlogo': clearlogo, 'landscape': landscape, 'thumb': thumb})
-			set_properties({'fenlight.extras_params': extras_params, 'fenlight.options_params': options_params,
-							'belongs_to_collection': belongs_to_movieset, 'fenlight.more_like_this_params': more_like_this_params})
+			properties = {'fenlight.extras_params': extras_params, 'fenlight.options_params': options_params,
+							'belongs_to_collection': belongs_to_movieset, 'fenlight.more_like_this_params': more_like_this_params}
+			if self.digital_release_indicators:
+				digital_status, digital_label, digital_date = digital_release_info(meta_get('release_dates'), self.current_date)
+				properties.update({'DigitalReleaseStatus': digital_status, 'DigitalReleaseLabel': digital_label})
+				if digital_date: properties['DigitalReleaseDate'] = digital_date
+			set_properties(properties)
 			self.append(((url_params, listitem, False), _position))
 		except: pass
 
 	def worker(self):
 		self.current_date, self.current_time, self.watched_indicators = get_datetime(), get_current_timestamp(), watched_indicators()
+		self.digital_release_indicators = self.action == 'trakt_movies_trending' and digital_release_indicators_trakt_trending()
 		self.tmdb_api_key, self.mpaa_region = tmdb_api_key(), mpaa_region()
 		self.watched_title = 'Trakt' if self.watched_indicators == 1 else 'Fen Light'
 		watched_db = get_database(self.watched_indicators)
